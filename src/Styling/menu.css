@@ -1,0 +1,12 @@
+.menu-bar {
+    -fx-background-color: #1d1d1d;
+    -fx-opacity: 0.5;
+}
+
+.menu, .menu-item, .context-menu {
+    -fx-background-color: #1d1d1d;
+}
+.menu .label, .menu-item .label
+{
+    -fx-text-fill: greenyellow;
+}
