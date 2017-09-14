@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.registerController">
+   <content>
+      <BorderPane prefHeight="750.0" prefWidth="600.0" styleClass="container" stylesheets="@../Styling/menu.css">
+         <top>
+            <HBox alignment="TOP_CENTER" prefHeight="53.0" prefWidth="564.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Registration Form" textFill="#e1d7d7">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="564.0" stylesheets="@../Styling/menu.css">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <Label text="Owner Information" textFill="#e4dede">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="180.0" prefWidth="562.0">
+                           <children>
+                              <TextField fx:id="ownerName" layoutY="24.0" opacity="0.8" prefHeight="25.0" prefWidth="233.0" promptText="Name">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                              <TextField fx:id="ownerPhone" layoutX="321.0" layoutY="24.0" opacity="0.8" prefHeight="25.0" prefWidth="241.0" promptText="Phone">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                              <TextField fx:id="ownerAddress" layoutX="1.0" layoutY="65.0" opacity="0.8" prefHeight="25.0" prefWidth="386.0" promptText="Address">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                              <TextField fx:id="ownerPan" layoutX="1.0" layoutY="109.0" opacity="0.8" prefHeight="25.0" prefWidth="232.0" promptText="PAN">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                              <TextField fx:id="ownerEmail" layoutX="323.0" layoutY="109.0" opacity="0.8" prefHeight="25.0" prefWidth="239.0" promptText="E-Mail">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="564.0" stylesheets="@../Styling/menu.css">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <Label text="Store Information" textFill="#ddd7d7">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                         <Pane prefHeight="180.0" prefWidth="562.0">
+                             <children>
+                                 <TextField fx:id="storeName" layoutY="24.0" opacity="0.8" prefHeight="25.0" prefWidth="233.0" promptText="Name">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                                 <TextField fx:id="storePhone" layoutX="321.0" layoutY="24.0" opacity="0.8" prefHeight="25.0" prefWidth="241.0" promptText="Phone">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                                 <TextField fx:id="storeAddress" layoutX="1.0" layoutY="65.0" opacity="0.8" prefHeight="25.0" prefWidth="386.0" promptText="Address">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                                 <TextField fx:id="storeGst" layoutX="1.0" layoutY="109.0" opacity="0.8" prefHeight="25.0" prefWidth="232.0" promptText="GST">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                              <ComboBox fx:id="storeType" layoutX="321.0" layoutY="109.0" prefWidth="150.0" />
+                             </children>
+                         </Pane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="101.0" prefWidth="680.0" stylesheets="@../Styling/menu.css">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <Label text="License Information" textFill="#eee7e7">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="71.0" prefWidth="678.0">
+                           <children>
+                               <TextField fx:id="licenseNumber" layoutY="24.0" onKeyPressed="#onChangeLicense" onKeyReleased="#onChangeLicense" opacity="0.8" prefHeight="25.0" prefWidth="233.0" promptText="License Number">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                              <DatePicker fx:id="licenseValidity" editable="false" layoutX="319.0" layoutY="24.0" opacity="0.84" prefHeight="25.0" prefWidth="166.0" promptText="Select License Validity">
+                                 <padding>
+                                    <Insets top="2.0" />
+                                 </padding></DatePicker>
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                   <VBox prefHeight="101.0" prefWidth="564.0" stylesheets="@../Styling/menu.css">
+                       <children>
+                        <Separator prefWidth="200.0" />
+                           <Label text="User Name and Password" textFill="#eee7e7">
+                               <font>
+                                   <Font name="System Bold" size="14.0" />
+                               </font>
+                           </Label>
+                           <Pane prefHeight="71.0" prefWidth="678.0">
+                               <children>
+                                   <TextField fx:id="username" editable="false" layoutY="24.0" opacity="0.8" prefHeight="25.0" prefWidth="233.0" promptText="Username">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                                   <TextField fx:id="password" layoutX="321.0" layoutY="24.0" opacity="0.8" prefHeight="25.0" prefWidth="241.0" promptText="Password">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></TextField>
+                               </children>
+                           </Pane>
+                       </children>
+                   </VBox>
+                   
+
+                   <HBox alignment="TOP_CENTER">
+                       <children>
+                           <Button fx:id="register" onAction="#onRegister" text="Register" textFill="#2a0286">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                       </children>
+                   </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </content>
+</ScrollPane>

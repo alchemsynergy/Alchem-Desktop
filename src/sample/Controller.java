@@ -8,7 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -51,7 +53,7 @@ public class Controller {
         {
             try
             {
-                Connection conn = jdbc.jconn();
+                Connection conn = jdbc.jconn_ankit();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM user_access");
                 while (rs.next())
@@ -86,7 +88,7 @@ public class Controller {
                 }
                 else
                 {
-                   new AlertBox().alertfunction(Main.primaryStage,fxmlLoader,"     Invalid Credentials");
+                   new AlertBox().alertfunction(Main.primaryStage,fxmlLoader,"Invalid Credentials");
                 }
             } catch (Exception e) {}
         }
@@ -95,5 +97,18 @@ public class Controller {
     {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
+    }
+    public void joinNow(ActionEvent e)
+    {
+        try {
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("register.fxml"));
+            Parent root2=(Parent) fxmlLoader2.load();
+            Stage stage2=new Stage();
+            stage2.setScene(new Scene(root2));
+            stage2.setResizable(false);
+            stage2.initModality(Modality.WINDOW_MODAL);
+            stage2.showAndWait();
+        }
+        catch (Exception e1) {}
     }
 }
