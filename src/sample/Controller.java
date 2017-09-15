@@ -107,6 +107,8 @@ public class Controller {
             stage2.setScene(new Scene(root2));
             stage2.setResizable(false);
             stage2.initModality(Modality.WINDOW_MODAL);
+            stage2.initOwner(Main.primaryStage);
+            stage2.initStyle(StageStyle.UNDECORATED);
             stage2.showAndWait();
         }
         catch (Exception e1) {}

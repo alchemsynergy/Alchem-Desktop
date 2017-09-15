@@ -42,6 +42,9 @@ public class registerController {
     @FXML
     private ComboBox storeType;
 
+    @FXML
+    private Button cancelButton;
+
     public void initialize()
     {
         storeType.setItems(StoreTypes);
@@ -159,5 +162,11 @@ public class registerController {
     public void onChangeLicense()
     {
         username.setText(licenseNumber.getText());
+    }
+
+    public void cancel()
+    {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 }
