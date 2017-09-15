@@ -31,10 +31,13 @@ public class registerController {
     ObservableList<String> StoreTypes = FXCollections.observableArrayList("Wholesaler", "Retailer");
 
     @FXML
-    private TextField ownerName, ownerPhone, ownerAddress, ownerPan, ownerEmail, storeName, storePhone, storeAddress, storeGst, licenseNumber, username, password;
+    private TextField ownerName, ownerPhone, ownerAddress, ownerPan, ownerEmail, storeName, storePhone, storeAddress, storeGst, licenseNumber, username;
 
     @FXML
     private DatePicker licenseValidity;
+
+    @FXML
+    private PasswordField password;
 
     @FXML
     private ComboBox storeType;
@@ -147,6 +150,7 @@ public class registerController {
             storeAddress.setText(null);
             storeGst.setText(null);
             licenseNumber.setText(null);
+            licenseValidity.setValue(null);
             username.setText(null);
             password.setText(null);
         }
