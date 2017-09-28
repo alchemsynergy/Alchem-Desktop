@@ -3,46 +3,21 @@ package JdbcConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- * Created by VIPUL GOYAL on 9/9/2017.
- */
-public class jdbc {
+public class JDBC {
 
-    /**
-     For Connection with Vipul Goyal
-     */
-
-    public static Connection jconn_vipul()
+    public static Connection databaseConnect()
     {
-        Connection conn=null;
+        Connection dbConnection = null;
         try
         {
             Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AlchemDB","postgres","123456");
+            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AlchemDB","postgres","121002");
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
-        return conn;
+        return dbConnection;
     }
 
-    /**
-    For Connection with Ankit Kumar
-     */
-
-    public static Connection jconn_ankit()
-    {
-        Connection conn=null;
-        try
-        {
-            Class.forName("org.postgresql.Driver");
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","123456");
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return conn;
-    }
 }
