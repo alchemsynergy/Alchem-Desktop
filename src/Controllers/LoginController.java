@@ -59,15 +59,16 @@ public class LoginController {
                 ResultSet userAccessResultSet = sqlStatement.executeQuery("SELECT * FROM user_access");
                 while (userAccessResultSet.next())
                 {
-                    if(loginUsername.equals(userAccessResultSet.getString("login_username")) &&
-                            loginPassword.equals(userAccessResultSet.getString("login_password")))
+                    if(loginUsername.equals(userAccessResultSet.getString("username")) &&
+                            loginPassword.equals(userAccessResultSet.getString("password")))
                     {
                         userTypeCheck = userAccessResultSet.getInt("user_type_id");
+
                         ResultSet userTypeResultSet=sqlStatement.executeQuery("select * from user_type");
                         while(userTypeResultSet.next())
                         {
                             if(user_type.getSelectedToggle().getUserData().toString().equals(
-                                    userTypeResultSet.getString("user_type")))
+                                    userTypeResultSet.getString("type")))
                             {
                                 userType=userTypeResultSet.getInt("user_type_id");
                                 break;
