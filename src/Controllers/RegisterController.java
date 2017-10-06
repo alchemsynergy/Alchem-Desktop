@@ -39,6 +39,7 @@ public class RegisterController {
 
     public void initialize()
     {
+        register_username.setDisable(true);
         store_type.setItems(StoreType);
         store_type.getSelectionModel().selectFirst();
     }
@@ -74,18 +75,42 @@ public class RegisterController {
         else
             user_type_id = 2;
 
-        if(ownerName.equals("") || ownerAddress.equals("") || ownerPan.equals("") || storeName.equals("") || storeAddress.equals("")
-                || storeGst.equals("") || licenseNumber.equals("") || license_validity.getValue() == null || loginPassword.equals(""))
+        if(ownerName.equals("") || ownerAddress.equals("") || ownerPan.equals("") || ownerPhone.equals("") || storeName.equals("") || storeAddress.equals("")
+                || storeGst.equals("") || storePhone.equals("") || licenseNumber.equals("") || license_validity.getValue() == null || loginPassword.equals(""))
         {
             new AlertBox(currentStage,fxmlLoader,"Fill in the missing fields !!");
+            if(ownerName.equals(""))
+                owner_name.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(ownerAddress.equals(""))
+                owner_address.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(ownerPan.equals(""))
+                owner_pan.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(ownerPhone.equals(""))
+                owner_phone.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(storeName.equals(""))
+                store_name.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(storeAddress.equals(""))
+                store_address.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(storeGst.equals(""))
+                store_gst.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(storePhone.equals(""))
+                store_phone.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(licenseNumber.equals(""))
+                license_number.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(license_validity.getValue()==null)
+                license_validity.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+            if(loginPassword.equals(""))
+                register_password.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
         }
         else if (!ownerPhone.matches(regexPhone) || !storePhone.matches(regexPhone))
         {
             new AlertBox(currentStage,fxmlLoader,"Phone must be a number !!");
+            owner_phone.setStyle("-fx-text-inner-color: red;");
         }
         else if (!ownerName.matches(regexName) || !storeName.matches(regexName))
         {
             new AlertBox(currentStage,fxmlLoader,"Name must be alphabets only");
+            owner_name.setStyle("-fx-text-inner-color: red;");
         }
         else
         {
