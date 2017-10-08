@@ -28,6 +28,9 @@ public class LoginController {
     private Button close_button;
 
     @FXML
+    private Button submit_button;
+
+    @FXML
     private ToggleGroup user_type;
 
     @FXML
@@ -88,7 +91,8 @@ public class LoginController {
                     Parent root1=(Parent) fxmlMainStage.load();
                     Stage mainStage=new Stage();
                     mainStage.setScene(new Scene(root1));
-                    mainStage.showAndWait();
+                    mainStage.show();
+                    ((Stage)submit_button.getScene().getWindow()).close();
                 }
                 else
                 {

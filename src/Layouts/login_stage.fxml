@@ -116,7 +116,7 @@
             <HBox>
                <children>
                   <Region prefHeight="25.0" prefWidth="265.0" />
-                  <Button fx:id="submit" blendMode="DIFFERENCE" mnemonicParsing="false" onAction="#login" text="Submit" />
+                  <Button fx:id="submit_button" blendMode="DIFFERENCE" mnemonicParsing="false" onAction="#login" text="Submit" />
                </children>
             </HBox>
          </children>
