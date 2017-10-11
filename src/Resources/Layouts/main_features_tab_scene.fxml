@@ -9,8 +9,11 @@
    <children>
       <TabPane prefHeight="200.0" prefWidth="200.0"  stylesheets="@../Styling/tab_pane.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="Untitled Tab 1" />
-          <Tab text="Untitled Tab 2" />
+          <Tab text="Inventory" />
+          <Tab text="Add Sale" />
+            <Tab text="Add Purchase" />
+            <Tab text="View Sale" />
+            <Tab text="View Purchase" />
         </tabs>
       </TabPane>
    </children>

@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by techfreakworm on 10/9/2017.
- */
 public class MainStageController implements Initializable{
 
     @FXML
@@ -23,14 +21,14 @@ public class MainStageController implements Initializable{
     private Pane pane1, pane2, pane21, pane3, pane4;
 
     @FXML
-    private AnchorPane scene_anchor_pane;
+    private StackPane switcher_pane;
 
-    AnchorPane homeScenePane = null;
+    AnchorPane homePane = null;
     AnchorPane allFeaturesPane = null;
     AnchorPane dashboardPane = null;
 
     public MainStageController() throws IOException {
-        homeScenePane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_home_scene.fxml"));
+        homePane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_home_scene.fxml"));
         allFeaturesPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_features_tab_scene.fxml"));
         dashboardPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_dashboard_scene.fxml"));
     }
@@ -71,31 +69,27 @@ public class MainStageController implements Initializable{
 
     public void viewHomeScene()
     {
-        System.out.println(scene_anchor_pane.getWidth());
-        scene_anchor_pane.getChildren().clear();
-        homeScenePane.setPrefWidth(scene_anchor_pane.getWidth());
-        homeScenePane.setMinWidth(scene_anchor_pane.getWidth());
-        homeScenePane.setMaxWidth(scene_anchor_pane.getWidth());
-        scene_anchor_pane.getChildren().addAll(homeScenePane);
+        switcher_pane.getChildren().clear();
+        homePane.setPrefWidth(switcher_pane.getWidth());
+        homePane.setPrefHeight(switcher_pane.getHeight());
+        switcher_pane.getChildren().addAll(homePane);
     }
 
 
     public void viewDashboardScene()
     {
-        scene_anchor_pane.getChildren().clear();
-        dashboardPane.setPrefWidth(scene_anchor_pane.getWidth());
-        dashboardPane.setMinWidth(scene_anchor_pane.getWidth());
-        dashboardPane.setMinWidth(scene_anchor_pane.getWidth());
-        scene_anchor_pane.getChildren().addAll(dashboardPane);
+        switcher_pane.getChildren().clear();
+        dashboardPane.setPrefWidth(switcher_pane.getWidth());
+        dashboardPane.setPrefHeight(switcher_pane.getHeight());
+        switcher_pane.getChildren().addAll(dashboardPane);
     }
 
     public void viewAllFeaturesScene()
     {
-        scene_anchor_pane.getChildren().clear();
-        allFeaturesPane.setPrefWidth(scene_anchor_pane.getWidth());
-        allFeaturesPane.setMinWidth(scene_anchor_pane.getWidth());
-        allFeaturesPane.setMinWidth(scene_anchor_pane.getWidth());
-        scene_anchor_pane.getChildren().addAll(allFeaturesPane);
+        switcher_pane.getChildren().clear();
+        switcher_pane.setPrefWidth(allFeaturesPane.getWidth());
+        switcher_pane.setPrefHeight(allFeaturesPane.getHeight());
+        switcher_pane.getChildren().addAll(allFeaturesPane);
     }
 }
 
