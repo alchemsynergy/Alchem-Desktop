@@ -1,7 +1,7 @@
-package Controllers;
+package Main.Controllers;
 
-import JdbcConnection.JDBC;
-import ErrorAndInfo.AlertBox;
+import Main.JdbcConnection.JDBC;
+import Main.ErrorAndInfo.AlertBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,7 +60,7 @@ public class RegisterController {
 
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("../Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
 
         String sqlQuery = null;
         int increment = 0;
