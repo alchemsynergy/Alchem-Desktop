@@ -1,7 +1,7 @@
-package Controllers;
+package Main.Controllers;
 
-import JdbcConnection.JDBC;
-import ErrorAndInfo.AlertBox;
+import Main.JdbcConnection.JDBC;
+import Main.ErrorAndInfo.AlertBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import Primary.Main;
+import Main.ApplicationLauncher;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -46,12 +46,12 @@ public class LoginController {
     {
         int flag = 0, userType = 0, userTypeCheck = 0;
         String loginUsername, loginPassword;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
         loginUsername = login_username.getText();
         loginPassword = login_password.getText();
         if(loginUsername.equals("") || loginPassword.equals("") )
         {
-          new AlertBox(Main.primaryStage,fxmlLoader,"Fill in the missing fields");
+          new AlertBox(ApplicationLauncher.primaryStage,fxmlLoader,"Fill in the missing fields");
         }
         else
         {
@@ -87,7 +87,7 @@ public class LoginController {
                 userAccessResultSet.close();
                 if(flag==1)
                 {
-                    FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../Layouts/main_stage.fxml"));
+                    FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/main_stage.fxml"));
                     Parent root1=(Parent) fxmlMainStage.load();
                     Stage mainStage=new Stage();
                     mainStage.setScene(new Scene(root1));
@@ -96,7 +96,7 @@ public class LoginController {
                 }
                 else
                 {
-                   new AlertBox(Main.primaryStage,fxmlLoader,"Invalid Credentials");
+                   new AlertBox(ApplicationLauncher.primaryStage,fxmlLoader,"Invalid Credentials");
                 }
             } catch (Exception e) {}
         }
@@ -109,13 +109,13 @@ public class LoginController {
     public void joinNow(ActionEvent actionEvent)
     {
         try {
-            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("../Layouts/register_stage.fxml"));
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("../../Resources/Layouts/register_stage.fxml"));
             Parent root2=(Parent) fxmlLoader2.load();
             Stage stage2=new Stage();
             stage2.setScene(new Scene(root2));
             stage2.setResizable(false);
             stage2.initModality(Modality.WINDOW_MODAL);
-            stage2.initOwner(Main.primaryStage);
+            stage2.initOwner(ApplicationLauncher.primaryStage);
             stage2.initStyle(StageStyle.UNDECORATED);
             stage2.showAndWait();
         }
