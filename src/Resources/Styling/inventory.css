@@ -1,0 +1,27 @@
+#medicineTableView .table-cell {
+    -fx-alignment: CENTER;
+
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
+    -fx-padding: 0.166667em;
+
+    -fx-background-color: #1d1d1d;
+    -fx-cell-size: 2.0em;
+    -fx-text-fill: #ffffff;
+}
+
+.table-view .column-header{
+    -fx-background-color: #000000;
+    -fx-border-color: #ffffff;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/*.table-row-cell {
+
+    -fx-border-color:white;
+    -fx-table-cell-border-color: red;
+
+}*/
