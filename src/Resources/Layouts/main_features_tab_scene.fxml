@@ -14,8 +14,13 @@
           <Tab text="Inventory">
                <content>
                   <fx:include source="inventory.fxml" />
-               </content></Tab>
-          <Tab text="Add Sale" />
+               </content>
+          </Tab>
+          <Tab text="Add Sale" >
+              <content>
+                  <fx:include source="bill_stage.fxml" />
+              </content>
+          </Tab>
             <Tab text="Add Purchase" />
             <Tab text="View Sale" />
             <Tab text="View Purchase" />
