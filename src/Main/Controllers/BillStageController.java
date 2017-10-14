@@ -95,9 +95,12 @@ public class BillStageController {
         mode.getSelectionModel().selectFirst();
 
         tableSelectionEvent();
+        tableKeyPressEvent();
         initializeItemsList();
         itemAutoCompleteBinding();
         batchKeyReleaseEvent();
+        quantityKeyPressEvent();
+        freeKeyPressEvent();
 
     }
     // End of Initialize
@@ -112,6 +115,17 @@ public class BillStageController {
                     delete.setDisable(false);
                 }
                 else delete.setDisable(true);
+            }
+        });
+    }
+
+    public void tableKeyPressEvent()
+    {
+        bill_table.setOnKeyPressed((KeyEvent keyEvent) -> {
+            if(bill_table.getSelectionModel().getSelectedItem() != null)
+            {
+                if(keyEvent.getCode() == KeyCode.DELETE)
+                    onDelete(null);
             }
         });
     }
@@ -190,13 +204,41 @@ public class BillStageController {
         });
     }
 
-    public void onAddBill(ActionEvent actionEvent) {
-        String regexQuantity = "^[0-9]*$";
+    public void quantityKeyPressEvent()
+    {
+        quantity.setOnKeyPressed((KeyEvent keyEvent) -> {
+            Node source = (Node) keyEvent.getSource();
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("../Layouts/alert_stage.fxml"));
 
+            if(keyEvent.getCode() == KeyCode.ENTER)
+                addEntry(currentStage, fxmlLoader);
+        });
+    }
+
+    public void freeKeyPressEvent()
+    {
+        free.setOnKeyPressed((KeyEvent keyEvent) -> {
+            Node source = (Node) keyEvent.getSource();
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("../Layouts/alert_stage.fxml"));
+
+            if(keyEvent.getCode() == KeyCode.ENTER)
+                addEntry(currentStage, fxmlLoader);
+        });
+    }
+
+    public void onAddBill(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("../Layouts/alert_stage.fxml"));
 
+        addEntry(currentStage, fxmlLoader);
+    }
+
+    public void addEntry(Stage currentStage, FXMLLoader fxmlLoader)
+    {
+        String regexQuantity = "^[0-9]*$";
         String Item = item.getText();
         String Batch = batch.getEditor().getText();
         String Quantity = quantity.getText();
