@@ -15,8 +15,7 @@ public class AlertScreenController {
     private Button ok_button;
 
 
-    public void alertAction(ActionEvent actionEvent)
-    {
+    public void alertAction(ActionEvent actionEvent) {
         Stage stage = (Stage) ok_button.getScene().getWindow();
         stage.close();
     }

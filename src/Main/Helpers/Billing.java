@@ -1,4 +1,4 @@
-package Main.Extras;
+package Main.Helpers;
 
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;

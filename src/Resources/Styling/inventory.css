@@ -9,7 +9,7 @@
     -fx-text-fill: #ffffff;
 }
 
-.table-view .column-header{
+.table-view .column-header {
     -fx-background-color: #000000;
     -fx-border-color: #ffffff;
 }

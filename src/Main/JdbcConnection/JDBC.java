@@ -5,16 +5,13 @@ import java.sql.DriverManager;
 
 public class JDBC {
 
-    public static Connection databaseConnect()
-    {
+    public static Connection databaseConnect() {
         Connection dbConnection = null;
-        try
-        {
+        try {
             Class.forName("org.postgresql.Driver");
-            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AlchemDB","postgres","123456");
-        }
-        catch(Exception e)
-        {
+            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AlchemDB",
+                    "postgres", "121002");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return dbConnection;

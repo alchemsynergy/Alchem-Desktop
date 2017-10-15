@@ -5,27 +5,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainStageController implements Initializable{
-
-    @FXML
-    private Button pane_button1, pane_button2, pane_button21, pane_button3, pane_button4;
-
-    @FXML
-    private Pane pane1, pane2, pane21, pane3, pane4;
-
-    @FXML
-    private StackPane switcher_pane;
+public class MainStageController implements Initializable {
 
     AnchorPane homePane = null;
     AnchorPane allFeaturesPane = null;
     AnchorPane dashboardPane = null;
+    @FXML
+    private Button pane_button1, pane_button2, pane_button21, pane_button3, pane_button4;
+    @FXML
+    private Pane pane1, pane2, pane21, pane3, pane4;
+    @FXML
+    private StackPane switcher_pane;
 
     public MainStageController() throws IOException {
         homePane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_home_scene.fxml"));
@@ -50,25 +47,24 @@ public class MainStageController implements Initializable{
         panes[3] = pane4;
         panes[4] = pane21;
 
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             int finalI = i;
-            buttons[i].setOnMouseEntered((event) ->{
-                    buttons[finalI].setStyle("-fx-background-color: grey");
-                    panes[finalI].setStyle("-fx-background-color: aqua ");
+            buttons[i].setOnMouseEntered((event) -> {
+                buttons[finalI].setStyle("-fx-background-color: grey");
+                panes[finalI].setStyle("-fx-background-color: aqua ");
 
             });
 
-            buttons[i].setOnMouseExited((event)->{
-                    buttons[finalI].setStyle("-fx-background-color: #200020");
-                    panes[finalI].setStyle("-fx-background-color: #200020");
+            buttons[i].setOnMouseExited((event) -> {
+                buttons[finalI].setStyle("-fx-background-color: #200020");
+                panes[finalI].setStyle("-fx-background-color: #200020");
 
             });
 
         }
     }
 
-    public void viewHomeScene()
-    {
+    public void viewHomeScene() {
         switcher_pane.getChildren().clear();
         homePane.setPrefWidth(switcher_pane.getWidth());
         homePane.setPrefHeight(switcher_pane.getHeight());
@@ -76,18 +72,17 @@ public class MainStageController implements Initializable{
     }
 
 
-    public void viewDashboardScene()
-    {
+    public void viewDashboardScene() {
         switcher_pane.getChildren().clear();
         dashboardPane.setPrefWidth(switcher_pane.getWidth());
         dashboardPane.setPrefHeight(switcher_pane.getHeight());
         switcher_pane.getChildren().addAll(dashboardPane);
     }
 
-    public void viewAllFeaturesScene()
-    {
+    public void viewAllFeaturesScene() {
         switcher_pane.getChildren().clear();
         switcher_pane.setPrefWidth(allFeaturesPane.getWidth());
+        InventoryController.setDrawableWidth(allFeaturesPane.getWidth());
         switcher_pane.setPrefHeight(allFeaturesPane.getHeight());
         switcher_pane.getChildren().addAll(allFeaturesPane);
     }

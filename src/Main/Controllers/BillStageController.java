@@ -2,7 +2,7 @@ package Main.Controllers;
 
 import Main.JdbcConnection.JDBC;
 import Main.ErrorAndInfo.AlertBox;
-import Main.Extras.Billing;
+import Main.Helpers.Billing;
 
 import java.lang.String;
 

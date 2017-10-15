@@ -1,22 +1,22 @@
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
+
 .scroll-pane {
     -fx-background-color: black;
 }
 
-.bill_container
-{
+.bill_container {
     -fx-background-color: #b4fbae;
     -fx-padding: 10px;
 }
-.text-field
-{
+
+.text-field {
     -fx-border-color: #1d1d1d;
     -fx-border-width: 0.5px;
 }
-.combo-box
-{
+
+.combo-box {
     -fx-border-color: #1d1d1d;
     -fx-border-width: 0.5px;
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-
-
-<AnchorPane fx:id="home_scene_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label text="Start" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label text="End" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-   </children>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="home_scene_pane" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.111">
+    <children>
+        <Label text="Start" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        <Label text="End" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+    </children>
 </AnchorPane>

@@ -1,7 +1,7 @@
 package Main.Controllers;
 
-import Main.JdbcConnection.JDBC;
 import Main.ErrorAndInfo.AlertBox;
+import Main.JdbcConnection.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,14 +37,13 @@ public class RegisterController {
     @FXML
     private Button cancel_button;
 
-    public void initialize()
-    {
+    public void initialize() {
         register_username.setDisable(true);
         store_type.setItems(StoreType);
         store_type.getSelectionModel().selectFirst();
     }
-    public void onRegister(ActionEvent actionEvent)
-    {
+
+    public void onRegister(ActionEvent actionEvent) {
         String ownerName = owner_name.getText();
         String ownerPhone = owner_phone.getText();
         String ownerAddress = owner_address.getText();
@@ -60,7 +59,7 @@ public class RegisterController {
 
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
 
         String sqlQuery = null;
         int increment = 0;
@@ -68,56 +67,46 @@ public class RegisterController {
         String regexName = "^[A-Za-z]*$";
 
         int user_type_id;
-        if(store_type.getSelectionModel().getSelectedItem() == "Wholesaler")
-        {
+        if (store_type.getSelectionModel().getSelectedItem() == "Wholesaler") {
             user_type_id = 1;
-        }
-        else
+        } else
             user_type_id = 2;
 
-        if(ownerName.equals("") || ownerAddress.equals("") || ownerPan.equals("") || ownerPhone.equals("") || storeName.equals("") || storeAddress.equals("")
-                || storeGst.equals("") || storePhone.equals("") || licenseNumber.equals("") || license_validity.getValue() == null || loginPassword.equals(""))
-        {
-            new AlertBox(currentStage,fxmlLoader,"Fill in the missing fields !!");
-            if(ownerName.equals(""))
+        if (ownerName.equals("") || ownerAddress.equals("") || ownerPan.equals("") || ownerPhone.equals("") || storeName.equals("") || storeAddress.equals("")
+                || storeGst.equals("") || storePhone.equals("") || licenseNumber.equals("") || license_validity.getValue() == null || loginPassword.equals("")) {
+            new AlertBox(currentStage, fxmlLoader, "Fill in the missing fields !!");
+            if (ownerName.equals(""))
                 owner_name.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(ownerAddress.equals(""))
+            if (ownerAddress.equals(""))
                 owner_address.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(ownerPan.equals(""))
+            if (ownerPan.equals(""))
                 owner_pan.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(ownerPhone.equals(""))
+            if (ownerPhone.equals(""))
                 owner_phone.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(storeName.equals(""))
+            if (storeName.equals(""))
                 store_name.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(storeAddress.equals(""))
+            if (storeAddress.equals(""))
                 store_address.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(storeGst.equals(""))
+            if (storeGst.equals(""))
                 store_gst.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(storePhone.equals(""))
+            if (storePhone.equals(""))
                 store_phone.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(licenseNumber.equals(""))
+            if (licenseNumber.equals(""))
                 license_number.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(license_validity.getValue()==null)
+            if (license_validity.getValue() == null)
                 license_validity.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-            if(loginPassword.equals(""))
+            if (loginPassword.equals(""))
                 register_password.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-        }
-        else if (!ownerPhone.matches(regexPhone) || !storePhone.matches(regexPhone))
-        {
-            new AlertBox(currentStage,fxmlLoader,"Phone must be a number !!");
+        } else if (!ownerPhone.matches(regexPhone) || !storePhone.matches(regexPhone)) {
+            new AlertBox(currentStage, fxmlLoader, "Phone must be a number !!");
             owner_phone.setStyle("-fx-text-inner-color: red;");
-        }
-        else if (!ownerName.matches(regexName) || !storeName.matches(regexName))
-        {
-            new AlertBox(currentStage,fxmlLoader,"Name must be alphabets only");
+        } else if (!ownerName.matches(regexName) || !storeName.matches(regexName)) {
+            new AlertBox(currentStage, fxmlLoader, "Name must be alphabets only");
             owner_name.setStyle("-fx-text-inner-color: red;");
-        }
-        else
-        {
+        } else {
             String licenseValidity1 = license_validity.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-            try
-            {
+            try {
                 Connection dbConnection = JDBC.databaseConnect();
 
                 PreparedStatement sqlStatement = dbConnection.prepareStatement("INSERT INTO user_access VALUES (?,?,?,DEFAULT )");
@@ -129,8 +118,7 @@ public class RegisterController {
                 Statement st = dbConnection.createStatement();
                 sqlQuery = "SELECT MAX(user_access_id) FROM user_access";
                 ResultSet queryResult = st.executeQuery(sqlQuery);
-                if(queryResult.next())
-                {
+                if (queryResult.next()) {
                     increment = queryResult.getInt(1);
                 }
 
@@ -153,12 +141,11 @@ public class RegisterController {
                 sqlStatement.setString(5, storeGst);
                 sqlStatement.executeUpdate();
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            new AlertBox(currentStage,fxmlLoader,loginUsername + "" + ": User Registered");
+            new AlertBox(currentStage, fxmlLoader, loginUsername + "" + ": User Registered");
 
             owner_name.setText(null);
             owner_phone.setText(null);
@@ -176,13 +163,12 @@ public class RegisterController {
         }
 
     }
-    public void onChangeLicense()
-    {
+
+    public void onChangeLicense() {
         register_username.setText(license_number.getText());
     }
 
-    public void cancel()
-    {
+    public void cancel() {
         Stage stage = (Stage) cancel_button.getScene().getWindow();
         stage.close();
     }

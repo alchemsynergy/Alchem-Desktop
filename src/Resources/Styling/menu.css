@@ -6,16 +6,16 @@
 .menu, .menu-item, .context-menu {
     -fx-background-color: #1d1d1d;
 }
-.menu .label, .menu-item .label
-{
+
+.menu .label, .menu-item .label {
     -fx-text-fill: greenyellow;
 }
-.container
-{
+
+.container {
     -fx-background-color: #1d1d1d;
     -fx-padding: 10px;
 }
-.group
-{
+
+.group {
     -fx-border-color: #32321f;
 }

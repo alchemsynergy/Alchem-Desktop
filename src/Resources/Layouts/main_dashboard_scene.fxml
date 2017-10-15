@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.MainDashboardSceneController">
-   <children>
-      <Text layoutX="212.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text on Dashboard pane" />
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="Main.Controllers.MainDashboardSceneController">
+    <children>
+        <Text layoutX="212.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text on Dashboard pane"/>
+    </children>
 </AnchorPane>
