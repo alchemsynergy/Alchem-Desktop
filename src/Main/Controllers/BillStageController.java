@@ -553,10 +553,13 @@ public class BillStageController {
 
     public void onNewBill(ActionEvent actionEvent)
     {
+        save_bill.setDisable(true);
         initializeBillNo();
         patient_name.setText(null);
         company.setText(null);
         doctor.setText(null);
+        display_amount.setText("");
+        discount.setText("");
         bill_table.getItems().clear();
         patient_name.setStyle(null);
         doctor.setStyle(null);
