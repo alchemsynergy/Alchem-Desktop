@@ -58,6 +58,7 @@ public class ViewSaleController {
  {
      initializeDatePicker();
      initializeTable();
+     addingToolTip();
      calculateTotalSale();
  }
 
@@ -144,6 +145,55 @@ public class ViewSaleController {
      }
 
  }
+
+    public void addingToolTip()
+    {
+        saleTableView.setRowFactory(tv -> new TableRow<Sale>() {
+            private Tooltip tooltip = new Tooltip();
+            @Override
+            public void updateItem(Sale sale, boolean empty) {
+                super.updateItem(sale, empty);
+                if (sale == null) {
+                    setTooltip(null);
+                }
+                else {
+                    String tooltipText="";
+                    long rsBillId=0;
+                    if (sale.getBillNumber() == 0) {
+                        tooltip.setText("NA");
+                        setTooltip(tooltip);
+                    }
+                    else
+                    {
+                        try {
+                            Connection dbConnection = JDBC.databaseConnect();
+                            Statement sqlStatement = dbConnection.createStatement();
+                            ResultSet saleResultSet = sqlStatement.executeQuery("SELECT rs_bill_id,discount FROM retailer_sale_bill WHERE user_access_id='"+user_id+"' AND bill_no='"+sale.getBillNumber()+"'");
+                            while(saleResultSet.next())
+                            {
+                                rsBillId=saleResultSet.getLong("rs_bill_id");
+                                tooltipText="Discount - "+saleResultSet.getFloat("discount")+"%\n";
+                                break;
+                            }
+                            saleResultSet.close();
+                            ResultSet itemResultSet=sqlStatement.executeQuery("SELECT * FROM retailer_sale_bill_info where rs_bill_id='"+rsBillId+"'");
+                            while(itemResultSet.next())
+                            {
+                                int quantity=itemResultSet.getInt("quantity");
+                                float amt=quantity*itemResultSet.getFloat("rate");
+                                String item=itemResultSet.getString("item");
+                                tooltipText=tooltipText+"Item- "+item+"  Quantity- "+quantity+"  Amount- "+amt+"\n";
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        tooltip.setText(tooltipText);
+                        setTooltip(tooltip);
+                    }
+                }
+            }
+        });
+    }
 
  public void datePicked()
  {
