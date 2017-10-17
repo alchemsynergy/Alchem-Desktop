@@ -2,6 +2,7 @@ package Main.Controllers;
 
 import Main.ApplicationLauncher;
 import Main.ErrorAndInfo.AlertBox;
+import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,6 +80,11 @@ public class LoginController {
                 }
                 userAccessResultSet.close();
                 if (flag == 1) {
+                    if(user_type.getSelectedToggle().getUserData().toString().equals("Wholesaler"))
+                        UserInfo.typeId=1;
+                    else
+                        UserInfo.typeId=2;
+                    UserInfo.accessId=userAccessId;
                     FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/main_stage.fxml"));
                     Parent root1 = (Parent) fxmlMainStage.load();
                     Stage mainStage = new Stage();
