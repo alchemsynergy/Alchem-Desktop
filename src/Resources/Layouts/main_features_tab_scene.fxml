@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="Main.Controllers.MainFeaturesTabSceneController">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.MainFeaturesTabSceneController">
     <children>
-        <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styling/tab_pane.css"
-                 tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styling/tab_pane.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
                 <Tab text="Inventory">
                     <content>
-                        <fx:include source="inventory.fxml"/>
+                        <fx:include source="inventory.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Add Sale">
                     <content>
-                        <fx:include source="add_sale.fxml"/>
+                        <fx:include source="add_sale.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Add Purchase"/>
-                <Tab text="View Sale"/>
-                <Tab text="View Purchase"/>
+                <Tab text="Add Purchase" />
+                <Tab text="View Sale">
+               <content>
+                  <fx:include source="Retailers/view_sale.fxml" />
+               </content></Tab>
+                <Tab text="View Purchase" />
             </tabs>
         </TabPane>
     </children>
