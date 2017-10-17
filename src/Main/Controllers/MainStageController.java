@@ -83,6 +83,7 @@ public class MainStageController implements Initializable {
         switcher_pane.getChildren().clear();
         switcher_pane.setPrefWidth(allFeaturesPane.getWidth());
         InventoryController.setDrawableWidth(allFeaturesPane.getWidth());
+        BillStageController.setBillDrawableWidth(allFeaturesPane.getWidth());
         switcher_pane.setPrefHeight(allFeaturesPane.getHeight());
         switcher_pane.getChildren().addAll(allFeaturesPane);
     }
