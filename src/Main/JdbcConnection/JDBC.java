@@ -9,8 +9,8 @@ public class JDBC {
         Connection dbConnection = null;
         try {
             Class.forName("org.postgresql.Driver");
-            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AlchemDB",
-                    "postgres", "123456");
+            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Alchem",
+                    "postgres", "ankit@123");
         } catch (Exception e) {
             e.printStackTrace();
         }

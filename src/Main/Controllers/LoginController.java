@@ -36,6 +36,8 @@ public class LoginController {
     @FXML
     private RadioButton wholesaler_toggle, retailer_toggle;
 
+    public static int userAccessId = 0;
+
     public void initialize() {
         wholesaler_toggle.setUserData("Wholesaler");
         retailer_toggle.setUserData("Retailer");
@@ -58,6 +60,7 @@ public class LoginController {
                     if (loginUsername.equals(userAccessResultSet.getString("username")) &&
                             loginPassword.equals(userAccessResultSet.getString("password"))) {
                         userTypeCheck = userAccessResultSet.getInt("user_type_id");
+                        userAccessId = userAccessResultSet.getInt("user_access_id");
 
                         ResultSet userTypeResultSet = sqlStatement.executeQuery("select * from user_type");
                         while (userTypeResultSet.next()) {
