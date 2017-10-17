@@ -1,6 +1,6 @@
 package Main.Controllers;
 
-import Main.Controllers.Retailers.ViewSale;
+import Main.Controllers.Retailers.ViewSaleController;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -112,7 +112,7 @@ public class MainStageController implements Initializable {
         switcher_pane.getChildren().clear();
         allFeaturesPane.setPrefWidth(drawableStageWidth);
         InventoryController.setDrawableWidth(drawableStageWidth);
-        ViewSale.setDrawableWidth(drawableStageWidth);
+        ViewSaleController.setDrawableWidth(drawableStageWidth);
         BillStageController.setBillDrawableWidth(drawableStageWidth);
         allFeaturesPane.setPrefHeight(drawableStageHeight);
         switcher_pane.getChildren().addAll(allFeaturesPane);

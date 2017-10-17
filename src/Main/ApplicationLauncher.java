@@ -20,7 +20,7 @@ public class ApplicationLauncher extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../Resources/Layouts/login_stage.fxml"));
         this.primaryStage.setResizable(false);
         this.primaryStage.initStyle(StageStyle.UNDECORATED);
-        this.primaryStage.setScene(new Scene(root, 600, 400));
+        this.primaryStage.setScene(new Scene(root, 400, 200));
         this.primaryStage.show();
     }
 }

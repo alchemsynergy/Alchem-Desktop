@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -7,151 +11,45 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" cacheShape="false" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            scaleShape="false" style="-fx-background-color: #1d1d1d;"
-            xmlns="http://javafx.com/javafx/8.0.112" fx:controller="Main.Controllers.LoginController">
-    <top>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <MenuBar prefHeight="32.0" prefWidth="575.0" stylesheets="@../Styling/menu.css">
-                            <menus>
-                                <Menu mnemonicParsing="false" text="File">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="Close"/>
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Edit">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="Delete"/>
-                                    </items>
-                                </Menu>
-                                <Menu mnemonicParsing="false" text="Help">
-                                    <items>
-                                        <MenuItem mnemonicParsing="false" text="About"/>
-                                    </items>
-                                </Menu>
-                            </menus>
-                        </MenuBar>
-                        <Button fx:id="close_button" blendMode="RED" mnemonicParsing="false" onAction="#closeAction"
-                                prefHeight="0.0" prefWidth="29.0" text="X"/>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Region prefHeight="62.0" prefWidth="238.0">
-                            <HBox.margin>
-                                <Insets bottom="10.0"/>
-                            </HBox.margin>
-                        </Region>
-                        <Label text="LOGIN" textFill="#ffffff70">
-                            <font>
-                                <Font name="Microsoft Sans Serif" size="36.0"/>
-                            </font>
-                            <HBox.margin>
-                                <Insets top="20.0"/>
-                            </HBox.margin>
-                        </Label>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </top>
-    <center>
-        <VBox BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="115.0" prefWidth="600.0">
-                    <children>
-                        <Region prefHeight="62.0" prefWidth="200.0"/>
-                        <TextField fx:id="login_username" cacheShape="false" centerShape="false"
-                                   focusTraversable="false" opacity="0.63" prefHeight="25.0" prefWidth="182.0"
-                                   promptText="Username" scaleShape="false">
-                            <effect>
-                                <InnerShadow/>
-                            </effect>
-                        </TextField>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Region prefHeight="0.0" prefWidth="200.0"/>
-                        <PasswordField fx:id="login_password" opacity="0.63" prefHeight="25.0" prefWidth="181.0"
-                                       promptText="Password">
-                            <effect>
-                                <InnerShadow/>
-                            </effect>
-                        </PasswordField>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Region prefHeight="17.0" prefWidth="196.0"/>
-                        <RadioButton fx:id="wholesaler_toggle" layoutX="313.0" layoutY="10.0" mnemonicParsing="false"
-                                     selected="true" text="Wholesaler">
-                            <textFill>
-                                <LinearGradient endX="1.0" endY="1.0" startY="0.5194174757281553">
-                                    <stops>
-                                        <Stop color="WHITE"/>
-                                        <Stop color="WHITE" offset="1.0"/>
-                                    </stops>
-                                </LinearGradient>
-                            </textFill>
-                            <toggleGroup>
-                                <ToggleGroup fx:id="user_type"/>
-                            </toggleGroup>
-                        </RadioButton>
-                        <Region prefHeight="17.0" prefWidth="41.0"/>
-                        <RadioButton fx:id="retailer_toggle" mnemonicParsing="false" text="Retailer" textFill="WHITE"
-                                     toggleGroup="$user_type"/>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="20.0"/>
-                    </VBox.margin>
-                </HBox>
-                <HBox>
-                    <children>
-                        <Region prefHeight="25.0" prefWidth="265.0"/>
-                        <Button fx:id="submit_button" blendMode="DIFFERENCE" mnemonicParsing="false" onAction="#login"
-                                text="Submit"/>
-                    </children>
-                </HBox>
-            </children>
-            <BorderPane.margin>
-                <Insets top="20.0"/>
-            </BorderPane.margin>
-        </VBox>
-    </center>
-    <bottom>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <Region prefHeight="100.0" prefWidth="352.0"/>
-                <VBox prefHeight="100.0" prefWidth="145.0">
-                    <children>
-                        <Region prefHeight="65.0" prefWidth="154.0"/>
-                        <Label prefHeight="22.0" prefWidth="146.0" text="Not a member yet," textAlignment="CENTER"
-                               textFill="#fc0c0c9e">
-                            <font>
-                                <Font name="Lucida Bright Demibold" size="15.0"/>
-                            </font>
-                        </Label>
-                    </children>
-                </VBox>
-                <VBox layoutX="346.0" layoutY="10.0" prefHeight="100.0" prefWidth="99.0">
-                    <children>
-                        <Region prefHeight="53.0" prefWidth="97.0"/>
-                        <Button fx:id="register" blendMode="EXCLUSION" cancelButton="true" mnemonicParsing="false"
-                                onAction="#joinNow" prefHeight="35.0" prefWidth="88.0" text="Join Now"/>
-                    </children>
-                </VBox>
-            </children>
-            <BorderPane.margin>
-                <Insets/>
-            </BorderPane.margin>
-        </HBox>
-    </bottom>
-    <opaqueInsets>
-        <Insets/>
-    </opaqueInsets>
-</BorderPane>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.LoginController">
+   <children>
+      <Button fx:id="close_button" blendMode="RED" mnemonicParsing="false" onAction="#closeAction" prefHeight="0.0" prefWidth="29.0" text="X" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="129.0" layoutY="4.0" text="LOGIN" textFill="#ffffff70">
+         <font>
+            <Font name="Microsoft Sans Serif" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="login_username" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="102.0" layoutY="54.0" opacity="0.63" prefHeight="25.0" prefWidth="182.0" promptText="Username" scaleShape="false">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TextField>
+      <PasswordField fx:id="login_password" layoutX="103.0" layoutY="84.0" opacity="0.63" prefHeight="25.0" prefWidth="181.0" promptText="Password">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </PasswordField>
+      <Button fx:id="submit_button" blendMode="DIFFERENCE" layoutX="167.0" layoutY="138.0" mnemonicParsing="false" onAction="#login" text="Submit" />
+      <Label layoutX="172.0" layoutY="165.0" prefHeight="22.0" prefWidth="146.0" text="Not a member yet," textAlignment="CENTER" textFill="#fc0c0c9e">
+         <font>
+            <Font name="Lucida Bright Demibold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="register" blendMode="EXCLUSION" cancelButton="true" layoutX="318.0" layoutY="163.0" mnemonicParsing="false" onAction="#joinNow" prefHeight="22.0" prefWidth="68.0" text="Join Now" />
+      <RadioButton fx:id="wholesaler_toggle" layoutX="120.0" layoutY="115.0" mnemonicParsing="false" selected="true" text="Wholesaler">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startY="0.5194174757281553">
+               <stops>
+                  <Stop color="WHITE" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <toggleGroup>
+            <ToggleGroup fx:id="user_type" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="retailer_toggle" layoutX="215.0" layoutY="115.0" mnemonicParsing="false" text="Retailer" textFill="WHITE" toggleGroup="$user_type" />
+   </children>
+</AnchorPane>
