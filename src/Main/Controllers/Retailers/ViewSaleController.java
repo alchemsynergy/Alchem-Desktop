@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Calendar;
 
-public class ViewSale {
+public class ViewSaleController {
 
     @FXML
     private TableView<Sale> saleTableView;
@@ -211,8 +211,18 @@ public class ViewSale {
         companyNameColumn.setCellValueFactory(new PropertyValueFactory<Sale, String>("companyName"));
         modeColumn.setCellValueFactory(new PropertyValueFactory<Sale, String>("mode"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<Sale, Float>("amount"));
-
-        saleTableView.setItems(getSale());
+        saleList=getSale();
+        if(saleList.size()<1)
+        {
+            Calendar dateToday= Calendar.getInstance();
+            int year,day,month;
+            year = dateToday.get(Calendar.YEAR);
+            month= dateToday.get(Calendar.MONTH)+1;
+            day= dateToday.get(Calendar.DAY_OF_MONTH);
+            String date=year+"-"+month+"-"+day;
+            saleList.add(new Sale(date, (long) 0,"-","-","-","-",0.0f));
+        }
+        saleTableView.setItems(saleList);
 
     }
 
