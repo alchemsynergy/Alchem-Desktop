@@ -7,6 +7,7 @@ import Main.Helpers.Billing;
 import java.lang.String;
 import java.math.BigInteger;
 
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -97,6 +98,7 @@ public class BillStageController {
         bill_amount.setCellValueFactory(new PropertyValueFactory<Billing, Float>("billAmount"));
         bill_table.setItems(bill_data);
 
+        bill_date.setEditable(false);
         batch.setDisable(true);
         delete.setDisable(true);
         discount.setDisable(true);
@@ -277,6 +279,7 @@ public class BillStageController {
         String Quantity = quantity.getText();
         String Free = free.getText();
         float Rate = getRate(Item, Batch);
+        int piece = 0;
 
         item.setStyle(null);
         batch.setStyle(null);
@@ -284,6 +287,22 @@ public class BillStageController {
         free.setStyle(null);
 
         display_amount.setText("");
+
+        //  Getting Max Quantity from database
+
+        try {
+            Connection dbConnection = JDBC.databaseConnect();
+            PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT quantity.piece FROM medicine JOIN medicine_info ON medicine.medicine_id=medicine_info.medicine_id JOIN quantity ON medicine_info.medicine_info_id=quantity.medicine_info_id WHERE medicine.name=? AND medicine_info.batch_number=?");
+            preparedStatement.setString(1,Item);
+            preparedStatement.setString(2,Batch);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next())
+            {
+                piece = rs.getInt("piece");
+            }
+
+        }
+        catch (Exception e) {e.printStackTrace();}
 
         if(Item.equals("") || Batch.equals("") || Quantity.equals(""))
         {
@@ -294,6 +313,11 @@ public class BillStageController {
             if(Quantity.equals(""))
                 quantity.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
+        else if (Integer.parseInt(Quantity) > piece)
+        {
+            new AlertBox(currentStage,fxmlLoader,"Quantity greater than :" + piece);
+            quantity.setStyle("-fx-text-inner-color: red;");
+        }
         else if (!Quantity.matches(regexQuantity))
         {
             new AlertBox(currentStage,fxmlLoader,"Quantity must be a number !!");
@@ -301,8 +325,9 @@ public class BillStageController {
         }
         else
         {
-            float amount = Rate * Integer.parseInt(quantity.getText());
-            bill_data.add(new Billing(Item, Batch, Integer.parseInt(quantity.getText()), Free ,Rate, amount));
+            int intQuantity = Integer.parseInt(Quantity);
+            float amount = Rate * intQuantity;
+            bill_data.add(new Billing(Item, Batch, intQuantity, Free ,Rate, amount));
 
             discount.setDisable(false);
             batch.setDisable(true);
@@ -310,8 +335,10 @@ public class BillStageController {
             batch.getEditor().setText("");
             quantity.setText("");
             free.setText("");
+
         }
     }
+
 
     public float getRate(String Item, String Batch)
     {
@@ -385,6 +412,101 @@ public class BillStageController {
     public void onDelete(ActionEvent actionEvent)
     {
         int selectedIndex = bill_table.getSelectionModel().getSelectedIndex();
+        String getItem = bill_table.getSelectionModel().getSelectedItem().getBillItem();
+        String getBatch = bill_table.getSelectionModel().getSelectedItem().getBillBatch();
+        int getQuantity = bill_table.getSelectionModel().getSelectedItem().getBillQuantity();
+        long billNo = Long.parseLong(bill_no.getText());
+        int piece = 0;
+        int pp_item = 0;
+        int items = 0;
+        int ip_unit = 0;
+        int unit = 0;
+        int medicine_info_id = 0;
+
+        // Code to accordingly update all the quantities after the sale
+
+        //  Getting Max Quantities from database
+        try {
+            Connection dbConnection = JDBC.databaseConnect();
+            PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT quantity.piece, quantity.pp_item, quantity.items, quantity.ip_unit, quantity.unit FROM medicine JOIN medicine_info ON medicine.medicine_id=medicine_info.medicine_id JOIN quantity ON medicine_info.medicine_info_id=quantity.medicine_info_id WHERE medicine.name=? AND medicine_info.batch_number=?");
+            preparedStatement.setString(1,getItem);
+            preparedStatement.setString(2,getBatch);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next())
+            {
+                piece = rs.getInt("piece");
+                pp_item = rs.getInt("pp_item");
+                items = rs.getInt("items");
+                ip_unit = rs.getInt("ip_unit");
+                unit = rs.getInt("unit");
+            }
+
+        }
+        catch (Exception e) {e.printStackTrace();}
+        // All quantities fetched from database
+
+
+        // Check whether the entry already exists in the database
+        try {
+            Connection dbConnection = JDBC.databaseConnect();
+            PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT retailer_sale_bill_info.rs_bill_info_id FROM retailer_sale_bill JOIN retailer_sale_bill_info ON retailer_sale_bill.rs_bill_id = retailer_sale_bill_info.rs_bill_id WHERE retailer_sale_bill.user_access_id=? AND retailer_sale_bill.bill_no=? AND retailer_sale_bill_info.item=? AND retailer_sale_bill_info.batch_number=?");
+            preparedStatement.setInt(1,LoginController.userAccessId);
+            preparedStatement.setLong(2,billNo);
+            preparedStatement.setString(3,getItem);
+            preparedStatement.setString(4,getBatch);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next())
+            {
+                // calculating number of piece left after sale
+                piece = piece + getQuantity;
+
+                // calculating number of items left after sale
+                if(piece % pp_item == 0)
+                    items = piece / pp_item;
+                else
+                    items = (piece / pp_item) + 1;
+
+                // calculating number of units left after sale
+                if(items % ip_unit == 0)
+                    unit = items / ip_unit;
+                else
+                    unit = (items / ip_unit) + 1;
+
+                // Deleting selected item from database
+
+                int rs_bill_info_id = resultSet.getInt("rs_bill_info_id");
+                preparedStatement = dbConnection.prepareStatement("DELETE FROM retailer_sale_bill_info WHERE rs_bill_info_id=?");
+                preparedStatement.setInt(1,rs_bill_info_id);
+                preparedStatement.executeUpdate();
+            }
+        }
+        catch (Exception e) {e.printStackTrace();}
+
+
+        try {
+            Connection dbConnection = JDBC.databaseConnect();
+
+            PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT medicine_info.medicine_info_id FROM medicine JOIN  medicine_info ON medicine.medicine_id=medicine_info.medicine_id WHERE medicine.name=? AND medicine_info.batch_number=?");
+            preparedStatement.setString(1,getItem);
+            preparedStatement.setString(2,getBatch);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                medicine_info_id = resultSet.getInt("medicine_info_id");
+            }
+
+            preparedStatement = dbConnection.prepareStatement("UPDATE quantity SET piece=?, items=?, unit=? WHERE medicine_info_id=?");
+            preparedStatement.setInt(1,piece);
+            preparedStatement.setInt(2,items);
+            preparedStatement.setInt(3,unit);
+            preparedStatement.setInt(4,medicine_info_id);
+            preparedStatement.executeUpdate();
+        }
+        catch (Exception e) {e.printStackTrace();}
+
+        // Now removing selected item from table
+
         bill_table.getItems().remove(selectedIndex);
         display_amount.setText("");
 
@@ -415,6 +537,12 @@ public class BillStageController {
         long rsBillId = 0;
         int flag = 0;
         String Free = "";
+        int piece = 0;
+        int pp_item = 0;
+        int items = 0;
+        int ip_unit = 0;
+        int unit = 0;
+        int medicine_info_id = 0;
 
         if(Discount.equals(""))
         {
@@ -438,6 +566,88 @@ public class BillStageController {
         else {
             String billDate = bill_date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Float Amount = Float.parseFloat(display_amount.getText());
+
+            // Code to accordingly update all the quantities after the sale
+
+            Iterator<Billing> it = bill_data.iterator();
+            while (it.hasNext())
+            {
+                Billing temp = it.next();
+
+                //  Getting Max Quantities from database
+                try {
+                    Connection dbConnection = JDBC.databaseConnect();
+                    PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT quantity.piece, quantity.pp_item, quantity.items, quantity.ip_unit, quantity.unit FROM medicine JOIN medicine_info ON medicine.medicine_id=medicine_info.medicine_id JOIN quantity ON medicine_info.medicine_info_id=quantity.medicine_info_id WHERE medicine.name=? AND medicine_info.batch_number=?");
+                    preparedStatement.setString(1,temp.getBillItem());
+                    preparedStatement.setString(2,temp.getBillBatch());
+                    ResultSet rs = preparedStatement.executeQuery();
+                    if(rs.next())
+                    {
+                        piece = rs.getInt("piece");
+                        pp_item = rs.getInt("pp_item");
+                        items = rs.getInt("items");
+                        ip_unit = rs.getInt("ip_unit");
+                        unit = rs.getInt("unit");
+                    }
+
+                }
+                catch (Exception e) {e.printStackTrace();}
+                // All quantities fetched from database
+
+                // Check whether the entry already exists in the database
+                try {
+                    Connection dbConnection = JDBC.databaseConnect();
+                    PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT retailer_sale_bill_info.rs_bill_info_id FROM retailer_sale_bill JOIN retailer_sale_bill_info ON retailer_sale_bill.rs_bill_id = retailer_sale_bill_info.rs_bill_id WHERE retailer_sale_bill.user_access_id=? AND retailer_sale_bill.bill_no=? AND retailer_sale_bill_info.item=? AND retailer_sale_bill_info.batch_number=?");
+                    preparedStatement.setInt(1,LoginController.userAccessId);
+                    preparedStatement.setLong(2,billNo);
+                    preparedStatement.setString(3,temp.getBillItem());
+                    preparedStatement.setString(4,temp.getBillBatch());
+                    ResultSet resultSet = preparedStatement.executeQuery();
+
+                    if(resultSet.next()==false)
+                    {
+                        // calculating number of piece left after sale
+                        piece = piece - temp.getBillQuantity();
+
+                        // calculating number of items left after sale
+                        if(piece % pp_item == 0)
+                            items = piece / pp_item;
+                        else
+                            items = (piece / pp_item) + 1;
+
+                        // calculating number of units left after sale
+                        if(items % ip_unit == 0)
+                            unit = items / ip_unit;
+                        else
+                            unit = (items / ip_unit) + 1;
+                    }
+                }
+                catch (Exception e) {e.printStackTrace();}
+
+
+                try {
+                    Connection dbConnection = JDBC.databaseConnect();
+
+                    PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT medicine_info.medicine_info_id FROM medicine JOIN  medicine_info ON medicine.medicine_id=medicine_info.medicine_id WHERE medicine.name=? AND medicine_info.batch_number=?");
+                    preparedStatement.setString(1,temp.getBillItem());
+                    preparedStatement.setString(2,temp.getBillBatch());
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    if(resultSet.next())
+                    {
+                        medicine_info_id = resultSet.getInt("medicine_info_id");
+                    }
+
+                    preparedStatement = dbConnection.prepareStatement("UPDATE quantity SET piece=?, items=?, unit=? WHERE medicine_info_id=?");
+                    preparedStatement.setInt(1,piece);
+                    preparedStatement.setInt(2,items);
+                    preparedStatement.setInt(3,unit);
+                    preparedStatement.setInt(4,medicine_info_id);
+                    preparedStatement.executeUpdate();
+                }
+                catch (Exception e) {e.printStackTrace();}
+            }
+
+            // Code for saving or updating the data into the database
 
             try {
                 Connection dbConnection = JDBC.databaseConnect();
@@ -475,10 +685,10 @@ public class BillStageController {
 
                     preparedStatement = dbConnection.prepareStatement("INSERT INTO retailer_sale_bill_info VALUES (?,?,?,?,?,?,DEFAULT )");
 
-                    Iterator<Billing> it = bill_data.iterator();
-                    while (it.hasNext())
+                    Iterator<Billing> it1 = bill_data.iterator();
+                    while (it1.hasNext())
                     {
-                        Billing temp = it.next();
+                        Billing temp = it1.next();
                         if(temp.getBillFree().equals(""))
                             Free = "NA";
                         else
@@ -521,10 +731,10 @@ public class BillStageController {
 
                     preparedStatement = dbConnection.prepareStatement("INSERT INTO retailer_sale_bill_info VALUES (?,?,?,?,?,?,DEFAULT )");
 
-                    Iterator<Billing> it = bill_data.iterator();
-                    while (it.hasNext())
+                    Iterator<Billing> it1 = bill_data.iterator();
+                    while (it1.hasNext())
                     {
-                        Billing temp = it.next();
+                        Billing temp = it1.next();
                         if(temp.getBillFree().equals(""))
                             Free = "NA";
                         else
@@ -547,6 +757,7 @@ public class BillStageController {
             doctor.setStyle(null);
             bill_date.setStyle(null);
             company.setStyle(null);
+
         }
 
     }
