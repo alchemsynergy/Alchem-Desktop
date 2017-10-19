@@ -73,7 +73,7 @@ public class LoginController {
         if (loginUsername.equals("") || loginPassword.equals("")) {
             login_username.setText("");
             login_password.setText("");
-            new AlertBox(ApplicationLauncher.primaryStage, fxmlLoader, "Fill in the missing fields");
+            new AlertBox(ApplicationLauncher.primaryStage, fxmlLoader, false, "Fill in the missing fields");
         } else {
             try {
                 Connection dbConnection = JDBC.databaseConnect();
@@ -116,7 +116,7 @@ public class LoginController {
                 } else {
                     login_username.setText("");
                     login_password.setText("");
-                    new AlertBox(ApplicationLauncher.primaryStage, fxmlLoader, "Invalid Credentials");
+                    new AlertBox(ApplicationLauncher.primaryStage, fxmlLoader, false, "Invalid Credentials");
                 }
             } catch (Exception e) {
             }

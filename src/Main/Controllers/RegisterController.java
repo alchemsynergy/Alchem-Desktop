@@ -64,7 +64,7 @@ public class RegisterController {
         String sqlQuery = null;
         int increment = 0;
         String regexPhone = "^[0-9]*$";
-        String regexName = "^[A-Za-z]*$";
+        String regexName = "^[A-Za-z]+$";
 
         int user_type_id;
         if (store_type.getSelectionModel().getSelectedItem() == "Wholesaler") {
@@ -74,7 +74,7 @@ public class RegisterController {
 
         if (ownerName.equals("") || ownerAddress.equals("") || ownerPan.equals("") || ownerPhone.equals("") || storeName.equals("") || storeAddress.equals("")
                 || storeGst.equals("") || storePhone.equals("") || licenseNumber.equals("") || license_validity.getValue() == null || loginPassword.equals("")) {
-            new AlertBox(currentStage, fxmlLoader, "Fill in the missing fields !!");
+            new AlertBox(currentStage, fxmlLoader, false, "Fill in the missing fields !!");
             if (ownerName.equals(""))
                 owner_name.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
             if (ownerAddress.equals(""))
@@ -97,13 +97,22 @@ public class RegisterController {
                 license_validity.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
             if (loginPassword.equals(""))
                 register_password.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
-        } else if (!ownerPhone.matches(regexPhone) || !storePhone.matches(regexPhone)) {
-            new AlertBox(currentStage, fxmlLoader, "Phone must be a number !!");
-            owner_phone.setStyle("-fx-text-inner-color: red;");
-        } else if (!ownerName.matches(regexName) || !storeName.matches(regexName)) {
-            new AlertBox(currentStage, fxmlLoader, "Name must be alphabets only");
-            owner_name.setStyle("-fx-text-inner-color: red;");
-        } else {
+        }
+        else if (!ownerPhone.matches(regexPhone) || !storePhone.matches(regexPhone)) {
+            new AlertBox(currentStage, fxmlLoader, false, "Phone must be a number !!");
+            if(!ownerPhone.matches(regexPhone))
+                owner_phone.setStyle("-fx-text-inner-color: red;");
+            if(!storePhone.matches(regexPhone))
+                store_phone.setStyle("-fx-text-inner-color: red;");
+        }
+        else if (!ownerName.matches(regexName) || !storeName.matches(regexName)) {
+            new AlertBox(currentStage, fxmlLoader, false, "Name must be alphabets only");
+            if(!ownerName.matches(regexName))
+                owner_name.setStyle("-fx-text-inner-color: red;");
+            if(!storeName.matches(regexName))
+                store_name.setStyle("-fx-text-inner-color: red;");
+        }
+        else {
             String licenseValidity1 = license_validity.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             try {
@@ -145,7 +154,7 @@ public class RegisterController {
                 e.printStackTrace();
             }
 
-            new AlertBox(currentStage, fxmlLoader, loginUsername + "" + ": User Registered");
+            new AlertBox(currentStage, fxmlLoader, true, loginUsername + "" + ": User Registered");
 
             owner_name.setText(null);
             owner_phone.setText(null);
