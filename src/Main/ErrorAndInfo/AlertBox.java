@@ -12,12 +12,16 @@ import javafx.stage.StageStyle;
  * Created by VIPUL GOYAL on 9/10/2017.
  */
 public class AlertBox {
-    public AlertBox(Stage primaryStage, FXMLLoader fxmlLoader, String msg) {
+    public AlertBox(Stage primaryStage, FXMLLoader fxmlLoader, boolean alertType, String msg) {
         try {
             Parent root = (Parent) fxmlLoader.load();
             Scene scene = new Scene(root);
             Label alertText = (Label) scene.lookup("#alert_text");
             alertText.setText(msg);
+            if(alertType == true)
+                alertText.setStyle("-fx-text-fill: chartreuse");
+            else
+                alertText.setStyle("-fx-text-fill: red");
             Stage stage = new Stage();
             stage.setResizable(false);
             stage.initModality(Modality.WINDOW_MODAL);

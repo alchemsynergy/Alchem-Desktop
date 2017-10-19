@@ -11,7 +11,7 @@
     <children>
         <Button fx:id="ok_button" blendMode="SOFT_LIGHT" cancelButton="true" layoutX="188.0" layoutY="120.0"
                 mnemonicParsing="false" onAction="#alertAction" text="OK"/>
-        <Label fx:id="alert_text" layoutX="73.0" layoutY="76.0" textFill="#f51313">
+        <Label fx:id="alert_text" layoutX="73.0" layoutY="76.0">
             <font>
                 <Font name="Copperplate Gothic Light" size="20.0"/>
             </font>

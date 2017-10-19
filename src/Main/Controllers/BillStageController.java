@@ -313,14 +313,14 @@ public class BillStageController {
             if(Quantity.equals(""))
                 quantity.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
-        else if (Integer.parseInt(Quantity) > piece)
-        {
-            new AlertBox(currentStage,fxmlLoader,"Quantity greater than :" + piece);
-            quantity.setStyle("-fx-text-inner-color: red;");
-        }
         else if (!Quantity.matches(regexQuantity))
         {
-            new AlertBox(currentStage,fxmlLoader,"Quantity must be a number !!");
+            new AlertBox(currentStage,fxmlLoader,false,"Quantity must be a number !!");
+            quantity.setStyle("-fx-text-inner-color: red;");
+        }
+        else if (Integer.parseInt(Quantity) > piece)
+        {
+            new AlertBox(currentStage,fxmlLoader,false,"Quantity greater than :" + piece);
             quantity.setStyle("-fx-text-inner-color: red;");
         }
         else
@@ -397,7 +397,7 @@ public class BillStageController {
             }
             else
             {
-                new AlertBox(currentStage,fxmlLoader,"Discount must be a number !");
+                new AlertBox(currentStage,fxmlLoader,false,"Discount must be a number !");
                 discount.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
                 display_amount.setText("");
             }
@@ -405,7 +405,7 @@ public class BillStageController {
         }
         else
         {
-            new AlertBox(currentStage,fxmlLoader,"Items list empty !");
+            new AlertBox(currentStage,fxmlLoader,false,"Items list empty !");
         }
     }
 
@@ -561,7 +561,7 @@ public class BillStageController {
             if(Company.equals(""))
                 company.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
             if(display_amount.getText().equals(""))
-                new AlertBox(currentStage,fxmlLoader,"Please Enter Amount !!");
+                new AlertBox(currentStage,fxmlLoader,false,"Please Enter Amount !!");
         }
         else {
             String billDate = bill_date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -752,7 +752,7 @@ public class BillStageController {
             }
             catch (Exception e) {e.printStackTrace();}
 
-            new AlertBox(currentStage,fxmlLoader,"Saved Successfully !!");
+            new AlertBox(currentStage,fxmlLoader,true,"Saved Successfully !!");
             patient_name.setStyle(null);
             doctor.setStyle(null);
             bill_date.setStyle(null);
