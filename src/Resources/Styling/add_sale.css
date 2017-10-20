@@ -20,3 +20,20 @@
     -fx-border-color: #1d1d1d;
     -fx-border-width: 0.5px;
 }
+
+#search_bill_table .table-cell {
+    -fx-alignment: CENTER;
+
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
+    -fx-padding: 0.166667em;
+}
+
+.table-view .column-header {
+    -fx-background-color: #1d1d1d;
+    -fx-border-color: #ffffff;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
