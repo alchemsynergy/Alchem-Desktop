@@ -113,7 +113,7 @@ public class MainStageController implements Initializable {
         allFeaturesPane.setPrefWidth(drawableStageWidth);
         InventoryController.setDrawableWidth(drawableStageWidth);
         ViewSaleController.setDrawableWidth(drawableStageWidth);
-        BillStageController.setBillDrawableWidth(drawableStageWidth);
+        AddSaleController.setBillDrawableWidth(drawableStageWidth);
         allFeaturesPane.setPrefHeight(drawableStageHeight);
         switcher_pane.getChildren().addAll(allFeaturesPane);
     }

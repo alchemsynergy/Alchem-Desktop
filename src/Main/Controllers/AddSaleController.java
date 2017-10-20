@@ -1,5 +1,6 @@
 package Main.Controllers;
 
+import Main.Helpers.Billing_history;
 import Main.JdbcConnection.JDBC;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Billing;
@@ -32,15 +33,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
-public class BillStageController {
+public class AddSaleController {
 
     ObservableList<String> Mode = FXCollections.observableArrayList("Cash", "Debit Card", "Credit Card");
     ObservableList<String> whole_item_list = FXCollections.observableArrayList();
     ObservableList<String> batch_list = FXCollections.observableArrayList();
     ObservableList<Billing> bill_data = FXCollections.observableArrayList();
+    ObservableList<Billing_history> search_bill_data = FXCollections.observableArrayList();
 
     @FXML
     private ScrollPane add_sale_parent_pane;
@@ -49,10 +52,7 @@ public class BillStageController {
     private Label display_amount, bill_no;
 
     @FXML
-    private TextField patient_name, company, doctor, quantity, free, item;
-
-    @FXML
-    private TextField discount;
+    private TextField patient_name, company, doctor, quantity, free, item, discount, search_bill;
 
     @FXML
     private ComboBox mode, batch;
@@ -82,21 +82,31 @@ public class BillStageController {
     private TableColumn<Billing,Float> bill_amount;
 
     @FXML
+    private TableView<Billing_history> search_bill_table;
+
+    @FXML
+    private TableColumn<Billing_history,Long> search_bill_no;
+
+    @FXML
+    private TableColumn<Billing_history,String> search_date;
+
+    @FXML
+    private TableColumn<Billing_history,Float> search_amount;
+
+    @FXML
     private Button delete, save_bill;
+
+    @FXML ProgressIndicator spinner;
 
     private static double billDrawableWidth;
 
     public void initialize()
     {
         add_sale_parent_pane.setPrefWidth(billDrawableWidth);
-
-        bill_item.setCellValueFactory(new PropertyValueFactory<Billing, String>("billItem"));
-        bill_batch.setCellValueFactory(new PropertyValueFactory<Billing, String>("billBatch"));
-        bill_quantity.setCellValueFactory(new PropertyValueFactory<Billing, Integer>("billQuantity"));
-        bill_free.setCellValueFactory(new PropertyValueFactory<Billing, String>("billFree"));
-        bill_rate.setCellValueFactory(new PropertyValueFactory<Billing, Float>("billRate"));
-        bill_amount.setCellValueFactory(new PropertyValueFactory<Billing, Float>("billAmount"));
         bill_table.setItems(bill_data);
+        initializeBillingProperty();
+        search_bill_table.setItems(search_bill_data);
+        initializeBillingHistoryProperty();
 
         bill_date.setEditable(false);
         batch.setDisable(true);
@@ -108,6 +118,7 @@ public class BillStageController {
         mode.getSelectionModel().selectFirst();
 
         tableSelectionEvent();
+        searchTableClickEvent();
         tableKeyPressEvent();
         initializeItemsList();
         itemAutoCompleteBinding();
@@ -115,9 +126,27 @@ public class BillStageController {
         quantityKeyPressEvent();
         freeKeyPressEvent();
         initializeBillNo();
+        searchKeyReleaseEvent();
 
     }
     // End of Initialize
+
+    public void initializeBillingProperty()
+    {
+        bill_item.setCellValueFactory(new PropertyValueFactory<Billing, String>("billItem"));
+        bill_batch.setCellValueFactory(new PropertyValueFactory<Billing, String>("billBatch"));
+        bill_quantity.setCellValueFactory(new PropertyValueFactory<Billing, Integer>("billQuantity"));
+        bill_free.setCellValueFactory(new PropertyValueFactory<Billing, String>("billFree"));
+        bill_rate.setCellValueFactory(new PropertyValueFactory<Billing, Float>("billRate"));
+        bill_amount.setCellValueFactory(new PropertyValueFactory<Billing, Float>("billAmount"));
+    }
+
+    public void initializeBillingHistoryProperty()
+    {
+        search_bill_no.setCellValueFactory(new PropertyValueFactory<Billing_history, Long>("searchBillNo"));
+        search_date.setCellValueFactory(new PropertyValueFactory<Billing_history, String>("searchDate"));
+        search_amount.setCellValueFactory(new PropertyValueFactory<Billing_history, Float>("searchAmount"));
+    }
 
     public void tableSelectionEvent()
     {
@@ -517,10 +546,6 @@ public class BillStageController {
         }
     }
 
-    public static void setBillDrawableWidth(double width) {
-        billDrawableWidth = width;
-    }
-
     public void onSaveBill(ActionEvent actionEvent)
     {
         Node source = (Node) actionEvent.getSource();
@@ -776,6 +801,113 @@ public class BillStageController {
         doctor.setStyle(null);
         bill_date.setStyle(null);
         company.setStyle(null);
+    }
+
+    public void searchKeyReleaseEvent()
+    {
+        search_bill.setOnKeyReleased((KeyEvent keyEvent) -> {
+            long bill_no = 0;
+            String date = "";
+            float total_amount = 0;
+
+            search_bill_data.clear();
+            String search = search_bill.getText();
+
+            if(search.equals(""))
+            {
+                search_bill_data.clear();
+            }
+
+            else
+            {
+                try {
+                    Connection dbConnection = JDBC.databaseConnect();
+                    PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT bill_no, date, total_amount FROM retailer_sale_bill WHERE user_access_id=? AND bill_no::TEXT LIKE ?");
+                    preparedStatement.setInt(1,LoginController.userAccessId);
+                    preparedStatement.setString(2,"%" + search + "%");
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next())
+                    {
+                        bill_no = resultSet.getLong("bill_no");
+                        date = resultSet.getString("date");
+                        total_amount = resultSet.getFloat("total_amount");
+
+                        search_bill_data.add(new Billing_history(bill_no, date, total_amount));
+                    }
+                }
+                catch (Exception e) {e.printStackTrace();}
+            }
+
+        });
+    }
+
+    public void searchTableClickEvent()
+    {
+        search_bill_table.setRowFactory( tv -> {
+            TableRow<Billing_history> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) )
+                {
+                    bill_data.clear();
+                    Billing_history rowData = row.getItem();
+                    long billNo = rowData.getSearchBillNo();
+                    String Date = rowData.getSearchDate();
+                    float totalAmount = rowData.getSearchAmount();
+
+                    try {
+                        Connection dbConnection = JDBC.databaseConnect();
+                        PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT patient_name, mode, company, doctor_name, discount, rs_bill_id FROM retailer_sale_bill WHERE user_access_id=? AND bill_no=? AND date=? AND total_amount=?");
+                        preparedStatement.setInt(1,LoginController.userAccessId);
+                        preparedStatement.setLong(2,billNo);
+                        preparedStatement.setString(3,Date);
+                        preparedStatement.setFloat(4,totalAmount);
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        if(resultSet.next())
+                        {
+                            String patientName = resultSet.getString("patient_name");
+                            String Mode = resultSet.getString("mode");
+                            String Company = resultSet.getString("company");
+                            String Doctor = resultSet.getString("doctor_name");
+                            float Discount = resultSet.getFloat("discount");
+                            long rs_bill_id = resultSet.getLong("rs_bill_id");
+
+                            patient_name.setText(patientName);
+                            mode.getSelectionModel().select(Mode);
+                            company.setText(Company);
+                            doctor.setText(Doctor);
+                            discount.setText(String.valueOf(Discount));
+                            bill_date.setValue(LocalDate.parse(Date));
+                            bill_no.setText(String.valueOf(billNo));
+                            display_amount.setText(String.valueOf(totalAmount));
+
+                            preparedStatement = dbConnection.prepareStatement("SELECT item, batch_number, quantity, free, rate FROM retailer_sale_bill_info WHERE rs_bill_id=?");
+                            preparedStatement.setLong(1,rs_bill_id);
+                            ResultSet resultSet1 = preparedStatement.executeQuery();
+                            while (resultSet1.next())
+                            {
+                                String item = resultSet1.getString("item");
+                                String batchNumber = resultSet1.getString("batch_number");
+                                int quantity = resultSet1.getInt("quantity");
+                                String free = resultSet1.getString("free");
+                                float rate = resultSet1.getFloat("rate");
+                                float amount = rate * quantity;
+                                bill_data.add(new Billing(item, batchNumber, quantity, free, rate, amount));
+                            }
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row ;
+        });
+    }
+
+    public static void setBillDrawableWidth(double width) {
+        billDrawableWidth = width;
     }
 
 }
