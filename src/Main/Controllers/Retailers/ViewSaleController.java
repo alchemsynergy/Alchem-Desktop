@@ -1,6 +1,8 @@
 package Main.Controllers.Retailers;
 
 
+import Main.Controllers.MainFeaturesTabSceneController;
+import Main.Controllers.MainStageController;
 import Main.Helpers.Retailers.Sale;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
@@ -37,7 +39,7 @@ public class ViewSaleController {
     private TableColumn<Sale,Float> amountColumn;
 
     @FXML
-    private Label todaySaleLabel,yesterdaySaleLabel,day3SaleLabel,day4SaleLabel,day5SaleLabel,day6SaleLabel,day7SaleLabel,dateSelectedLabel;
+    public Label todaySaleLabel,yesterdaySaleLabel,day3SaleLabel,day4SaleLabel,day5SaleLabel,day6SaleLabel,day7SaleLabel,dateSelectedLabel;
 
     @FXML
     private Button particularDateSaleButton;
@@ -50,17 +52,24 @@ public class ViewSaleController {
 
     private static double drawableWidth;
 
-    ObservableList<Sale> saleList,saleParticularDayList;
+    public static ObservableList<Sale> saleList,saleParticularDayList;
     Long user_id=(long) UserInfo.accessId;
     static boolean saleCheck=true;
+    public static long[] year=new long[7];
+    public static long[] month=new long[7];
+    public static long[] day=new long[7];
+    public static double[] sum=new double[7];
+    public ViewSaleController viewSaleController;
 
- public void initialize()
- {
+    public void initialize()
+   {
      initializeDatePicker();
      initializeTable();
      addingToolTip();
      calculateTotalSale();
- }
+   }
+
+
 
  public void initializeDatePicker(){
      dateHBox.setVisible(false);
@@ -70,14 +79,10 @@ public class ViewSaleController {
  public void calculateTotalSale()
  {
      Calendar dateToday= Calendar.getInstance();
-     long[] year=new long[7];
-     long[] month=new long[7];
-     long[] day=new long[7];
      long dateCheck;
      year[0] = dateToday.get(Calendar.YEAR);
      month[0] = dateToday.get(Calendar.MONTH)+1;
      day[0] = dateToday.get(Calendar.DAY_OF_MONTH);
-     double[] sum=new double[7];
      String date;
      try
      {
@@ -130,13 +135,7 @@ public class ViewSaleController {
                  }
              }
          }
-         todaySaleLabel.setText("Today's Total Sale is Rs."+sum[0]);
-         yesterdaySaleLabel.setText("Yesterday's Total Sale was Rs."+sum[1]);
-         day3SaleLabel.setText("Total Sale on "+day[2] +"-"+month[2]+"-"+year[2]+" was Rs."+sum[2]);
-         day4SaleLabel.setText("Total Sale on "+day[3] +"-"+month[3]+"-"+year[3]+" was Rs."+sum[3]);
-         day5SaleLabel.setText("Total Sale on "+day[4] +"-"+month[4]+"-"+year[4]+" was Rs."+sum[4]);
-         day6SaleLabel.setText("Total Sale on "+day[5] +"-"+month[5]+"-"+year[5]+" was Rs."+sum[5]);
-         day7SaleLabel.setText("Total Sale on "+day[6] +"-"+month[6]+"-"+year[6]+" was Rs."+sum[6]);
+         setSaleLabel();
 
      }
      catch (Exception e)
@@ -145,6 +144,17 @@ public class ViewSaleController {
      }
 
  }
+
+    public void setSaleLabel()
+    {
+        todaySaleLabel.setText("Today's Total Sale is Rs."+sum[0]);
+        yesterdaySaleLabel.setText("Yesterday's Total Sale was Rs."+sum[1]);
+        day3SaleLabel.setText("Total Sale on "+day[2] +"-"+month[2]+"-"+year[2]+" was Rs."+sum[2]);
+        day4SaleLabel.setText("Total Sale on "+day[3] +"-"+month[3]+"-"+year[3]+" was Rs."+sum[3]);
+        day5SaleLabel.setText("Total Sale on "+day[4] +"-"+month[4]+"-"+year[4]+" was Rs."+sum[4]);
+        day6SaleLabel.setText("Total Sale on "+day[5] +"-"+month[5]+"-"+year[5]+" was Rs."+sum[5]);
+        day7SaleLabel.setText("Total Sale on "+day[6] +"-"+month[6]+"-"+year[6]+" was Rs."+sum[6]);
+    }
 
     public void addingToolTip()
     {
@@ -322,4 +332,5 @@ public class ViewSaleController {
     public static void setDrawableWidth(double width) {
         drawableWidth = width;
     }
+
 }

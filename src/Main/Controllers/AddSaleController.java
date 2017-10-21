@@ -1,6 +1,9 @@
 package Main.Controllers;
 
+import Main.Controllers.Retailers.ViewSaleController;
 import Main.Helpers.Billing_history;
+import Main.Helpers.Retailers.Sale;
+import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Billing;
@@ -8,6 +11,7 @@ import Main.Helpers.Billing;
 import java.lang.String;
 import java.math.BigInteger;
 
+import com.sun.glass.ui.View;
 import com.sun.org.apache.regexp.internal.RE;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,6 +48,7 @@ public class AddSaleController {
     ObservableList<String> batch_list = FXCollections.observableArrayList();
     ObservableList<Billing> bill_data = FXCollections.observableArrayList();
     ObservableList<Billing_history> search_bill_data = FXCollections.observableArrayList();
+    ObservableList<Billing_history> search_bill_table_list = FXCollections.observableArrayList();
 
     @FXML
     private ScrollPane add_sale_parent_pane;
@@ -105,7 +110,8 @@ public class AddSaleController {
         add_sale_parent_pane.setPrefWidth(billDrawableWidth);
         bill_table.setItems(bill_data);
         initializeBillingProperty();
-        search_bill_table.setItems(search_bill_data);
+        setSearchBillDataList();
+        search_bill_table.setItems(search_bill_table_list);
         initializeBillingHistoryProperty();
 
         bill_date.setEditable(false);
@@ -129,6 +135,22 @@ public class AddSaleController {
         searchKeyReleaseEvent();
 
     }
+
+    public void setSearchBillDataList()
+    {
+        try {
+            Connection dbConnection = JDBC.databaseConnect();
+            Statement sqlStatement=dbConnection.createStatement();
+            ResultSet searchTableResultSet=sqlStatement.executeQuery("SELECT bill_no,date,total_amount FROM retailer_sale_bill where user_access_id='"+ UserInfo.accessId+"'");
+            while (searchTableResultSet.next())
+            {
+                search_bill_data.add(new Billing_history(searchTableResultSet.getLong("bill_no"),searchTableResultSet.getString("date"),searchTableResultSet.getFloat("total_amount")));
+                search_bill_table_list.add(new Billing_history(searchTableResultSet.getLong("bill_no"),searchTableResultSet.getString("date"),searchTableResultSet.getFloat("total_amount")));
+            }
+        }
+        catch (Exception e) {e.printStackTrace();}
+    }
+
     // End of Initialize
 
     public void initializeBillingProperty()
@@ -682,8 +704,10 @@ public class AddSaleController {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next())
                 {
-                    if(billNo == resultSet.getLong("bill_no"))
+                    if(billNo == resultSet.getLong("bill_no")) {
                         flag = 1;
+                        break;
+                    }
                     else flag = 0;
                 }
 
@@ -726,6 +750,19 @@ public class AddSaleController {
                         preparedStatement.setFloat(6,temp.getBillRate());
                         preparedStatement.executeUpdate();
                     }
+                    ViewSaleController.saleList.add(new Sale(billDate,billNo,patientName,Doctor,Company,Mode,Amount));
+                    for(int i=0;i<7;i++)
+                    {
+                        long date=ViewSaleController.day[i];
+                        long month=ViewSaleController.month[i];
+                        long year=ViewSaleController.year[i];
+                        String datechk=year+"-"+month+"-"+date;
+                        if(datechk.equals(billDate))
+                        {
+                            ViewSaleController.sum[i]=ViewSaleController.sum[i]+Amount;
+                        }
+                    }
+                    search_bill_table_list.add(new Billing_history(billNo,billDate,Amount));
                 }
                 else
                 {
@@ -776,7 +813,6 @@ public class AddSaleController {
 
             }
             catch (Exception e) {e.printStackTrace();}
-
             new AlertBox(currentStage,fxmlLoader,true,"Saved Successfully !!");
             patient_name.setStyle(null);
             doctor.setStyle(null);
@@ -815,7 +851,7 @@ public class AddSaleController {
 
             if(search.equals(""))
             {
-                search_bill_data.clear();
+                search_bill_table.setItems(search_bill_table_list);
             }
 
             else
@@ -836,6 +872,7 @@ public class AddSaleController {
                     }
                 }
                 catch (Exception e) {e.printStackTrace();}
+                search_bill_table.setItems(search_bill_data);
             }
 
         });

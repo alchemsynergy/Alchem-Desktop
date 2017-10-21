@@ -48,6 +48,7 @@ public class MainStageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         /*Set private static variables for Main Stage width and Height*/
         drawableStageWidth = switcher_pane.getWidth();
         drawableStageHeight = switcher_pane.getHeight();
