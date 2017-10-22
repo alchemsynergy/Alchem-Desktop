@@ -1,8 +1,6 @@
 package Main.Helpers;
 
-/**
- * Created by VIPUL GOYAL on 10/17/2017.
- */
+
 public class UserInfo {
     public static int typeId;
     public static int accessId;

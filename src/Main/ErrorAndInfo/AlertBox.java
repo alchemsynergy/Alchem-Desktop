@@ -8,9 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-/**
- * Created by VIPUL GOYAL on 9/10/2017.
- */
+
 public class AlertBox {
     public AlertBox(Stage primaryStage, FXMLLoader fxmlLoader, boolean alertType, String msg) {
         try {

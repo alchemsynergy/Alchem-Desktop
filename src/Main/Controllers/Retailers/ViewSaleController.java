@@ -1,6 +1,7 @@
 package Main.Controllers.Retailers;
 
 
+import Main.Controllers.AddSaleController;
 import Main.Controllers.MainFeaturesTabSceneController;
 import Main.Controllers.MainStageController;
 import Main.Helpers.Retailers.Sale;
@@ -9,6 +10,7 @@ import Main.JdbcConnection.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -59,14 +61,14 @@ public class ViewSaleController {
     public static long[] month=new long[7];
     public static long[] day=new long[7];
     public static double[] sum=new double[7];
-    public ViewSaleController viewSaleController;
 
     public void initialize()
    {
-     initializeDatePicker();
-     initializeTable();
-     addingToolTip();
-     calculateTotalSale();
+       AddSaleController.setScene((Scene)particularDateSaleButton.getScene());
+       initializeDatePicker();
+       initializeTable();
+       addingToolTip();
+       calculateTotalSale();
    }
 
 

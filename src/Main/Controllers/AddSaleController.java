@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,6 +50,7 @@ public class AddSaleController {
     ObservableList<Billing> bill_data = FXCollections.observableArrayList();
     ObservableList<Billing_history> search_bill_data = FXCollections.observableArrayList();
     ObservableList<Billing_history> search_bill_table_list = FXCollections.observableArrayList();
+    static Scene scene=null;
 
     @FXML
     private ScrollPane add_sale_parent_pane;
@@ -760,6 +762,7 @@ public class AddSaleController {
                             ViewSaleController.sum[i]=ViewSaleController.sum[i]+Amount;
                         }
                     }
+                    setSaleLabel();
                     search_bill_table_list.add(new Billing_history(billNo,billDate,Amount));
                 }
                 else
@@ -945,4 +948,25 @@ public class AddSaleController {
         billDrawableWidth = width;
     }
 
+    public static void setScene(Scene scene) {
+        AddSaleController.scene = scene;
+    }
+
+    public void setSaleLabel()
+    {
+        Label todaySaleLabel=(Label) scene.lookup("#todaySaleLabel");
+        Label yesterdaySaleLabel=(Label) scene.lookup("#yesterdaySaleLabel");
+        Label day3SaleLabel=(Label) scene.lookup("#day3SaleLabel");
+        Label day4SaleLabel=(Label) scene.lookup("#day4SaleLabel");
+        Label day5SaleLabel=(Label) scene.lookup("#day5SaleLabel");
+        Label day6SaleLabel=(Label) scene.lookup("#day6SaleLabel");
+        Label day7SaleLabel=(Label) scene.lookup("#day7SaleLabel");
+        todaySaleLabel.setText("Today's Total Sale is Rs."+ViewSaleController.sum[0]);
+        yesterdaySaleLabel.setText("Yesterday's Total Sale was Rs."+ViewSaleController.sum[1]);
+        day3SaleLabel.setText("Total Sale on "+ViewSaleController.day[2] +"-"+ViewSaleController.month[2]+"-"+ViewSaleController.year[2]+" was Rs."+ViewSaleController.sum[2]);
+        day4SaleLabel.setText("Total Sale on "+ViewSaleController.day[3] +"-"+ViewSaleController.month[3]+"-"+ViewSaleController.year[3]+" was Rs."+ViewSaleController.sum[3]);
+        day5SaleLabel.setText("Total Sale on "+ViewSaleController.day[4] +"-"+ViewSaleController.month[4]+"-"+ViewSaleController.year[4]+" was Rs."+ViewSaleController.sum[4]);
+        day6SaleLabel.setText("Total Sale on "+ViewSaleController.day[5] +"-"+ViewSaleController.month[5]+"-"+ViewSaleController.year[5]+" was Rs."+ViewSaleController.sum[5]);
+        day7SaleLabel.setText("Total Sale on "+ViewSaleController.day[6] +"-"+ViewSaleController.month[6]+"-"+ViewSaleController.year[6]+" was Rs."+ViewSaleController.sum[6]);
+    }
 }
