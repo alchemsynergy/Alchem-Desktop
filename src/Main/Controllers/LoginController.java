@@ -1,11 +1,11 @@
 package Main.Controllers;
 
 import Main.ApplicationLauncher;
+import Main.Controllers.NavigationDrawer.UserDrawerController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -84,6 +84,7 @@ public class LoginController {
                             loginPassword.equals(userAccessResultSet.getString("password"))) {
                         userTypeCheck = userAccessResultSet.getInt("user_type_id");
                         userAccessId = userAccessResultSet.getInt("user_access_id");
+                        UserDrawerController.setUserAccessID(userAccessId);
 
                         ResultSet userTypeResultSet = sqlStatement.executeQuery("select * from user_type");
                         while (userTypeResultSet.next()) {

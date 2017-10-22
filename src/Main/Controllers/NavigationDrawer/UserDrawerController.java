@@ -1,37 +1,91 @@
 package Main.Controllers.NavigationDrawer;
 
 import Main.ErrorAndInfo.AlertBox;
+import Main.JdbcConnection.JDBC;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.ImageView;
 import javafx.fxml.Initializable;
-import javafx.stage.FileChooser;
-import java.io.File;
-import java.io.IOException;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import java.sql.*;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import javafx.embed.swing.SwingFXUtils;
-import javax.imageio.ImageIO;
 import java.util.ResourceBundle;
-import java.awt.image.BufferedImage;
-import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.event.ActionEvent;
 
 public class UserDrawerController implements Initializable{
     @FXML
     ImageView user_image;
 
+    //Owner Info related variables
+    @FXML
+    Label owner_name, owner_phone, owner_email, owner_address;
+
+    //Store Info related variables
+    @FXML
+    Label store_name, store_phone, store_address;
+
+    //License Info related variables
+    @FXML
+    Label license_number, license_valid_till;
+
+    //Variables related to 'Alchem Validity'
+    @FXML
+    Label alchem_validity;
+
+
     private String imageFile;
+    static int userAccessID;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            setUserData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        alchem_validity.setText("1st Jan, 2018");
+    }
+
+    public void setUserData() throws SQLException {
+        Connection dbConnection = JDBC.databaseConnect();
+        StringBuffer ownerSQLQuery = new StringBuffer("SELECT * FROM owner_info where user_access_id=");
+        ownerSQLQuery.append(userAccessID);
+        try {
+            ResultSet ownerResult = dbConnection.createStatement().executeQuery(ownerSQLQuery.toString());
+            while(ownerResult.next())
+            {
+                owner_name.setText(ownerResult.getString("name"));
+                owner_address.setText(ownerResult.getString("address"));
+                owner_email.setText(ownerResult.getString("email"));
+                owner_phone.setText(ownerResult.getString("mobile_number"));
+                license_number.setText(ownerResult.getString("license_number"));
+                license_valid_till.setText(ownerResult.getString("license_valid"));
+            }
+            ownerResult.close();
+
+            StringBuffer storeSQLQuery = new StringBuffer("SELECT * FROM owner_info where user_access_id=");
+            storeSQLQuery.append(userAccessID);
+            ResultSet storeResult = dbConnection.createStatement().executeQuery(ownerSQLQuery.toString());
+            while (storeResult.next())
+            {
+                store_name.setText(storeResult.getString("name"));
+                store_address.setText(storeResult.getString("address"));
+                store_phone.setText(storeResult.getString("mobile_number"));
+            }
+            storeResult.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            dbConnection.close();
+        }
 
     }
 
-    public void addOrChangePhoto(ActionEvent actionEvent) throws MalformedURLException {
+    public void addOrChangePhoto() throws MalformedURLException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
         fileChooser.getExtensionFilters().addAll(
@@ -46,12 +100,15 @@ public class UserDrawerController implements Initializable{
             Image image = new Image(imageFile);
             user_image.setImage(image);
         } else {
-            new AlertBox(((Stage)((Node)actionEvent.getSource()).getScene().getWindow()),
+            new AlertBox(((Stage)user_image.getScene().getWindow()  ),
                     new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml")),
                     false,
                     "Could not load image!");
         }
 
         
+    }
+    public static void setUserAccessID(int id){
+        userAccessID = id;
     }
 }
