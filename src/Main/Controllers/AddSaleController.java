@@ -101,8 +101,6 @@ public class AddSaleController {
     @FXML
     private Button delete, save_bill;
 
-    @FXML ProgressIndicator spinner;
-
     private static double billDrawableWidth;
 
     public void initialize()
