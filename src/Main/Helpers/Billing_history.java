@@ -27,4 +27,9 @@ public class Billing_history {
         return searchAmount.get();
     }
 
+    public void setSearchAmount(float searchAmount) {this.searchAmount.set(searchAmount);}
+
+    public void setSearchBillNo(long searchBillNo) {this.searchBillNo.set(searchBillNo);}
+
+    public void setSearchDate(String searchDate) {this.searchDate.set(searchDate);}
 }

@@ -755,19 +755,9 @@ public class AddSaleController {
                     ViewSaleController.saleList.add(new Sale(billDate,billNo,patientName,Doctor,Company,Mode,Amount));
                     for(int i=0;i<7;i++)
                     {
-                        long date=ViewSaleController.day[i];
-                        long month=ViewSaleController.month[i];
-                        long year=ViewSaleController.year[i];
-                        String datechk=year+"-"+month+"-"+date;
-                        if(datechk.equals(billDate))
-                        {
-                            ViewSaleController.sum[i]=ViewSaleController.sum[i]+Amount;
-                            try {
-                                mainFeaturesTabSceneController.setSaleLabel();
-                            }catch (Exception e)
-                            {e.printStackTrace();}
+                        int chk=viewSaleEvent(i,billDate,Amount);
+                        if(chk==1)
                             break;
-                        }
                     }
                     search_bill_table_list.add(new Billing_history(billNo,billDate,Amount));
                 }
@@ -781,12 +771,12 @@ public class AddSaleController {
                     preparedStatement.setString(5,Mode);
                     preparedStatement.setFloat(6,floatDiscount);
                     preparedStatement.setFloat(7,Amount);
-                    preparedStatement.setInt(8,LoginController.userAccessId);
+                    preparedStatement.setInt(8,UserInfo.accessId);
                     preparedStatement.setLong(9,billNo);
                     preparedStatement.executeUpdate();
 
                     preparedStatement = dbConnection.prepareStatement("SELECT rs_bill_id FROM retailer_sale_bill WHERE user_access_id=? AND bill_no=?");
-                    preparedStatement.setInt(1,LoginController.userAccessId);
+                    preparedStatement.setInt(1,UserInfo.accessId);
                     preparedStatement.setLong(2,billNo);
                     ResultSet resultSet1 = preparedStatement.executeQuery();
                     if(resultSet1.next())
@@ -816,6 +806,32 @@ public class AddSaleController {
                         preparedStatement.setFloat(6,temp.getBillRate());
                         preparedStatement.executeUpdate();
                     }
+                    Iterator<Sale> saleIterator=ViewSaleController.saleList.iterator();
+                    while(saleIterator.hasNext())
+                    {
+                        Sale sale=saleIterator.next();
+                        String date;
+                        if(sale.getBillNumber()==billNo)
+                        {
+                            float amt=Amount-sale.getAmount();
+                            sale.setAmount(Amount);
+                            date=sale.getDate();
+                            for(int i=0;i<7;i++) {
+                                int chk=viewSaleEvent(i,date,amt);
+                                if(chk==1)
+                                    break;
+                            }
+                        }
+                    }
+                    Iterator<Billing_history> billingHistoryIterator=search_bill_data.iterator();
+                    while(billingHistoryIterator.hasNext())
+                    {
+                        Billing_history bill=billingHistoryIterator.next();
+                        if(billNo==bill.getSearchBillNo())
+                        {
+                            bill.setSearchAmount(Amount);
+                        }
+                    }
                 }
 
             }
@@ -827,7 +843,24 @@ public class AddSaleController {
             company.setStyle(null);
 
         }
+    }
 
+    public int viewSaleEvent(int i,String billDate,Float Amount)
+    {
+        long date=ViewSaleController.day[i];
+        long month=ViewSaleController.month[i];
+        long year=ViewSaleController.year[i];
+        String datechk=year+"-"+month+"-"+date;
+        if(datechk.equals(billDate))
+        {
+            ViewSaleController.sum[i]=ViewSaleController.sum[i]+Amount;
+            try {
+                mainFeaturesTabSceneController.setSaleLabel();
+            }catch (Exception e)
+            {e.printStackTrace();}
+            return 1;
+        }
+        return 0;
     }
 
     public void onNewBill(ActionEvent actionEvent)

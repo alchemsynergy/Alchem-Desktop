@@ -28,4 +28,5 @@ public class MainFeaturesTabSceneController {
         viewSaleController.day6SaleLabel.setText("Total Sale on "+ViewSaleController.day[5] +"-"+ViewSaleController.month[5]+"-"+ViewSaleController.year[5]+" was Rs."+ViewSaleController.sum[5]);
         viewSaleController.day7SaleLabel.setText("Total Sale on "+ViewSaleController.day[6] +"-"+ViewSaleController.month[6]+"-"+ViewSaleController.year[6]+" was Rs."+ViewSaleController.sum[6]);
     }
+
 }

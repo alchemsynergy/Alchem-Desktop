@@ -23,7 +23,7 @@ import java.util.Calendar;
 public class ViewSaleController {
 
     @FXML
-    private TableView<Sale> saleTableView;
+    public TableView<Sale> saleTableView;
 
     @FXML
     private TableColumn<Sale,String> dateColumn;
