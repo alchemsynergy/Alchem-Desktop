@@ -119,14 +119,14 @@ public class MainStageController implements Initializable {
         switcher_pane.getChildren().addAll(allFeaturesPane);
     }
 
-    public void viewUserDrawer(){
+    public void viewUserDrawer() {
         /*Draw user.fxml into Parent Drawer Pane (StackPane) in main_stage.fxml */
         drawer_parent.getChildren().clear();
         drawer_parent.setPrefHeight(drawableStageHeight);
         drawer_parent.getChildren().addAll(userDrawerPane);
 
         /*Play transition set by Initialise()*/
-        if(drawer_parent.getTranslateX() != 0){
+        if (drawer_parent.getTranslateX() != 0) {
             openNavigation.play();
         } else {
             closeNavigation.setToX(-(drawer_parent.getWidth()));
@@ -135,14 +135,14 @@ public class MainStageController implements Initializable {
 
     }
 
-    public void viewSettingsDrawer(){
+    public void viewSettingsDrawer() {
          /*Draw settings.fxml into Parent Drawer Pane (StackPane) in main_stage.fxml */
         drawer_parent.getChildren().clear();
         drawer_parent.setPrefHeight(drawableStageHeight);
         drawer_parent.getChildren().addAll(settingsDrawerPane);
 
         /*Play transition set by Initialise()*/
-        if(drawer_parent.getTranslateX() != 0){
+        if (drawer_parent.getTranslateX() != 0) {
             openNavigation.play();
         } else {
             closeNavigation.setToX(-(drawer_parent.getWidth()));

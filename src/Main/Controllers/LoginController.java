@@ -22,25 +22,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class LoginController {
+    public static int userAccessId = 0;
     @FXML
     private TextField login_username;
-
     @FXML
     private PasswordField login_password;
-
     @FXML
     private Button close_button;
-
     @FXML
     private Button submit_button;
-
     @FXML
     private ToggleGroup user_type;
-
     @FXML
     private RadioButton wholesaler_toggle, retailer_toggle;
-
-    public static int userAccessId = 0;
 
     public void initialize() {
         wholesaler_toggle.setUserData("Wholesaler");
@@ -48,17 +42,14 @@ public class LoginController {
         setOnKeyPressedListener();
     }
 
-    public void setOnKeyPressedListener()
-    {
+    public void setOnKeyPressedListener() {
         login_password.setOnKeyPressed((KeyEvent event) -> {
-            if(event.getCode()== KeyCode.ENTER)
-            {
+            if (event.getCode() == KeyCode.ENTER) {
                 login();
             }
         });
         login_username.setOnKeyPressed((KeyEvent event) -> {
-            if(event.getCode()== KeyCode.ENTER)
-            {
+            if (event.getCode() == KeyCode.ENTER) {
                 login();
             }
         });
@@ -103,11 +94,11 @@ public class LoginController {
                 }
                 userAccessResultSet.close();
                 if (flag == 1) {
-                    if(user_type.getSelectedToggle().getUserData().toString().equals("Wholesaler"))
-                        UserInfo.typeId=1;
+                    if (user_type.getSelectedToggle().getUserData().toString().equals("Wholesaler"))
+                        UserInfo.typeId = 1;
                     else
-                        UserInfo.typeId=2;
-                    UserInfo.accessId=userAccessId;
+                        UserInfo.typeId = 2;
+                    UserInfo.accessId = userAccessId;
                     FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/main_stage.fxml"));
                     Parent root1 = (Parent) fxmlMainStage.load();
                     Stage mainStage = new Stage();

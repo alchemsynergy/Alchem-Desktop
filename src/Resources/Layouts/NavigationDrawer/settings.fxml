@@ -2,9 +2,11 @@
 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="800.0" prefWidth="350.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.NavigationDrawer.SettingsDrawerController">
-   <children>
-      <Text fill="WHITE" layoutX="152.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text on settings drawer" />
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="350.0"
+            style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.112"
+            fx:controller="Main.Controllers.NavigationDrawer.SettingsDrawerController">
+    <children>
+        <Text fill="WHITE" layoutX="152.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Text on settings drawer"/>
+    </children>
 </AnchorPane>

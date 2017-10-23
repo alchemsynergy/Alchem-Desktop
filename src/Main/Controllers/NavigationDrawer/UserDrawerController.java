@@ -10,35 +10,36 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.sql.*;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class UserDrawerController implements Initializable{
+public class UserDrawerController implements Initializable {
+    static int userAccessID;
     @FXML
     ImageView user_image;
-
     //Owner Info related variables
     @FXML
     Label owner_name, owner_phone, owner_email, owner_address;
-
     //Store Info related variables
     @FXML
     Label store_name, store_phone, store_address;
-
     //License Info related variables
     @FXML
     Label license_number, license_valid_till;
-
     //Variables related to 'Alchem Validity'
     @FXML
     Label alchem_validity;
-
-
     private String imageFile;
-    static int userAccessID;
+
+    public static void setUserAccessID(int id) {
+        userAccessID = id;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,8 +57,7 @@ public class UserDrawerController implements Initializable{
         ownerSQLQuery.append(userAccessID);
         try {
             ResultSet ownerResult = dbConnection.createStatement().executeQuery(ownerSQLQuery.toString());
-            while(ownerResult.next())
-            {
+            while (ownerResult.next()) {
                 owner_name.setText(ownerResult.getString("name"));
                 owner_address.setText(ownerResult.getString("address"));
                 owner_email.setText(ownerResult.getString("email"));
@@ -70,8 +70,7 @@ public class UserDrawerController implements Initializable{
             StringBuffer storeSQLQuery = new StringBuffer("SELECT * FROM owner_info where user_access_id=");
             storeSQLQuery.append(userAccessID);
             ResultSet storeResult = dbConnection.createStatement().executeQuery(ownerSQLQuery.toString());
-            while (storeResult.next())
-            {
+            while (storeResult.next()) {
                 store_name.setText(storeResult.getString("name"));
                 store_address.setText(storeResult.getString("address"));
                 store_phone.setText(storeResult.getString("mobile_number"));
@@ -100,15 +99,12 @@ public class UserDrawerController implements Initializable{
             Image image = new Image(imageFile);
             user_image.setImage(image);
         } else {
-            new AlertBox(((Stage)user_image.getScene().getWindow()  ),
+            new AlertBox(((Stage) user_image.getScene().getWindow()),
                     new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml")),
                     false,
                     "Could not load image!");
         }
 
-        
-    }
-    public static void setUserAccessID(int id){
-        userAccessID = id;
+
     }
 }

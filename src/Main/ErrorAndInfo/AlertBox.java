@@ -16,7 +16,7 @@ public class AlertBox {
             Scene scene = new Scene(root);
             Label alertText = (Label) scene.lookup("#alert_text");
             alertText.setText(msg);
-            if(alertType == true)
+            if (alertType == true)
                 alertText.setStyle("-fx-text-fill: chartreuse");
             else
                 alertText.setStyle("-fx-text-fill: red");

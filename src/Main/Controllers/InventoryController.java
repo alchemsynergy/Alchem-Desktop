@@ -21,6 +21,10 @@ import java.util.function.Predicate;
 
 
 public class InventoryController {
+    private static double drawableWidth;
+    ObservableList<Medicine> medicines;
+    FilteredList<Medicine> filteredData;
+    Boolean advancedSearchedToggle = false;
     @FXML
     private TextField searchField;
     @FXML
@@ -53,48 +57,34 @@ public class InventoryController {
     private TableColumn<Medicine, Integer> cgstColumn;
     @FXML
     private TableColumn<Medicine, Integer> igstColumn;
-
     @FXML
     private AnchorPane inventory_parent_pane;
-
     @FXML
     private Button advancedSearch;
-
     @FXML
     private RadioButton medicineButton;
-
     @FXML
     private RadioButton codeButton;
-
     @FXML
     private RadioButton saltButton;
-
     @FXML
     private RadioButton companyButton;
-
     @FXML
     private RadioButton typeButton;
-
     @FXML
     private RadioButton batchButton;
-
     @FXML
     private RadioButton hsnButton;
-
     @FXML
     private Label searchBy;
-
     @FXML
     private ToggleGroup searchGroup;
-
     @FXML
     private VBox searchVBox;
 
-    private static double drawableWidth;
-
-    ObservableList<Medicine> medicines;
-    FilteredList<Medicine> filteredData;
-    Boolean advancedSearchedToggle = false;
+    public static void setDrawableWidth(double width) {
+        drawableWidth = width;
+    }
 
     public void initialize() {
         inventory_parent_pane.setPrefWidth(drawableWidth);
@@ -103,17 +93,6 @@ public class InventoryController {
         onChangingSearchOption();
         searchTable();
         disableVisibilityAdvancedSearch();
-    }
-
-    public void onChangingSearchOption() {
-        searchGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle old_toggle, Toggle new_toggle) {
-                if (searchGroup.getSelectedToggle() != null) {
-                    searchField.setText("");
-                }
-            }
-        });
     }
 
     public void initializeTable() {
@@ -134,6 +113,27 @@ public class InventoryController {
 
         medicineTableView.setItems(getMedicine());
 
+    }
+
+    public void assignToggleValues() {
+        medicineButton.setUserData("Medicine");
+        codeButton.setUserData("Code");
+        saltButton.setUserData("Salt");
+        companyButton.setUserData("Company");
+        batchButton.setUserData("Batch Number");
+        typeButton.setUserData("Type");
+        hsnButton.setUserData("HSN Number");
+    }
+
+    public void onChangingSearchOption() {
+        searchGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle old_toggle, Toggle new_toggle) {
+                if (searchGroup.getSelectedToggle() != null) {
+                    searchField.setText("");
+                }
+            }
+        });
     }
 
     public void searchTable() {
@@ -170,6 +170,11 @@ public class InventoryController {
         });
     }
 
+    public void disableVisibilityAdvancedSearch() {
+        searchBy.setVisible(false);
+        searchVBox.setVisible(false);
+    }
+
     public ObservableList<Medicine> getMedicine() {
         int code = 0, quantity = 0, sgst = 0, cgst = 0, igst = 0;
         String name, salt, company, type, batch, hsn, expiry;
@@ -203,11 +208,6 @@ public class InventoryController {
         return medicines;
     }
 
-    public void disableVisibilityAdvancedSearch() {
-        searchBy.setVisible(false);
-        searchVBox.setVisible(false);
-    }
-
     public void advancedSearchMethod() {
         if (!advancedSearchedToggle) {
             advancedSearch.setText("Advanced Search v");
@@ -220,20 +220,6 @@ public class InventoryController {
             searchVBox.setVisible(false);
             advancedSearchedToggle = false;
         }
-    }
-
-    public void assignToggleValues() {
-        medicineButton.setUserData("Medicine");
-        codeButton.setUserData("Code");
-        saltButton.setUserData("Salt");
-        companyButton.setUserData("Company");
-        batchButton.setUserData("Batch Number");
-        typeButton.setUserData("Type");
-        hsnButton.setUserData("HSN Number");
-    }
-
-    public static void setDrawableWidth(double width) {
-        drawableWidth = width;
     }
 
 

@@ -19,17 +19,23 @@ public class Billing_history {
         return searchBillNo.get();
     }
 
+    public void setSearchBillNo(long searchBillNo) {
+        this.searchBillNo.set(searchBillNo);
+    }
+
     public String getSearchDate() {
         return searchDate.get();
+    }
+
+    public void setSearchDate(String searchDate) {
+        this.searchDate.set(searchDate);
     }
 
     public float getSearchAmount() {
         return searchAmount.get();
     }
 
-    public void setSearchAmount(float searchAmount) {this.searchAmount.set(searchAmount);}
-
-    public void setSearchBillNo(long searchBillNo) {this.searchBillNo.set(searchBillNo);}
-
-    public void setSearchDate(String searchDate) {this.searchDate.set(searchDate);}
+    public void setSearchAmount(float searchAmount) {
+        this.searchAmount.set(searchAmount);
+    }
 }

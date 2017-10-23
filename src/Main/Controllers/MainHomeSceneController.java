@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainHomeSceneController implements Initializable{
+public class MainHomeSceneController implements Initializable {
 
     @FXML
     Pane add_sale_pane, view_sale_pane, add_purchase_pane, view_purchase_pane, inventory_pane, about_pane;
@@ -17,11 +17,11 @@ public class MainHomeSceneController implements Initializable{
         add_sale_pane.setOnMouseEntered((event) -> {
             add_sale_pane.setStyle("-fx-background-color: black");
         });
-        add_sale_pane.setOnMouseExited((event)->{
+        add_sale_pane.setOnMouseExited((event) -> {
             add_sale_pane.setStyle("-fx-background-color: transparent");
         });
 
-        view_sale_pane.setOnMouseEntered((event) ->{
+        view_sale_pane.setOnMouseEntered((event) -> {
             view_sale_pane.setStyle("-fx-background-color: black");
         });
 
