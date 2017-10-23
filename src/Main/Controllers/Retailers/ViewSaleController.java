@@ -61,10 +61,10 @@ public class ViewSaleController {
     public static long[] month=new long[7];
     public static long[] day=new long[7];
     public static double[] sum=new double[7];
+    MainFeaturesTabSceneController mainFeaturesTabSceneController;
 
     public void initialize()
    {
-       AddSaleController.setScene((Scene)particularDateSaleButton.getScene());
        initializeDatePicker();
        initializeTable();
        addingToolTip();
@@ -335,4 +335,8 @@ public class ViewSaleController {
         drawableWidth = width;
     }
 
+
+    public void init(MainFeaturesTabSceneController mainFeaturesTabSceneController) {
+     this.mainFeaturesTabSceneController=mainFeaturesTabSceneController;
+    }
 }
