@@ -1,4 +1,4 @@
-#medicineTableView .table-cell {
+#purchaseTableView .table-cell {
     -fx-alignment: CENTER;
 
     -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
@@ -9,7 +9,7 @@
     -fx-text-fill: #ffffff;
 }
 
-.table-view .column-header {
+.table-view .column-header{
     -fx-background-color: #00110f;
     -fx-border-color: #ffffff;
 }
@@ -18,4 +18,3 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
-

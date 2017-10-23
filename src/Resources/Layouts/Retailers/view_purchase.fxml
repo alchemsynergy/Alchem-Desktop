@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/view_purchase.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.ViewPurchaseController">
+   <children>
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="680.0" prefWidth="542.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <TableView fx:id="purchaseTableView" prefHeight="340.0" prefWidth="733.0">
+               <columns>
+                  <TableColumn fx:id="dateColumn" prefWidth="101.0" text="Date" />
+                  <TableColumn fx:id="billNumberColumn" prefWidth="104.0" text="Bill Number" />
+                  <TableColumn fx:id="wholesalerNameColumn" prefWidth="137.0" text="Wholesaler Name" />
+                  <TableColumn fx:id="modeColumn" minWidth="0.0" prefWidth="90.0" text="Mode" />
+                  <TableColumn fx:id="amountColumn" minWidth="0.0" prefWidth="110.0" text="Amount" />
+               </columns>
+            </TableView>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="73.0" prefHeight="680.0" prefWidth="394.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <Pane prefHeight="680.0" prefWidth="393.0">
+               <children>
+                  <VBox prefHeight="486.0" prefWidth="318.0">
+                     <children>
+                        <HBox prefHeight="18.0" prefWidth="272.0">
+                           <children>
+                              <Region prefHeight="32.0" prefWidth="80.0" />
+                              <Label prefHeight="32.0" prefWidth="163.0" text="Statistics" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="50.0" prefWidth="228.0" />
+                        <HBox prefHeight="18.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="todayPurchaseLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="380.0" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="20.0" prefWidth="228.0" />
+                        <HBox prefHeight="2.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="yesterdayPurchaseLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="380.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="20.0" prefWidth="228.0" />
+                        <HBox prefHeight="0.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="day3PurchaseLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="380.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="20.0" prefWidth="228.0" />
+                        <HBox prefHeight="0.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="day4PurchaseLabel" prefHeight="21.0" prefWidth="351.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="20.0" prefWidth="228.0" />
+                        <HBox prefHeight="0.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="day5PurchaseLabel" prefHeight="20.0" prefWidth="380.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="20.0" prefWidth="228.0" />
+                        <HBox prefHeight="0.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="day6PurchaseLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="380.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="20.0" prefWidth="228.0" />
+                        <HBox prefHeight="0.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="day7PurchaseLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="380.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Region prefHeight="58.0" prefWidth="318.0" />
+                        <HBox prefHeight="41.0" prefWidth="272.0">
+                           <children>
+                              <Button fx:id="particularDatePurchaseButton" mnemonicParsing="false" onAction="#purchaseParticularDay" prefHeight="48.0" prefWidth="372.0" style="-fx-background-color: transparent;" text="See Purchase of Particular Day &gt;" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="dateHBox" prefHeight="41.0" prefWidth="272.0">
+                           <children>
+                              <Region prefHeight="36.0" prefWidth="54.0" />
+                              <DatePicker fx:id="purchaseDatePicker" editable="false" onAction="#datePicked" prefHeight="36.0" prefWidth="195.0" promptText="Pick Date" />
+                           </children>
+                        </HBox>
+                        <Region prefHeight="27.0" prefWidth="318.0" />
+                        <HBox fx:id="datePickedHBox" prefHeight="0.0" prefWidth="318.0">
+                           <children>
+                              <Region minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="20.0" />
+                              <Label fx:id="dateSelectedLabel" prefHeight="20.0" prefWidth="380.0" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
