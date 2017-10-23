@@ -49,7 +49,6 @@ public class AddSaleController {
     ObservableList<String> whole_item_list = FXCollections.observableArrayList();
     ObservableList<String> batch_list = FXCollections.observableArrayList();
     ObservableList<Billing> bill_data = FXCollections.observableArrayList();
-    ObservableList<Billing_history> search_bill_data = FXCollections.observableArrayList();
     ObservableList<Billing_history> search_bill_table_list = FXCollections.observableArrayList();
 
     @FXML
@@ -146,7 +145,6 @@ public class AddSaleController {
             ResultSet searchTableResultSet=sqlStatement.executeQuery("SELECT bill_no,date,total_amount FROM retailer_sale_bill where user_access_id='"+ UserInfo.accessId+"'");
             while (searchTableResultSet.next())
             {
-                search_bill_data.add(new Billing_history(searchTableResultSet.getLong("bill_no"),searchTableResultSet.getString("date"),searchTableResultSet.getFloat("total_amount")));
                 search_bill_table_list.add(new Billing_history(searchTableResultSet.getLong("bill_no"),searchTableResultSet.getString("date"),searchTableResultSet.getFloat("total_amount")));
             }
         }
@@ -823,7 +821,12 @@ public class AddSaleController {
                             }
                         }
                     }
-                    Iterator<Billing_history> billingHistoryIterator=search_bill_data.iterator();
+                    ObservableList<Sale> temporary_view_sale_data = FXCollections.observableArrayList(ViewSaleController.saleList);
+                    ViewSaleController.saleList.clear();
+                    ViewSaleController.saleList.addAll(temporary_view_sale_data);
+
+
+                    Iterator<Billing_history> billingHistoryIterator=search_bill_table_list.iterator();
                     while(billingHistoryIterator.hasNext())
                     {
                         Billing_history bill=billingHistoryIterator.next();
@@ -832,6 +835,9 @@ public class AddSaleController {
                             bill.setSearchAmount(Amount);
                         }
                     }
+                    ObservableList<Billing_history> temporary_add_sale_data = FXCollections.observableArrayList(search_bill_table_list);
+                    search_bill_table_list.clear();
+                    search_bill_table_list.addAll(temporary_add_sale_data);
                 }
 
             }
@@ -886,7 +892,9 @@ public class AddSaleController {
             String date = "";
             float total_amount = 0;
 
-            search_bill_data.clear();
+            ObservableList<Billing_history> search_bill_data = FXCollections.observableArrayList();
+
+            search_bill_table.setItems(search_bill_data);
             String search = search_bill.getText();
 
             if(search.equals(""))
@@ -896,23 +904,20 @@ public class AddSaleController {
 
             else
             {
-                try {
-                    Connection dbConnection = JDBC.databaseConnect();
-                    PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT bill_no, date, total_amount FROM retailer_sale_bill WHERE user_access_id=? AND bill_no::TEXT LIKE ?");
-                    preparedStatement.setInt(1,LoginController.userAccessId);
-                    preparedStatement.setString(2,"%" + search + "%");
-                    ResultSet resultSet = preparedStatement.executeQuery();
-                    while (resultSet.next())
+                Iterator<Billing_history> iterator = search_bill_table_list.iterator();
+                while (iterator.hasNext())
+                {
+                    Billing_history temp = iterator.next();
+                    bill_no = temp.getSearchBillNo();
+                    if(String.valueOf(bill_no).contains(search))
                     {
-                        bill_no = resultSet.getLong("bill_no");
-                        date = resultSet.getString("date");
-                        total_amount = resultSet.getFloat("total_amount");
-
+                        date = temp.getSearchDate();
+                        total_amount = temp.getSearchAmount();
                         search_bill_data.add(new Billing_history(bill_no, date, total_amount));
                     }
+
                 }
-                catch (Exception e) {e.printStackTrace();}
-                search_bill_table.setItems(search_bill_data);
+
             }
 
         });
