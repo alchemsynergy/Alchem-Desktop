@@ -18,10 +18,14 @@
                         <fx:include fx:id="addSale" source="add_sale.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Add Purchase" />
                 <Tab fx:id="viewSaleTab" text="View Sale">
                     <content>
                         <fx:include fx:id="viewSale" source="Retailers/view_sale.fxml" />
+                    </content>
+                </Tab>
+                <Tab fx:id="addPurchaseTab" text="Add Purchase">
+                    <content>
+                        <fx:include source="Retailers/add_purchase.fxml" />
                     </content>
                 </Tab>
                 <Tab text="View Purchase">

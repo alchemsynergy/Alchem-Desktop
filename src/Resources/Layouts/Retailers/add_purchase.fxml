@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="750.0" prefWidth="1250.0" stylesheets="@../../Styling/add_sale.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddPurchaseController">
+    <content>
+        <AnchorPane>
+            <children>
+                <AnchorPane layoutX="460.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="750.0" styleClass="container" stylesheets="@../../Styling/add_purchase.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+                    <children>
+                        <HBox alignment="CENTER" layoutX="224.0" layoutY="14.0" prefHeight="27.0" prefWidth="193.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="180.0">
+                            <children>
+                                <Label prefHeight="27.0" prefWidth="196.0" text="Purchase Information" textFill="#1e1d1d">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="9.0" layoutY="46.0" prefHeight="0.0" prefWidth="722.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0">
+                            <children>
+                                <Separator prefHeight="1.0" prefWidth="731.0">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                </Separator>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutY="55.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-7.0">
+                            <children>
+                                <VBox alignment="BOTTOM_CENTER" prefHeight="45.0" prefWidth="741.0">
+                                    <children>
+                                        <Pane prefHeight="49.0" prefWidth="591.0">
+                                            <children>
+                                                <TextField fx:id="wholesaler_name" layoutX="16.0" layoutY="16.0" prefHeight="25.0" prefWidth="196.0" promptText="Wholesaler Name" />
+                                                <DatePicker fx:id="date" layoutX="396.0" layoutY="16.0" prefHeight="25.0" prefWidth="155.0" promptText="Date" />
+                                    <TextField fx:id="bill_no" layoutX="228.0" layoutY="16.0" prefHeight="25.0" prefWidth="150.0" promptText="Bill Number" />
+                                                <ComboBox fx:id="mode" layoutX="566.0" layoutY="16.0" prefHeight="25.0" prefWidth="154.0" />
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="9.0" layoutY="170.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" />
+                        <HBox alignment="CENTER" layoutX="1.0" layoutY="290.0" prefHeight="300.0" prefWidth="750.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0">
+                            <children>
+                                <TableView fx:id="purchase_table" prefHeight="300.0" prefWidth="750.0">
+                                    <columns>
+                                        <TableColumn fx:id="purchase_item" prefWidth="195.0" text="Item" />
+                                        <TableColumn fx:id="purchase_batch" prefWidth="165.0" text="Batch No." />
+                                        <TableColumn fx:id="purchase_quantity" prefWidth="128.0" text="Quantity (pc)" />
+                                        <TableColumn fx:id="purchase_cost" prefWidth="137.0" text="Cost Price" />
+                                        <TableColumn fx:id="purchase_mrp" prefWidth="124.0" text="M.R.P" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="30.0" layoutY="117.0" prefHeight="170.0" prefWidth="708.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="22.0">
+                            <children>
+                                <Pane prefHeight="134.0" prefWidth="708.0">
+                                    <children>
+                                        <TextField fx:id="hsn_code" layoutX="13.0" layoutY="18.0" prefHeight="31.0" prefWidth="161.0" promptText="Enter HSN Code" />
+                                        <TextField fx:id="salt" layoutX="363.0" layoutY="18.0" prefHeight="31.0" prefWidth="150.0" promptText="Salt" />
+                                        <TextField fx:id="company" layoutX="531.0" layoutY="18.0" prefHeight="31.0" prefWidth="157.0" promptText="Company" />
+                                        <Button fx:id="add_purchase" layoutX="540.0" layoutY="115.0" mnemonicParsing="false" onAction="#onAddPurchase" prefHeight="31.0" prefWidth="51.0" text="Add ">
+                                            <font>
+                                                <Font name="Arial Black" size="12.0" />
+                                            </font>
+                                        </Button>
+                              <TextField fx:id="medicine_name" layoutX="192.0" layoutY="18.0" prefHeight="31.0" prefWidth="151.0" promptText="Medicine Name" />
+                              <TextField fx:id="mrp" layoutX="13.0" layoutY="115.0" prefHeight="31.0" prefWidth="161.0" promptText="M.R.P" />
+                              <DatePicker fx:id="expiry_date" layoutX="195.0" layoutY="119.0" prefHeight="27.0" prefWidth="152.0" promptText="Expiry date" />
+                              <DatePicker fx:id="mfg_date" layoutX="365.0" layoutY="119.0" prefHeight="27.0" prefWidth="152.0" promptText="Manufacture date" />
+                              <TextField fx:id="batch_number" layoutX="195.0" layoutY="66.0" prefHeight="31.0" promptText="Enter Batch Number" />
+                              <TextField fx:id="quantity" layoutX="365.0" layoutY="66.0" prefHeight="31.0" prefWidth="108.0" promptText="Quantity (pc)" />
+                              <TextField fx:id="cost_price" layoutX="494.0" layoutY="66.0" prefHeight="31.0" prefWidth="155.0" promptText="Cost Price" />
+                              <ComboBox fx:id="medicine_type" layoutX="13.0" layoutY="66.0" prefHeight="31.0" prefWidth="169.0" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="1.0" layoutY="624.0" prefHeight="96.0" prefWidth="752.0" AnchorPane.leftAnchor="-9.0" AnchorPane.rightAnchor="-9.0">
+                            <children>
+                                <Pane prefHeight="96.0" prefWidth="754.0">
+                                    <children>
+                                        <Label layoutX="423.0" layoutY="10.0" prefHeight="19.0" prefWidth="109.0" text="Total Amount :" textFill="#111010">
+                                            <font>
+                                                <Font name="System Bold" size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="display_amount" layoutX="453.0" layoutY="51.0" textFill="#025e36">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="delete" layoutX="25.0" layoutY="4.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Delete Entry" textFill="#ae0404">
+                                            <font>
+                                                <Font name="System Bold" size="11.0" />
+                                            </font>
+                                        </Button>
+                              <TextField fx:id="total_amount" layoutX="532.0" layoutY="6.0" prefHeight="27.0" prefWidth="116.0" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="9.0" layoutY="610.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0">
+                            <children>
+                                <Separator prefHeight="1.0" prefWidth="731.0">
+                                    <effect>
+                                        <InnerShadow />
+                                    </effect>
+                                </Separator>
+                            </children>
+                        </HBox>
+                        <Button fx:id="save_purchase" layoutX="278.0" layoutY="676.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Save / Update" textFill="#18048a">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="444.0" layoutY="676.0" mnemonicParsing="false" text="New Purchase">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                          <Separator layoutX="10.0" layoutY="115.0" prefHeight="1.0" prefWidth="731.0">
+                              <effect>
+                                  <InnerShadow />
+                              </effect>
+                          </Separator>
+                    </children>
+                </AnchorPane>
+                <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="401.0" AnchorPane.rightAnchor="810.0">
+                    <children>
+                        <TextField fx:id="search_bill" layoutX="88.0" layoutY="14.0" prefHeight="27.0" prefWidth="207.0" promptText="Search by Bill No." />
+                        <TableView fx:id="search_bill_table" layoutY="80.0" prefHeight="496.0" prefWidth="401.0" stylesheets="@../../Styling/add_sale.css">
+                            <columns>
+                                <TableColumn fx:id="search_bill_no" prefWidth="171.0" text="Bill Number" />
+                                <TableColumn fx:id="search_date" prefWidth="116.0" text="Date" />
+                                <TableColumn fx:id="search_amount" prefWidth="113.0" text="Amount" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </content>
+</ScrollPane>
