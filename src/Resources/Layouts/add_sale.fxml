@@ -191,7 +191,7 @@
                         </Button>
                     </children>
                 </AnchorPane>
-                <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="401.0" AnchorPane.leftAnchor="100.0">
+                <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="401.0" AnchorPane.rightAnchor="810.0">
                     <children>
                         <TextField fx:id="search_bill" layoutX="88.0" layoutY="14.0" prefHeight="27.0" prefWidth="207.0" promptText="Search by Bill No." />
                         <TableView fx:id="search_bill_table" layoutY="80.0" prefHeight="496.0" prefWidth="401.0" stylesheets="@../Styling/add_sale.css">
