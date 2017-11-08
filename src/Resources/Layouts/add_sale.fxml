@@ -7,11 +7,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="750.0" prefWidth="1250.0" stylesheets="@../Styling/add_sale.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddSaleController">
+<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="850.0" prefWidth="1250.0" stylesheets="@../Styling/add_sale.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddSaleController">
     <content>
         <AnchorPane>
             <children>
-                <AnchorPane layoutX="460.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="780.0" prefWidth="750.0" styleClass="bill_container" stylesheets="@../Styling/add_sale.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
+                <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="401.0" AnchorPane.leftAnchor="150.0">
+                    <children>
+                        <TextField fx:id="search_bill" layoutX="88.0" layoutY="14.0" prefHeight="27.0" prefWidth="207.0" promptText="Search by Bill No." />
+                        <TableView fx:id="search_bill_table" layoutY="80.0" prefHeight="496.0" prefWidth="401.0" stylesheets="@../Styling/add_sale.css">
+                            <columns>
+                                <TableColumn fx:id="search_bill_no" prefWidth="171.0" text="Bill Number" />
+                                <TableColumn fx:id="search_date" prefWidth="116.0" text="Date" />
+                                <TableColumn fx:id="search_amount" prefWidth="113.0" text="Amount" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </Pane>
+                <AnchorPane layoutX="351.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="750.0" styleClass="bill_container" stylesheets="@../Styling/add_sale.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="147.0" AnchorPane.topAnchor="14.0">
                     <children>
                         <HBox alignment="CENTER" layoutX="224.0" layoutY="14.0" prefHeight="27.0" prefWidth="193.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="180.0">
                             <children>
@@ -102,7 +114,7 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="1.0" layoutY="290.0" prefHeight="300.0" prefWidth="750.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="-10.0">
                             <children>
-                                <TableView fx:id="bill_table" prefHeight="300.0" prefWidth="750.0">
+                                <TableView fx:id="bill_table" prefHeight="275.0" prefWidth="750.0">
                                     <columns>
                                         <TableColumn fx:id="bill_item" prefWidth="147.0" text="Item" />
                                         <TableColumn fx:id="bill_batch" prefWidth="123.0" text="Batch No." />
@@ -191,18 +203,6 @@
                         </Button>
                     </children>
                 </AnchorPane>
-                <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="401.0" AnchorPane.rightAnchor="810.0">
-                    <children>
-                        <TextField fx:id="search_bill" layoutX="88.0" layoutY="14.0" prefHeight="27.0" prefWidth="207.0" promptText="Search by Bill No." />
-                        <TableView fx:id="search_bill_table" layoutY="80.0" prefHeight="496.0" prefWidth="401.0" stylesheets="@../Styling/add_sale.css">
-                            <columns>
-                                <TableColumn fx:id="search_bill_no" prefWidth="171.0" text="Bill Number" />
-                                <TableColumn fx:id="search_date" prefWidth="116.0" text="Date" />
-                                <TableColumn fx:id="search_amount" prefWidth="113.0" text="Amount" />
-                            </columns>
-                        </TableView>
-                    </children>
-                </Pane>
             </children>
         </AnchorPane>
     </content>
