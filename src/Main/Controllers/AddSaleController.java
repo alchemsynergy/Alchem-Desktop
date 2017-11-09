@@ -1,9 +1,11 @@
 package Main.Controllers;
 
+import Main.Controllers.Retailers.ProfitLossController;
 import Main.Controllers.Retailers.ViewSaleController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Billing;
 import Main.Helpers.Billing_history;
+import Main.Helpers.Retailers.ProfitLoss;
 import Main.Helpers.Retailers.Sale;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
@@ -648,6 +650,37 @@ public class AddSaleController {
                         if (chk == 1)
                             break;
                     }
+
+                    String date="";
+                    try {
+                        Connection conn=JDBC.databaseConnect();
+                        Statement sqlStatement=conn.createStatement();
+                        ResultSet saleProfitResultSet=sqlStatement.executeQuery("SELECT date from retailer_sale_bill where bill_no='"+billNo+"' AND user_access_id='"+UserInfo.accessId+"'");
+                        while(saleProfitResultSet.next())
+                        {
+                            date=saleProfitResultSet.getString(1);
+                        }
+                    }catch (Exception e)
+                    {e.printStackTrace();}
+
+                    Iterator<ProfitLoss> plIterator = ProfitLossController.profitList.iterator();
+                    while (plIterator.hasNext()) {
+                        ProfitLoss profitLoss=plIterator.next();
+                        if(date.equals(profitLoss.getDate()))
+                        {
+                            profitLoss.setTotalSale(Amount+profitLoss.getTotalSale());
+                            profitLoss.setProfit(profitLoss.getProfit()+Amount);
+                            for (int i = 0; i < 7; i++) {
+                                int chk = viewSaleProfitEvent(i, date,Amount);
+                                if (chk == 1)
+                                    break;
+                            }
+                        }
+                    }
+                    ObservableList<ProfitLoss> temporary_profit_data = FXCollections.observableArrayList(ProfitLossController.profitList);
+                    ProfitLossController.profitList.clear();
+                    ProfitLossController.profitList.addAll(temporary_profit_data);
+
                     search_bill_table_list.add(new Billing_history(billNo, billDate, Amount));
                 } else {
                     preparedStatement = dbConnection.prepareStatement("UPDATE retailer_sale_bill SET patient_name=?, date=?, company=?, doctor_name=?, mode=?, discount=?, total_amount=? WHERE user_access_id=? AND bill_no=?");
@@ -691,12 +724,13 @@ public class AddSaleController {
                         preparedStatement.setFloat(6, temp.getBillRate());
                         preparedStatement.executeUpdate();
                     }
+                    float amt=0;
                     Iterator<Sale> saleIterator = ViewSaleController.saleList.iterator();
                     while (saleIterator.hasNext()) {
                         Sale sale = saleIterator.next();
                         String date;
                         if (sale.getBillNumber() == billNo) {
-                            float amt = Amount - sale.getAmount();
+                            amt = Amount - sale.getAmount();
                             sale.setAmount(Amount);
                             date = sale.getDate();
                             for (int i = 0; i < 7; i++) {
@@ -710,6 +744,35 @@ public class AddSaleController {
                     ViewSaleController.saleList.clear();
                     ViewSaleController.saleList.addAll(temporary_view_sale_data);
 
+                    String date="";
+                    try {
+                        Connection conn=JDBC.databaseConnect();
+                        Statement sqlStatement=conn.createStatement();
+                        ResultSet saleProfitResultSet=sqlStatement.executeQuery("SELECT date from retailer_sale_bill where bill_no='"+billNo+"' AND user_access_id='"+UserInfo.accessId+"'");
+                        while(saleProfitResultSet.next())
+                        {
+                            date=saleProfitResultSet.getString(1);
+                        }
+                    }catch (Exception e)
+                    {e.printStackTrace();}
+
+                    Iterator<ProfitLoss> plIterator = ProfitLossController.profitList.iterator();
+                    while (plIterator.hasNext()) {
+                        ProfitLoss profitLoss=plIterator.next();
+                      if(date.equals(profitLoss.getDate()))
+                      {
+                          profitLoss.setTotalSale(profitLoss.getTotalSale()+amt);
+                          profitLoss.setProfit(profitLoss.getProfit()+amt);
+                          for (int i = 0; i < 7; i++) {
+                              int chk = viewSaleProfitEvent(i, date, amt);
+                              if (chk == 1)
+                                  break;
+                          }
+                      }
+                    }
+                    ObservableList<ProfitLoss> temporary_profit_data = FXCollections.observableArrayList(ProfitLossController.profitList);
+                    ProfitLossController.profitList.clear();
+                    ProfitLossController.profitList.addAll(temporary_profit_data);
 
                     Iterator<Billing_history> billingHistoryIterator = search_bill_table_list.iterator();
                     while (billingHistoryIterator.hasNext()) {
@@ -751,6 +814,26 @@ public class AddSaleController {
         }
         return 0;
     }
+
+    public int viewSaleProfitEvent(int i, String billDate, Float Amount) {
+        long date = ProfitLossController.day[i];
+        long month = ProfitLossController.month[i];
+        long year = ProfitLossController.year[i];
+        String datechk = year + "-" + month + "-" + date;
+        if (datechk.equals(billDate)) {
+            ProfitLossController.sum[i] = ProfitLossController.sum[i] + Amount;
+            ProfitLossController.totalSale[i]=ProfitLossController.totalSale[i]+Amount;
+            try {
+                mainFeaturesTabSceneController.setProfitLabel();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 1;
+        }
+        return 0;
+    }
+
+
 
     public void onNewBill(ActionEvent actionEvent) {
         save_bill.setDisable(true);
@@ -881,6 +964,14 @@ public class AddSaleController {
         viewSaleLoader.load();
         ViewSaleController viewSaleController = viewSaleLoader.getController();
         viewSaleController.setSaleLabel();
+    }
+
+    public void setSaleProfitLabel() throws Exception {
+        FXMLLoader profitLossLoader = new FXMLLoader();
+        profitLossLoader.setLocation(getClass().getResource("../../Resources/Layouts/Retailers/profit_loss.fxml"));
+        profitLossLoader.load();
+        ProfitLossController profitLossController = profitLossLoader.getController();
+        profitLossController.setProfitLabel();
     }
 
     public void init(MainFeaturesTabSceneController mainFeaturesTabSceneController) {

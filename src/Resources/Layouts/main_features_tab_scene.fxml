@@ -32,6 +32,11 @@
                <content>
                   <fx:include source="Retailers/view_purchase.fxml" />
                </content></Tab>
+            <Tab text="Sale/Purchase Analysis">
+               <content>
+                  <fx:include fx:id="profitLoss" source="Retailers/profit_loss.fxml" />
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>

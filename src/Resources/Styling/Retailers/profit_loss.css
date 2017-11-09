@@ -1,0 +1,67 @@
+#profitTableView .table-cell {
+    -fx-alignment: CENTER;
+
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
+    -fx-padding: 0.166667em;
+
+    -fx-background-color: #000040;
+    -fx-cell-size: 2.0em;
+    -fx-text-fill: #ffffff;
+}
+
+.table-view .column-header{
+    -fx-background-color: #00110f;
+    -fx-border-color: #ffffff;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: black;
+}
+.chart-content {
+    -fx-padding: 30px;
+}
+
+.chart-legend {
+    -fx-background-color:  transparent;
+    -fx-font-size: 1.4em;
+}
+
+.chart-legend-item-symbol{
+    -fx-background-radius: 0;
+}
+
+.chart-legend-item{
+    -fx-text-fill: #ffffff;
+}
+
+.chart-plot-background {
+    -fx-background-color:transparent ;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: #3278fa;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #3278fa;
+}
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: #ffffff;
+}
+
+.chart-title
+{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.5em;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #ff0000; }
+.default-color2.chart-series-line { -fx-stroke: #00ff00; }
+.default-color1.chart-series-line { -fx-stroke: #f0e68c; }
+
+
