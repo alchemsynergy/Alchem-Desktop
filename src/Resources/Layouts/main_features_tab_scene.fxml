@@ -25,12 +25,12 @@
                 </Tab>
                 <Tab fx:id="addPurchaseTab" text="Add Purchase">
                     <content>
-                        <fx:include source="Retailers/add_purchase.fxml" />
+                        <fx:include fx:id="addPurchase" source="Retailers/add_purchase.fxml" />
                     </content>
                 </Tab>
                 <Tab text="View Purchase">
                <content>
-                  <fx:include source="Retailers/view_purchase.fxml" />
+                  <fx:include fx:id="viewPurchase" source="Retailers/view_purchase.fxml" />
                </content></Tab>
             <Tab text="Sale/Purchase Analysis">
                <content>

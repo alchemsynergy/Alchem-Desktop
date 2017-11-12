@@ -69,6 +69,7 @@ public class ProfitLossController {
 
     public void initialize()
     {
+        System.out.println(user_id);
         initializeDatePicker();
         initializeTable();
         calculateTotalProfit();
@@ -508,7 +509,7 @@ public class ProfitLossController {
     public void graphGenerator()
     {
         profitLineChart.getData().clear();
-        double max=totalSale[0],min=totalPurchase[0];
+        /*double max=totalSale[0],min=totalPurchase[0];
         for(int i=1;i<7;i++)
         {
          if(max<totalSale[i])
@@ -516,11 +517,11 @@ public class ProfitLossController {
          if(min<totalPurchase[i])
              min=totalPurchase[i];
         }
-        String date;
         profitAxis.setAutoRanging(false);
         profitAxis.setUpperBound(max+100);
         profitAxis.setLowerBound(-(min+100));
-        profitAxis.setTickUnit(200);
+        profitAxis.setTickUnit(200);*/
+        String date;
         XYChart.Series profit=new XYChart.Series();
         XYChart.Series sale=new XYChart.Series();
         XYChart.Series purchase=new XYChart.Series();

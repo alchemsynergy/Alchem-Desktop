@@ -1,7 +1,9 @@
 package Main.Controllers.Retailers;
 
 
+import Main.Controllers.MainFeaturesTabSceneController;
 import Main.Helpers.Retailers.Purchase;
+import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +36,7 @@ public class ViewPurchaseController {
     private HBox dateHBox,datePickedHBox;
 
     @FXML
-    private Label todayPurchaseLabel,yesterdayPurchaseLabel,day3PurchaseLabel,day4PurchaseLabel,day5PurchaseLabel,day6PurchaseLabel,day7PurchaseLabel,dateSelectedLabel;
+    public Label todayPurchaseLabel,yesterdayPurchaseLabel,day3PurchaseLabel,day4PurchaseLabel,day5PurchaseLabel,day6PurchaseLabel,day7PurchaseLabel,dateSelectedLabel;
 
     @FXML
     private DatePicker purchaseDatePicker;
@@ -42,17 +44,22 @@ public class ViewPurchaseController {
     @FXML
     private Button particularDatePurchaseButton;
 
-    ObservableList<Purchase> purchaseList,purchaseParticularDayList;
-    private long user_id=(long)2;
+    public static ObservableList<Purchase> purchaseList,purchaseParticularDayList;
+    public static long[] year=new long[7];
+    public static long[] month=new long[7];
+    public static long[] day=new long[7];
+    public static double[] sum=new double[7];
+    private long user_id= UserInfo.accessId;
     static boolean purchaseCheck=true;
+    private MainFeaturesTabSceneController mainFeaturesTabSceneController;
 
 
     public void initialize()
     {
-     initializeDatePicker();
-     initializeTable();
-     calculateTotalSale();
-     addingToolTip();
+        initializeDatePicker();
+        initializeTable();
+        calculateTotalSale();
+        addingToolTip();
     }
 
     public void addingToolTip()
@@ -175,14 +182,10 @@ public class ViewPurchaseController {
     public void calculateTotalSale()
     {
         Calendar dateToday= Calendar.getInstance();
-        long[] year=new long[7];
-        long[] month=new long[7];
-        long[] day=new long[7];
         long dateCheck;
         year[0] = dateToday.get(Calendar.YEAR);
         month[0] = dateToday.get(Calendar.MONTH)+1;
         day[0] = dateToday.get(Calendar.DAY_OF_MONTH);
-        double[] sum=new double[7];
         String date;
         try {
             Connection dbConnection = JDBC.databaseConnect();
@@ -308,5 +311,7 @@ public class ViewPurchaseController {
     }
 
 
-
+    public void init(MainFeaturesTabSceneController mainFeaturesTabSceneController) {
+    this.mainFeaturesTabSceneController=mainFeaturesTabSceneController;
+    }
 }

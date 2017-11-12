@@ -2,6 +2,7 @@ package Main.Controllers;
 
 
 import Main.Controllers.Retailers.ProfitLossController;
+import Main.Controllers.Retailers.ViewPurchaseController;
 import Main.Controllers.Retailers.ViewSaleController;
 import Main.Helpers.Retailers.ProfitLoss;
 import javafx.fxml.FXML;
@@ -17,10 +18,18 @@ public class MainFeaturesTabSceneController {
     @FXML
     ProfitLossController profitLossController;
 
+    @FXML
+    AddPurchaseController addPurchaseController;
+
+    @FXML
+    ViewPurchaseController viewPurchaseController;
+
     public void initialize() {
         viewSaleController.init(this);
         addSaleController.init(this);
         profitLossController.init(this);
+        viewPurchaseController.init(this);
+        addPurchaseController.init(this);
     }
 
     public void setSaleLabel() {
@@ -31,6 +40,16 @@ public class MainFeaturesTabSceneController {
         viewSaleController.day5SaleLabel.setText("Total Sale on " + ViewSaleController.day[4] + "-" + ViewSaleController.month[4] + "-" + ViewSaleController.year[4] + " was Rs." + ViewSaleController.sum[4]);
         viewSaleController.day6SaleLabel.setText("Total Sale on " + ViewSaleController.day[5] + "-" + ViewSaleController.month[5] + "-" + ViewSaleController.year[5] + " was Rs." + ViewSaleController.sum[5]);
         viewSaleController.day7SaleLabel.setText("Total Sale on " + ViewSaleController.day[6] + "-" + ViewSaleController.month[6] + "-" + ViewSaleController.year[6] + " was Rs." + ViewSaleController.sum[6]);
+    }
+
+    public void setPurchaseLabel() {
+        viewPurchaseController.todayPurchaseLabel.setText("Today's Total Purchase is Rs." + ViewPurchaseController.sum[0]);
+        viewPurchaseController.yesterdayPurchaseLabel.setText("Yesterday's Total Purchase was Rs." + ViewPurchaseController.sum[1]);
+        viewPurchaseController.day3PurchaseLabel.setText("Total Purchase on " + ViewPurchaseController.day[2] + "-" + ViewPurchaseController.month[2] + "-" + ViewPurchaseController.year[2] + " was Rs." + ViewPurchaseController.sum[2]);
+        viewPurchaseController.day4PurchaseLabel.setText("Total Purchase on " + ViewPurchaseController.day[3] + "-" + ViewPurchaseController.month[3] + "-" + ViewPurchaseController.year[3] + " was Rs." + ViewPurchaseController.sum[3]);
+        viewPurchaseController.day5PurchaseLabel.setText("Total Purchase on " + ViewPurchaseController.day[4] + "-" + ViewPurchaseController.month[4] + "-" + ViewPurchaseController.year[4] + " was Rs." + ViewPurchaseController.sum[4]);
+        viewPurchaseController.day6PurchaseLabel.setText("Total Purchase on " + ViewPurchaseController.day[5] + "-" + ViewPurchaseController.month[5] + "-" + ViewPurchaseController.year[5] + " was Rs." + ViewPurchaseController.sum[5]);
+        viewPurchaseController.day7PurchaseLabel.setText("Total Purchase on " + ViewPurchaseController.day[6] + "-" + ViewPurchaseController.month[6] + "-" + ViewPurchaseController.year[6] + " was Rs." + ViewPurchaseController.sum[6]);
     }
 
     public void setProfitLabel()

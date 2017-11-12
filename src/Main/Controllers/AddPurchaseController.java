@@ -1,8 +1,14 @@
 package Main.Controllers;
 
+import Main.Controllers.Retailers.ProfitLossController;
+import Main.Controllers.Retailers.ViewPurchaseController;
+import Main.Controllers.Retailers.ViewSaleController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Add_purchase;
 import Main.Helpers.Purchase_history;
+import Main.Helpers.Retailers.ProfitLoss;
+import Main.Helpers.Retailers.Purchase;
+import Main.Helpers.Retailers.Sale;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
 import com.sun.org.apache.regexp.internal.RE;
@@ -105,6 +111,7 @@ public class AddPurchaseController {
 
     @FXML
     private ComboBox mode,medicine_type;
+    private MainFeaturesTabSceneController mainFeaturesTabSceneController;
 
     public void initialize() {
 
@@ -449,6 +456,7 @@ public class AddPurchaseController {
                         preparedStatement.setInt(3, Integer.parseInt(cgst.getText()));
                         preparedStatement.setInt(4, Integer.parseInt(igst.getText()));
                         preparedStatement.setInt(5, medicine_id);
+                        preparedStatement.executeUpdate();
                     }
 
                     catch (Exception e){e.printStackTrace();}
@@ -499,6 +507,44 @@ public class AddPurchaseController {
             }
             new AlertBox(currentStage, fxmlLoader, true, "Saved Successfully !!");
             search_bill_table_list.add(new Purchase_history(wholesaler_name.getText(), BillNoLong, Date, totalAmount));
+            ViewPurchaseController.purchaseList.add(new Purchase(Date,BillNoLong,wholesaler_name.getText(), Mode,Float.parseFloat(Amount)));
+            for (int i = 0; i < 7; i++) {
+                int chk = viewPurchaseEvent(i,Date,Float.parseFloat(Amount));
+                if (chk == 1)
+                    break;
+            }
+
+            String date="";
+            try {
+                Connection conn=JDBC.databaseConnect();
+                Statement sqlStatement=conn.createStatement();
+                ResultSet purchaseProfitResultSet=sqlStatement.executeQuery("SELECT date from retailer_purchase_bill where bill_no='"+BillNoLong+"' AND user_access_id='"+UserInfo.accessId+"' AND wholesaler_name='"+wholesaler_name.getText()+"'");
+                while(purchaseProfitResultSet.next())
+                {
+                    date=purchaseProfitResultSet.getString(1);
+                }
+            }catch (Exception e)
+            {e.printStackTrace();}
+
+            Iterator<ProfitLoss> plIterator = ProfitLossController.profitList.iterator();
+            while (plIterator.hasNext()) {
+                ProfitLoss profitLoss=plIterator.next();
+                if(date.equals(profitLoss.getDate()))
+                {
+                    profitLoss.setTotalPurchase(Float.parseFloat(Amount)+profitLoss.getTotalPurchase());
+                    profitLoss.setProfit(profitLoss.getProfit()-Float.parseFloat(Amount));
+                    for (int i = 0; i < 7; i++) {
+                        int chk = viewPurchaseProfitEvent(i, date,Float.parseFloat(Amount));
+                        if (chk == 1)
+                            break;
+                    }
+                }
+            }
+            ObservableList<ProfitLoss> temporary_profit_data = FXCollections.observableArrayList(ProfitLossController.profitList);
+            ProfitLossController.profitList.clear();
+            ProfitLossController.profitList.addAll(temporary_profit_data);
+
+
         }
     }
 
@@ -533,5 +579,44 @@ public class AddPurchaseController {
             }
 
         });
+    }
+
+    public int viewPurchaseEvent(int i, String billDate, Float Amount) {
+        long date = ViewPurchaseController.day[i];
+        long month = ViewPurchaseController.month[i];
+        long year = ViewPurchaseController.year[i];
+        String datechk = year + "-" + month + "-" + date;
+        if (datechk.equals(billDate)) {
+            ViewPurchaseController.sum[i] = ViewPurchaseController.sum[i] + Amount;
+            try {
+                mainFeaturesTabSceneController.setPurchaseLabel();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 1;
+        }
+        return 0;
+    }
+
+    public int viewPurchaseProfitEvent(int i, String billDate, Float Amount) {
+        long date = ProfitLossController.day[i];
+        long month = ProfitLossController.month[i];
+        long year = ProfitLossController.year[i];
+        String datechk = year + "-" + month + "-" + date;
+        if (datechk.equals(billDate)) {
+            ProfitLossController.sum[i] = ProfitLossController.sum[i] - Amount;
+            ProfitLossController.totalPurchase[i]=ProfitLossController.totalPurchase[i]+Amount;
+            try {
+                mainFeaturesTabSceneController.setProfitLabel();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return 1;
+        }
+        return 0;
+    }
+
+    public void init(MainFeaturesTabSceneController mainFeaturesTabSceneController) {
+    this.mainFeaturesTabSceneController=mainFeaturesTabSceneController;
     }
 }

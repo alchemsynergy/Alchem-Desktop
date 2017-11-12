@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="800.0" prefWidth="1270.0" stylesheets="@../../Styling/add_sale.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddPurchaseController">
+<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="800.0" prefWidth="1270.0" stylesheets="@../../Styling/add_purchase.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddPurchaseController">
     <content>
-        <AnchorPane>
+        <AnchorPane stylesheets="@../../Styling/add_purchase.css" style="-fx-background-color: black">
             <children>
                 <AnchorPane layoutX="460.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="780.0" prefWidth="750.0" styleClass="container" stylesheets="@../../Styling/add_purchase.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
                     <children>
@@ -167,7 +167,7 @@
                 <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="411.0" AnchorPane.rightAnchor="810.0">
                     <children>
                         <TextField fx:id="search_bill" layoutX="88.0" layoutY="14.0" prefHeight="27.0" prefWidth="207.0" promptText="Search by Bill No." />
-                        <TableView fx:id="search_bill_table" layoutY="80.0" prefHeight="496.0" prefWidth="411.0" stylesheets="@../../Styling/add_sale.css">
+                        <TableView fx:id="search_bill_table" layoutY="80.0" prefHeight="496.0" prefWidth="411.0" stylesheets="@../../Styling/add_purchase.css">
                             <columns>
                                 <TableColumn fx:id="search_wholesaler" prefWidth="121.0" text="Wholesaler" />
                                 <TableColumn fx:id="search_bill_no" prefWidth="105.99996948242188" text="Bill No" />

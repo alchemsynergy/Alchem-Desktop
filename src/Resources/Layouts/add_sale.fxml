@@ -9,7 +9,7 @@
 
 <ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="850.0" prefWidth="1250.0" stylesheets="@../Styling/add_sale.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddSaleController">
     <content>
-        <AnchorPane>
+        <AnchorPane stylesheets="@../Styling/add_sale.css">
             <children>
                 <Pane layoutX="18.0" layoutY="52.0" prefHeight="620.0" prefWidth="401.0" AnchorPane.leftAnchor="150.0">
                     <children>
