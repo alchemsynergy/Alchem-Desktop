@@ -435,12 +435,12 @@ public class AddPurchaseController {
                 {
                     try {
                         Connection dbConnection = JDBC.databaseConnect();
-                        PreparedStatement preparedStatement = dbConnection.prepareStatement("INSERT INTO medicine VALUES (DEFAULT ,?,?,?,?,?)");
-                        preparedStatement.setString(1, medicine_name.getText());
-                        preparedStatement.setString(2, salt.getText());
-                        preparedStatement.setString(3, company.getText());
-                        preparedStatement.setString(4, hsn_code.getText());
-                        preparedStatement.setString(5, medicine_type.getSelectionModel().getSelectedItem().toString());
+                        PreparedStatement preparedStatement = dbConnection.prepareStatement("INSERT INTO medicine VALUES (DEFAULT,?,?,?,?,?)");
+                        preparedStatement.setString(1, temp.getPurchaseItem());
+                        preparedStatement.setString(2, temp.getPurchaseSalt());
+                        preparedStatement.setString(3, temp.getPurchaseCompany());
+                        preparedStatement.setString(4, temp.getPurchaseHsn());
+                        preparedStatement.setString(5, temp.getPurchaseType());
                         preparedStatement.executeUpdate();
 
                         preparedStatement = dbConnection.prepareStatement("SELECT MAX(medicine_id) FROM medicine");
@@ -452,9 +452,9 @@ public class AddPurchaseController {
 
                         preparedStatement = dbConnection.prepareStatement("INSERT INTO gst VALUES (?,?,?,?,?)");
                         preparedStatement.setInt(1, medicine_id);
-                        preparedStatement.setInt(2, Integer.parseInt(sgst.getText()));
-                        preparedStatement.setInt(3, Integer.parseInt(cgst.getText()));
-                        preparedStatement.setInt(4, Integer.parseInt(igst.getText()));
+                        preparedStatement.setInt(2, temp.getPurchaseSgst());
+                        preparedStatement.setInt(3, temp.getPurchaseCgst());
+                        preparedStatement.setInt(4, temp.getPurchaseIgst());
                         preparedStatement.setInt(5, medicine_id);
                         preparedStatement.executeUpdate();
                     }

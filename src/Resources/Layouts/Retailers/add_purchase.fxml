@@ -61,7 +61,7 @@
                            <children>
                         <ScrollPane>
                            <content>
-                                            <TableView fx:id="purchase_table" prefHeight="300.0" prefWidth="1650.0">
+                                            <TableView fx:id="purchase_table" prefHeight="300.0" prefWidth="2350.0">
                                                 <columns>
                                                     <TableColumn fx:id="purchase_hsn" prefWidth="135.0" text="HSN_code" />
                                                     <TableColumn fx:id="purchase_item" prefWidth="195.0" text="Item" />
