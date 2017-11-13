@@ -5,6 +5,7 @@ import Main.Controllers.Retailers.ViewSaleController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Billing;
 import Main.Helpers.Billing_history;
+import Main.Helpers.Medicine;
 import Main.Helpers.Retailers.ProfitLoss;
 import Main.Helpers.Retailers.Sale;
 import Main.Helpers.UserInfo;
@@ -513,7 +514,15 @@ public class AddSaleController {
         } else {
             String billDate = bill_date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Float Amount = Float.parseFloat(display_amount.getText());
-
+            ObservableList<Billing> previousItemList=FXCollections.observableArrayList();
+           try {
+                Connection dbconnect=JDBC.databaseConnect();
+                Statement sqlStatement=dbconnect.createStatement();
+                ResultSet inventory=sqlStatement.executeQuery("select item,batch_number,quantity from retailer_sale_bill_info JOIN retailer_sale_bill ON retailer_sale_bill_info.rs_bill_id=retailer_sale_bill.rs_bill_id where retailer_sale_bill.bill_no='"+bill_no.getText()+"' AND  retailer_sale_bill.user_access_id='"+UserInfo.accessId+"'");
+                while (inventory.next()) {
+                    previousItemList.add(new Billing(inventory.getString("item"),inventory.getString("batch_number"),inventory.getInt("quantity"),false));
+                }
+            }catch(Exception e){}
             // Code to accordingly update all the quantities after the sale
 
             Iterator<Billing> it = bill_data.iterator();
@@ -643,8 +652,26 @@ public class AddSaleController {
                         preparedStatement.setString(5, Free);
                         preparedStatement.setFloat(6, temp.getBillRate());
                         preparedStatement.executeUpdate();
+
+                        Iterator<Medicine> medicineIterator=InventoryController.medicines.iterator();
+                        while(medicineIterator.hasNext())
+                        {
+                            Medicine medicine=medicineIterator.next();
+                            if(temp.getBillItem().equals(medicine.getName()) && temp.getBillBatch().equals(medicine.getBatch()))
+                            {
+                                medicine.setQuantity(medicine.getQuantity()-temp.getBillQuantity());
+                                if(medicine.getQuantity()==0)
+                                {
+                                    medicineIterator.remove();
+                                }
+                                break;
+                            }
+                        }
                     }
                     ViewSaleController.saleList.add(new Sale(billDate, billNo, patientName, Doctor, Company, Mode, Amount));
+                    ObservableList<Medicine> temp_medicine=FXCollections.observableArrayList(InventoryController.medicines);
+                    InventoryController.medicines.clear();
+                    InventoryController.medicines.addAll(temp_medicine);
                     for (int i = 0; i < 7; i++) {
                         int chk = viewSaleEvent(i, billDate, Amount);
                         if (chk == 1)
@@ -682,7 +709,8 @@ public class AddSaleController {
                     ProfitLossController.profitList.addAll(temporary_profit_data);
 
                     search_bill_table_list.add(new Billing_history(billNo, billDate, Amount));
-                } else {
+                }
+                else {
                     preparedStatement = dbConnection.prepareStatement("UPDATE retailer_sale_bill SET patient_name=?, date=?, company=?, doctor_name=?, mode=?, discount=?, total_amount=? WHERE user_access_id=? AND bill_no=?");
                     preparedStatement.setString(1, patientName);
                     preparedStatement.setString(2, billDate);
@@ -709,6 +737,23 @@ public class AddSaleController {
 
                     preparedStatement = dbConnection.prepareStatement("INSERT INTO retailer_sale_bill_info VALUES (?,?,?,?,?,?,DEFAULT )");
 
+                    Iterator<Billing> previousIterator=previousItemList.iterator();
+                    while(previousIterator.hasNext())
+                    {
+                        Billing previousItem=previousIterator.next();
+                        Iterator<Medicine> medicineIterator=InventoryController.medicines.iterator();
+                        while(medicineIterator.hasNext())
+                        {
+                            Medicine medicine=medicineIterator.next();
+                            if(medicine.getName().equals(previousItem.getBillItem()) && medicine.getBatch().equals(previousItem.getBillBatch()))
+                            {
+                                System.out.println(medicine.getBatch());
+                                medicine.setQuantity(medicine.getQuantity()+previousItem.getBillQuantity());
+                                break;
+                            }
+                        }
+                    }
+
                     Iterator<Billing> it1 = bill_data.iterator();
                     while (it1.hasNext()) {
                         Billing temp = it1.next();
@@ -723,7 +768,28 @@ public class AddSaleController {
                         preparedStatement.setString(5, Free);
                         preparedStatement.setFloat(6, temp.getBillRate());
                         preparedStatement.executeUpdate();
+
+                        Iterator<Medicine> medicineIterator=InventoryController.medicines.iterator();
+                        while(medicineIterator.hasNext())
+                        {
+                            Medicine medicine=medicineIterator.next();
+                            if(temp.getBillItem().equals(medicine.getName()) && temp.getBillBatch().equals(medicine.getBatch()))
+                            {
+                                medicine.setQuantity(medicine.getQuantity()-temp.getBillQuantity());
+                                if(medicine.getQuantity()==0)
+                                {
+                                    medicineIterator.remove();
+                                }
+                                break;
+                            }
+                        }
+
                     }
+
+                    ObservableList<Medicine> temp_medicine=FXCollections.observableArrayList(InventoryController.medicines);
+                    InventoryController.medicines.clear();
+                    InventoryController.medicines.addAll(temp_medicine);
+
                     float amt=0;
                     Iterator<Sale> saleIterator = ViewSaleController.saleList.iterator();
                     while (saleIterator.hasNext()) {

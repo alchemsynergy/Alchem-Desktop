@@ -10,19 +10,19 @@
 
 <AnchorPane prefHeight="735.0" prefWidth="1162.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/profit_loss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.ProfitLossController">
    <children>
-      <HBox layoutX="20.0" layoutY="20.0" prefHeight="680.0" prefWidth="515.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0">
+      <HBox layoutX="20.0" layoutY="20.0" prefHeight="655.0" prefWidth="420.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0">
          <children>
-            <TableView fx:id="profitTableView" prefHeight="680.0" prefWidth="516.0">
+            <TableView fx:id="profitTableView" prefHeight="655.0" prefWidth="420.0">
                <columns>
-                  <TableColumn fx:id="dateColumn" prefWidth="101.0" text="Date" />
-                  <TableColumn fx:id="totalSaleColumn" prefWidth="127.0" text="Total Sale" />
-                  <TableColumn fx:id="totalPurchaseColumn" prefWidth="148.0" text="Total Purchase" />
-                  <TableColumn fx:id="profitColumn" minWidth="0.0" prefWidth="139.0" text="Profit" />
+                  <TableColumn fx:id="dateColumn" prefWidth="87.0" text="Date" />
+                  <TableColumn fx:id="totalSaleColumn" prefWidth="109.0" text="Total Sale" />
+                  <TableColumn fx:id="totalPurchaseColumn" prefWidth="121.0" text="Total Purchase" />
+                  <TableColumn fx:id="profitColumn" minWidth="0.0" prefWidth="103.0" text="Profit" />
                </columns>
             </TableView>
          </children>
       </HBox>
-      <VBox prefHeight="575.0" prefWidth="374.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="80.0">
+      <VBox prefHeight="575.0" prefWidth="374.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="80.0">
          <children>
             <HBox prefHeight="680.0" prefWidth="394.0">
                <children>
@@ -120,7 +120,7 @@
                               <Region prefHeight="58.0" prefWidth="318.0" />
                               <HBox prefHeight="41.0" prefWidth="272.0">
                                  <children>
-                                    <Button fx:id="particularDateProfitButton" mnemonicParsing="false" onAction="#profitParticularDay" prefHeight="48.0" prefWidth="397.0" style="-fx-background-color: transparent;" text="See Profit/Loss of Particular Day &gt;" textFill="WHITE">
+                                    <Button fx:id="particularDateProfitButton" mnemonicParsing="false" onAction="#profitParticularDay" prefHeight="48.0" prefWidth="459.0" style="-fx-background-color: transparent;" text="See Profit/Loss of Particular Day &gt;" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="22.0" />
                                        </font>
@@ -152,9 +152,9 @@
             </HBox>
          </children>
       </VBox>
-      <Pane fx:id="graphPane" prefHeight="428.0" prefWidth="527.0" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+      <Pane fx:id="graphPane" layoutY="147.0" prefHeight="371.0" prefWidth="498.0" AnchorPane.bottomAnchor="217.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
          <children>
-            <LineChart fx:id="profitLineChart" title="Profit/Loss">
+            <LineChart fx:id="profitLineChart" layoutX="-11.0" layoutY="-2.0" prefHeight="402.0" prefWidth="511.0" title="Profit/Loss">
               <xAxis>
                 <CategoryAxis fx:id="dateAxis" prefHeight="25.0" prefWidth="439.0" side="BOTTOM" />
               </xAxis>

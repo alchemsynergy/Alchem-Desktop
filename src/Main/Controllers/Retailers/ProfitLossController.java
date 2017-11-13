@@ -69,7 +69,6 @@ public class ProfitLossController {
 
     public void initialize()
     {
-        System.out.println(user_id);
         initializeDatePicker();
         initializeTable();
         calculateTotalProfit();

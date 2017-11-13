@@ -68,8 +68,8 @@ public class Medicine {
         return quantity.get();
     }
 
-    public void setQuantity(SimpleIntegerProperty quantity) {
-        this.quantity = quantity;
+    public void setQuantity(int quantity) {
+        this.quantity.set(quantity);
     }
 
     public int getSgst() {

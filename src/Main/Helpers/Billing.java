@@ -5,12 +5,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Billing {
-    private final SimpleStringProperty billItem;
-    private final SimpleStringProperty billBatch;
-    private final SimpleIntegerProperty billQuantity;
-    private final SimpleStringProperty billFree;
-    private final SimpleFloatProperty billRate;
-    private final SimpleFloatProperty billAmount;
+    private SimpleStringProperty billItem;
+    private SimpleStringProperty billBatch;
+    private SimpleIntegerProperty billQuantity;
+    private SimpleStringProperty billFree;
+    private SimpleFloatProperty billRate;
+    private SimpleFloatProperty billAmount;
+    private Boolean check;
 
     public Billing(String billItem, String billBatch, int billQuantity, String billFree, float billRate, float billAmount) {
         this.billItem = new SimpleStringProperty(billItem);
@@ -19,6 +20,14 @@ public class Billing {
         this.billFree = new SimpleStringProperty(billFree);
         this.billRate = new SimpleFloatProperty(billRate);
         this.billAmount = new SimpleFloatProperty(billAmount);
+    }
+
+    public Billing(String billItem,String billBatch,int billQuantity,Boolean check)
+    {
+        this.billItem = new SimpleStringProperty(billItem);
+        this.billBatch = new SimpleStringProperty(billBatch);
+        this.billQuantity = new SimpleIntegerProperty(billQuantity);
+        this.check=check;
     }
 
     public String getBillItem() {
@@ -45,4 +54,11 @@ public class Billing {
         return billAmount.get();
     }
 
+    public void setBillQuantity(int billQuantity) {
+        this.billQuantity.set(billQuantity);
+    }
+
+    public void setCheck(Boolean check) {
+        this.check = check;
+    }
 }

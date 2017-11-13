@@ -5,6 +5,7 @@ import Main.Controllers.Retailers.ViewPurchaseController;
 import Main.Controllers.Retailers.ViewSaleController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Add_purchase;
+import Main.Helpers.Medicine;
 import Main.Helpers.Purchase_history;
 import Main.Helpers.Retailers.ProfitLoss;
 import Main.Helpers.Retailers.Purchase;
@@ -501,9 +502,10 @@ public class AddPurchaseController {
                     preparedStatement1.setInt(5, pp_item);
                     preparedStatement1.setInt(6, piece);
                     preparedStatement1.executeUpdate();
+
+                    InventoryController.medicines.add(new Medicine(medicine_id,temp.getPurchaseItem(),temp.getPurchaseSalt(),temp.getPurchaseCompany(),temp.getPurchaseType(),temp.getPurchaseHsn(),temp.getPurchaseBatch(),temp.getPurchaseExpiry(),temp.getPurchaseQuantity(),temp.getPurchaseMrp(),temp.getPurchaseCost(),temp.getPurchaseSgst(),temp.getPurchaseCgst(),temp.getPurchaseIgst()));
                 }
                 catch (Exception e) {e.printStackTrace();}
-
             }
             new AlertBox(currentStage, fxmlLoader, true, "Saved Successfully !!");
             search_bill_table_list.add(new Purchase_history(wholesaler_name.getText(), BillNoLong, Date, totalAmount));

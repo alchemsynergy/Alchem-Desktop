@@ -22,7 +22,7 @@ import java.util.function.Predicate;
 
 public class InventoryController {
     private static double drawableWidth;
-    ObservableList<Medicine> medicines;
+    public static ObservableList<Medicine> medicines;
     FilteredList<Medicine> filteredData;
     Boolean advancedSearchedToggle = false;
     @FXML

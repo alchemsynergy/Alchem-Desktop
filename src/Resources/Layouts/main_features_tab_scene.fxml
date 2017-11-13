@@ -10,7 +10,7 @@
             <tabs>
                 <Tab fx:id="inventoryTab" text="Inventory">
                     <content>
-                        <fx:include source="inventory.fxml" />
+                        <fx:include fx:id="inventory" source="inventory.fxml" />
                     </content>
                 </Tab>
                 <Tab fx:id="addSaleTab" text="Add Sale">
