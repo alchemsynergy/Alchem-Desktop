@@ -4,7 +4,7 @@
 
 #### Why it is needed?
 
-All the existing solutions don't have a good UI and UX, even getting used to those softwares take more than a month. Also, customer support is not at par. This software being OpenSource aims to become more than just a software. It aims to become a community.
+All the existing solutions don't have a good UI and UX, even getting used to those softwares take more than a month. Also, customer support is not at par.</br> This software being OpenSource aims to become more than just a software. It aims to become a community.
 
 ## How to build?
 
