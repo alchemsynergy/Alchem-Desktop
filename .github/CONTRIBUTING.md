@@ -32,4 +32,4 @@ When requesting or submitting new features, first consider whether it might be u
 ## Technical requirements
 
 - Before Submitting your Pull Request, merge `master` with your new branch and fix any conflicts. (Make sure you don't break anything in development!)
-- Make sure to reasonably test your code. We have a sample platform that runs a test-suite for you, but it only covers a general set of tests.
+- Make sure to reasonably test your code.
