@@ -10,7 +10,7 @@ Please prefix your pull request with one of the following: **[FEATURE]** **[FIX]
 
 **My familiarity with the project is as follows (check one):**
 
-- [ ] I have never used Alchemr.
+- [ ] I have never used Alchem.
 - [ ] I have used Alchem just a couple of times.
 - [ ] I absolutely love Alchem, but have not contributed previously.
 - [ ] I am an active contributor to Alchem.
