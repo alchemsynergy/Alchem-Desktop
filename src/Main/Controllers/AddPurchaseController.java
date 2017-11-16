@@ -580,7 +580,27 @@ public class AddPurchaseController {
                 catch (Exception e) {e.printStackTrace();}
             }
             new AlertBox(currentStage, fxmlLoader, true, "Saved Successfully !!");
-            search_bill_table_list.add(new Purchase_history(wholesaler_name.getText(), BillNoLong, Date, totalAmount));
+
+            // updating side search table
+
+            if(flag == 0)
+            {
+                search_bill_table_list.add(new Purchase_history(wholesaler_name.getText(), BillNoLong, Date, totalAmount));
+            }
+            else
+            {
+                Iterator<Purchase_history> billingHistoryIterator = search_bill_table_list.iterator();
+                while (billingHistoryIterator.hasNext()) {
+                    Purchase_history bill = billingHistoryIterator.next();
+                    if (BillNoLong == bill.getSearchBillNo() && WholesalerName.equals(bill.getSearchWholesaler())) {
+                        bill.setSearchAmount(totalAmount);
+                    }
+                }
+                ObservableList<Purchase_history> temporary_add_sale_data = FXCollections.observableArrayList(search_bill_table_list);
+                search_bill_table_list.clear();
+                search_bill_table_list.addAll(temporary_add_sale_data);
+            }
+
             ViewPurchaseController.purchaseList.add(new Purchase(Date,BillNoLong,wholesaler_name.getText(), Mode,Float.parseFloat(Amount)));
             for (int i = 0; i < 7; i++) {
                 int chk = viewPurchaseEvent(i,Date,Float.parseFloat(Amount));
