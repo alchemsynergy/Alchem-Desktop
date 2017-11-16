@@ -18,7 +18,7 @@
 
 <ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="800.0" prefWidth="1270.0" stylesheets="@../../Styling/add_purchase.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddPurchaseController">
     <content>
-        <AnchorPane stylesheets="@../../Styling/add_purchase.css" style="-fx-background-color: black">
+        <AnchorPane style="-fx-background-color: black" stylesheets="@../../Styling/add_purchase.css">
             <children>
                 <AnchorPane layoutX="460.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="780.0" prefWidth="750.0" styleClass="container" stylesheets="@../../Styling/add_purchase.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="15.0">
                     <children>
@@ -47,8 +47,8 @@
                                         <Pane prefHeight="49.0" prefWidth="591.0">
                                             <children>
                                                 <TextField fx:id="wholesaler_name" layoutX="16.0" layoutY="16.0" prefHeight="25.0" prefWidth="196.0" promptText="Wholesaler Name" />
-                                                <DatePicker fx:id="date" layoutX="396.0" layoutY="16.0" prefHeight="25.0" prefWidth="155.0" promptText="Date" />
                                     <TextField fx:id="bill_no" layoutX="228.0" layoutY="16.0" prefHeight="25.0" prefWidth="150.0" promptText="Bill Number" />
+                                                <DatePicker fx:id="date" layoutX="396.0" layoutY="16.0" prefHeight="25.0" prefWidth="155.0" promptText="Date" />
                                                 <ComboBox fx:id="mode" layoutX="566.0" layoutY="16.0" prefHeight="25.0" prefWidth="154.0" />
                                             </children>
                                         </Pane>
@@ -90,26 +90,26 @@
                                 <Pane prefHeight="217.0" prefWidth="708.0">
                                     <children>
                                         <TextField fx:id="medicine_name" layoutX="13.0" layoutY="18.0" prefHeight="31.0" prefWidth="161.0" promptText="Medicine Name" />
+                              <TextField fx:id="hsn_code" layoutX="192.0" layoutY="18.0" prefHeight="31.0" prefWidth="151.0" promptText="Enter HSN Code" />
                                         <TextField fx:id="salt" layoutX="363.0" layoutY="18.0" prefHeight="31.0" prefWidth="150.0" promptText="Salt" />
                                         <TextField fx:id="company" layoutX="531.0" layoutY="18.0" prefHeight="31.0" prefWidth="157.0" promptText="Company" />
-                                        <Button fx:id="add_purchase" layoutX="637.0" layoutY="164.0" mnemonicParsing="false" onAction="#onAddPurchase" prefHeight="31.0" prefWidth="51.0" text="Add ">
-                                            <font>
-                                                <Font name="Arial Black" size="12.0" />
-                                            </font>
-                                        </Button>
-                              <TextField fx:id="hsn_code" layoutX="192.0" layoutY="18.0" prefHeight="31.0" prefWidth="151.0" promptText="Enter HSN Code" />
-                              <TextField fx:id="mrp" layoutX="13.0" layoutY="115.0" prefHeight="31.0" prefWidth="161.0" promptText="M.R.P" />
-                              <DatePicker fx:id="expiry_date" layoutX="195.0" layoutY="119.0" prefHeight="27.0" prefWidth="152.0" promptText="Expiry date" />
-                              <DatePicker fx:id="mfd" layoutX="365.0" layoutY="119.0" prefHeight="27.0" prefWidth="152.0" promptText="Manufacture date" />
+                              <ComboBox fx:id="medicine_type" layoutX="13.0" layoutY="66.0" prefHeight="31.0" prefWidth="169.0" />
                               <TextField fx:id="batch_number" layoutX="195.0" layoutY="66.0" prefHeight="31.0" promptText="Enter Batch Number" />
                               <TextField fx:id="quantity" layoutX="365.0" layoutY="66.0" prefHeight="31.0" prefWidth="108.0" promptText="Quantity (unit)" />
                               <TextField fx:id="cost_price" layoutX="494.0" layoutY="66.0" prefHeight="31.0" prefWidth="155.0" promptText="Cost Price" />
-                              <ComboBox fx:id="medicine_type" layoutX="13.0" layoutY="66.0" prefHeight="31.0" prefWidth="169.0" />
+                              <TextField fx:id="mrp" layoutX="13.0" layoutY="115.0" prefHeight="31.0" prefWidth="161.0" promptText="M.R.P" />
+                              <DatePicker fx:id="expiry_date" layoutX="195.0" layoutY="119.0" prefHeight="27.0" prefWidth="152.0" promptText="Expiry date" />
+                              <DatePicker fx:id="mfd" layoutX="365.0" layoutY="119.0" prefHeight="27.0" prefWidth="152.0" promptText="Manufacture date" />
                               <TextField fx:id="sgst" layoutX="535.0" layoutY="120.0" prefHeight="27.0" prefWidth="129.0" promptText="sgst" />
                               <TextField fx:id="cgst" layoutX="13.0" layoutY="163.0" prefHeight="27.0" prefWidth="131.0" promptText="cgst" />
                               <TextField fx:id="igst" layoutX="173.0" layoutY="164.0" prefHeight="27.0" prefWidth="131.0" promptText="igst" />
                               <TextField fx:id="ipunit" layoutX="324.0" layoutY="165.0" prefHeight="27.0" prefWidth="131.0" promptText="item per unit" />
                               <TextField fx:id="ppitem" layoutX="478.0" layoutY="166.0" prefHeight="27.0" prefWidth="131.0" promptText="piece per item" />
+                                        <Button fx:id="add_purchase" layoutX="637.0" layoutY="164.0" mnemonicParsing="false" onAction="#onAddPurchase" prefHeight="31.0" prefWidth="51.0" text="Add ">
+                                            <font>
+                                                <Font name="Arial Black" size="12.0" />
+                                            </font>
+                                        </Button>
                                     </children>
                                 </Pane>
                             </children>
