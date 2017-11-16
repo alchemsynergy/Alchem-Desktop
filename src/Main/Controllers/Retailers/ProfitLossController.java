@@ -524,7 +524,7 @@ public class ProfitLossController {
         XYChart.Series profit=new XYChart.Series();
         XYChart.Series sale=new XYChart.Series();
         XYChart.Series purchase=new XYChart.Series();
-        for(int i=0;i<7;i++)
+        for(int i=6;i>=0;i--)
         {
             date=day[i]+"-"+month[i]+"-"+year[i];
             profit.getData().add(new XYChart.Data(date,sum[i]));
