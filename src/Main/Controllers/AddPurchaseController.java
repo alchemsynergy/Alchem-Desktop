@@ -364,6 +364,7 @@ public class AddPurchaseController {
             String Date = date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Long BillNoLong = Long.parseLong(BillNo);
             Float totalAmount = Float.parseFloat(total_amount.getText());
+            int med_flag = 0;
             int flag = 0;
             int medicine_id = 0;
             int medicine_info_id = 0;
@@ -376,22 +377,93 @@ public class AddPurchaseController {
 
             try {
                 Connection dbConnection = JDBC.databaseConnect();
-                PreparedStatement preparedStatement = dbConnection.prepareStatement("INSERT INTO retailer_purchase_bill VALUES (?,?,?,?,?,?,DEFAULT )");
+
+                PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT rp_bill_id FROM retailer_purchase_bill WHERE user_access_id=? AND bill_no=? AND wholesaler_name=?");
                 preparedStatement.setInt(1, LoginController.userAccessId);
                 preparedStatement.setLong(2, BillNoLong);
                 preparedStatement.setString(3, WholesalerName);
-                preparedStatement.setString(4, Date);
-                preparedStatement.setString(5, Mode);
-                preparedStatement.setFloat(6, floatAmount);
-                preparedStatement.executeUpdate();
-
-                Statement statement = dbConnection.createStatement();
-                ResultSet resultSet1 = statement.executeQuery("SELECT MAX(rp_bill_id) FROM retailer_purchase_bill");
-                if (resultSet1.next()) {
-                    rp_bill_id = resultSet1.getLong(1);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    flag = 1;
                 }
+                else
+                    flag = 0;
             }
             catch (Exception e) {e.printStackTrace();}
+
+            // Condition to save a new purchase bill entry
+
+            if(flag == 0)
+            {
+                try {
+                    Connection dbConnection = JDBC.databaseConnect();
+                    PreparedStatement preparedStatement = dbConnection.prepareStatement("INSERT INTO retailer_purchase_bill VALUES (?,?,?,?,?,?,DEFAULT )");
+                    preparedStatement.setInt(1, LoginController.userAccessId);
+                    preparedStatement.setLong(2, BillNoLong);
+                    preparedStatement.setString(3, WholesalerName);
+                    preparedStatement.setString(4, Date);
+                    preparedStatement.setString(5, Mode);
+                    preparedStatement.setFloat(6, floatAmount);
+                    preparedStatement.executeUpdate();
+
+                    Statement statement = dbConnection.createStatement();
+                    ResultSet resultSet1 = statement.executeQuery("SELECT MAX(rp_bill_id) FROM retailer_purchase_bill");
+                    if (resultSet1.next()) {
+                        rp_bill_id = resultSet1.getLong(1);
+                    }
+                }
+                catch (Exception e) {e.printStackTrace();}
+
+            }
+
+            // Condition to update the purchase bill entry
+
+            else
+            {
+                try {
+                    Connection dbConnection = JDBC.databaseConnect();
+                    PreparedStatement preparedStatement = dbConnection.prepareStatement("UPDATE retailer_purchase_bill SET date=?, mode=?, total_amount=? WHERE user_access_id=? AND bill_no=? AND wholesaler_name=?");
+                    preparedStatement.setString(1, Date);
+                    preparedStatement.setString(2, Mode);
+                    preparedStatement.setFloat(3, totalAmount);
+                    preparedStatement.setInt(4, LoginController.userAccessId);
+                    preparedStatement.setLong(5, BillNoLong);
+                    preparedStatement.setString(6, WholesalerName);
+                    preparedStatement.executeUpdate();
+
+                    preparedStatement = dbConnection.prepareStatement("SELECT rp_bill_id FROM retailer_purchase_bill WHERE user_access_id=? AND bill_no=? AND wholesaler_name=?");
+                    preparedStatement.setInt(1, LoginController.userAccessId);
+                    preparedStatement.setLong(2, BillNoLong);
+                    preparedStatement.setString(3, WholesalerName);
+                    ResultSet resultSet1 = preparedStatement.executeQuery();
+                    if (resultSet1.next()) {
+                        rp_bill_id = resultSet1.getLong(1);
+                    }
+
+                    preparedStatement = dbConnection.prepareStatement("SELECT medicine_info_id FROM retailer_purchase_bill_info WHERE rp_bill_id=?");
+                    preparedStatement.setLong(1, rp_bill_id);
+                    ResultSet resultSet2 = preparedStatement.executeQuery();
+                    while (resultSet2.next())
+                    {
+                        medicine_info_id = resultSet2.getInt(1);
+
+                        PreparedStatement preparedStatement1 = dbConnection.prepareStatement("DELETE FROM quantity WHERE medicine_info_id=?");
+                        preparedStatement1.setInt(1, medicine_info_id);
+                        preparedStatement1.executeUpdate();
+
+                        preparedStatement1 = dbConnection.prepareStatement("DELETE FROM medicine_info WHERE medicine_info_id=?");
+                        preparedStatement1.setInt(1, medicine_info_id);
+                        preparedStatement1.executeUpdate();
+
+                    }
+
+                    preparedStatement = dbConnection.prepareStatement("DELETE FROM retailer_purchase_bill_info WHERE rp_bill_id=?");
+                    preparedStatement.setLong(1, rp_bill_id);
+                    preparedStatement.executeUpdate();
+                }
+                catch (Exception e) {e.printStackTrace();}
+
+            }
 
             Iterator<Add_purchase> it = table_data.iterator();
             while (it.hasNext())
@@ -406,17 +478,17 @@ public class AddPurchaseController {
                     {
                         if(temp.getPurchaseItem().equals(resultSet.getString("name")))
                         {
-                            flag = 1;
+                            med_flag = 1;
                             break;
                         }
-                        else flag = 0;
+                        else med_flag = 0;
                     }
                 }
                 catch (Exception e) {e.printStackTrace();}
 
                 // when medicine already exists
 
-                if(flag == 1)
+                if(med_flag == 1)
                 {
 
                     try {
