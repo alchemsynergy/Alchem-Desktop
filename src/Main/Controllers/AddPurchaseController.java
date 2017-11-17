@@ -31,6 +31,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 
@@ -44,61 +45,42 @@ public class AddPurchaseController {
 
     @FXML
     private TextField wholesaler_name, bill_no, hsn_code,medicine_name,salt,company,batch_number,quantity,cost_price,mrp,total_amount,sgst,cgst,igst,ipunit,ppitem,search_bill;
-
     @FXML
     private DatePicker date,expiry_date,mfd;
-
     @FXML
     private TableView<Add_purchase> purchase_table;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_hsn;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_item;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_batch;
-
     @FXML
     private TableColumn<Add_purchase, Integer> purchase_quantity;
-
     @FXML
     private TableColumn<Add_purchase, Float> purchase_cost;
-
     @FXML
     private TableColumn<Add_purchase, Float> purchase_mrp;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_salt;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_company;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_type;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_expiry;
-
     @FXML
     private TableColumn<Add_purchase, String> purchase_mfd;
-
     @FXML
     private TableColumn<Add_purchase, Integer> purchase_sgst;
-
     @FXML
     private TableColumn<Add_purchase, Integer> purchase_cgst;
-
     @FXML
     private TableColumn<Add_purchase, Integer> purchase_igst;
-
     @FXML
     private TableColumn<Add_purchase, Integer> purchase_ipunit;
-
     @FXML
     private TableColumn<Add_purchase, Integer> purchase_ppitem;
-
     @FXML
     private TableView<Purchase_history> search_bill_table;
     @FXML
@@ -109,7 +91,6 @@ public class AddPurchaseController {
     private TableColumn<Purchase_history, String> search_date;
     @FXML
     private TableColumn<Purchase_history, Float> search_amount;
-
     @FXML
     private ComboBox mode,medicine_type;
     private MainFeaturesTabSceneController mainFeaturesTabSceneController;
@@ -124,6 +105,7 @@ public class AddPurchaseController {
 
         setSearchBillDataList();
         search_bill_table.setItems(search_bill_table_list);
+        searchTableClickEvent();
         initializePurchaseHistoryProperty();
         initializeMedicineList();
         medicineAutoCompleteBinding();
@@ -672,6 +654,114 @@ public class AddPurchaseController {
 
             }
 
+        });
+    }
+
+    public void searchTableClickEvent() {
+        search_bill_table.setRowFactory(tv -> {
+            TableRow<Purchase_history> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    table_data.clear();
+                    Purchase_history rowData = row.getItem();
+                    long billNo = rowData.getSearchBillNo();
+                    String Date = rowData.getSearchDate();
+                    float totalAmount = rowData.getSearchAmount();
+                    String Wholesaler = rowData.getSearchWholesaler();
+                    int medicine_id = 0;
+                    int medicine_info_id = 0;
+                    String Mode = "";
+                    long rp_bill_id = 0;
+                    String batch_number = "";
+                    String manufacture_date = "";
+                    String expiry_date = "";
+                    float mrp = 0;
+                    float cost_price = 0;
+                    String med_name = "";
+                    String med_salt = "";
+                    String med_company = "";
+                    String med_hsn = "";
+                    String med_type = "";
+                    int sgst = 0;
+                    int cgst = 0;
+                    int igst = 0;
+                    int unit = 0;
+                    int ip_unit = 0;
+                    int pp_item = 0;
+
+                    try {
+                        Connection dbConnection = JDBC.databaseConnect();
+                        PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT mode, rp_bill_id FROM retailer_purchase_bill WHERE user_access_id=? AND bill_no=? AND date=? AND total_amount=? AND wholesaler_name=?");
+                        preparedStatement.setInt(1, LoginController.userAccessId);
+                        preparedStatement.setLong(2, billNo);
+                        preparedStatement.setString(3, Date);
+                        preparedStatement.setFloat(4, totalAmount);
+                        preparedStatement.setString(5, Wholesaler);
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        if (resultSet.next()) {
+                            Mode = resultSet.getString("mode");
+                            rp_bill_id = resultSet.getLong("rp_bill_id");
+
+                            mode.getSelectionModel().select(Mode);
+                            date.setValue(LocalDate.parse(Date));
+                            bill_no.setText(String.valueOf(billNo));
+                            total_amount.setText(String.valueOf(totalAmount));
+                            wholesaler_name.setText(Wholesaler);
+
+                            preparedStatement = dbConnection.prepareStatement("SELECT medicine_info_id FROM retailer_purchase_bill_info WHERE rp_bill_id=?");
+                            preparedStatement.setLong(1, rp_bill_id);
+                            ResultSet resultSet1 = preparedStatement.executeQuery();
+                            while (resultSet1.next()) {
+                                medicine_info_id = resultSet1.getInt(1);
+
+                                PreparedStatement preparedStatement1 = dbConnection.prepareStatement("SELECT medicine_id, batch_number, manufacture_date, expiry_date, mrp, cost_price FROM medicine_info WHERE medicine_info_id=?");
+                                preparedStatement1.setInt(1, medicine_info_id);
+                                ResultSet resultSet2 = preparedStatement1.executeQuery();
+                                if(resultSet2.next())
+                                {
+                                    medicine_id = resultSet2.getInt("medicine_id");
+                                    batch_number = resultSet2.getString("batch_number");
+                                    manufacture_date = resultSet2.getString("manufacture_date");
+                                    expiry_date = resultSet2.getString("expiry_date");
+                                    mrp = resultSet2.getFloat("mrp");
+                                    cost_price = resultSet2.getFloat("cost_price");
+                                }
+
+                                preparedStatement1 = dbConnection.prepareStatement("SELECT medicine.name, medicine.salt, medicine.company, medicine.hsn_number, medicine.type, gst.sgst, gst.cgst, gst.igst FROM medicine JOIN gst ON medicine.medicine_id = gst.medicine_id WHERE medicine.medicine_id=?");
+                                preparedStatement1.setInt(1, medicine_id);
+                                ResultSet resultSet3 = preparedStatement1.executeQuery();
+                                if (resultSet3.next())
+                                {
+                                    med_name = resultSet3.getString("name");
+                                    med_salt = resultSet3.getString("salt");
+                                    med_company = resultSet3.getString("company");
+                                    med_hsn = resultSet3.getString("hsn_number");
+                                    med_type = resultSet3.getString("type");
+                                    sgst = resultSet3.getInt("sgst");
+                                    cgst = resultSet3.getInt("cgst");
+                                    igst = resultSet3.getInt("igst");
+                                }
+
+                                preparedStatement1 = dbConnection.prepareStatement("SELECT unit, ip_unit, pp_item FROM quantity WHERE medicine_info_id=?");
+                                preparedStatement1.setInt(1, medicine_info_id);
+                                ResultSet resultSet4 = preparedStatement1.executeQuery();
+                                if(resultSet4.next())
+                                {
+                                    unit = resultSet4.getInt("unit");
+                                    ip_unit = resultSet4.getInt("ip_unit");
+                                    pp_item = resultSet4.getInt("pp_item");
+                                }
+
+                                table_data.add(new Add_purchase(med_hsn, med_name, batch_number, unit, cost_price, mrp, med_salt, med_company, med_type, expiry_date, manufacture_date, sgst, cgst, igst, ip_unit, pp_item));
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
         });
     }
 
