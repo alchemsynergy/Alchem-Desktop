@@ -376,6 +376,7 @@ public class AddSaleController {
         int getQuantity = bill_table.getSelectionModel().getSelectedItem().getBillQuantity();
         long billNo = Long.parseLong(bill_no.getText());
         int piece = 0;
+        int piece_zero_flag = 0;
         int pp_item = 0;
         int items = 0;
         int ip_unit = 0;
@@ -398,6 +399,10 @@ public class AddSaleController {
                 ip_unit = rs.getInt("ip_unit");
                 unit = rs.getInt("unit");
             }
+            else
+            {
+                piece_zero_flag = 1;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -419,17 +424,20 @@ public class AddSaleController {
                 // calculating number of piece left after sale
                 piece = piece + getQuantity;
 
-                // calculating number of items left after sale
-                if (piece % pp_item == 0)
-                    items = piece / pp_item;
-                else
-                    items = (piece / pp_item) + 1;
+                if (piece_zero_flag == 0)
+                {
+                    // calculating number of items left after sale
+                    if (piece % pp_item == 0)
+                        items = piece / pp_item;
+                    else
+                        items = (piece / pp_item) + 1;
 
-                // calculating number of units left after sale
-                if (items % ip_unit == 0)
-                    unit = items / ip_unit;
-                else
-                    unit = (items / ip_unit) + 1;
+                    // calculating number of units left after sale
+                    if (items % ip_unit == 0)
+                        unit = items / ip_unit;
+                    else
+                        unit = (items / ip_unit) + 1;
+                }
 
                 // Deleting selected item from database
 
@@ -454,12 +462,23 @@ public class AddSaleController {
                 medicine_info_id = resultSet.getInt("medicine_info_id");
             }
 
-            preparedStatement = dbConnection.prepareStatement("UPDATE quantity SET piece=?, items=?, unit=? WHERE medicine_info_id=?");
-            preparedStatement.setInt(1, piece);
-            preparedStatement.setInt(2, items);
-            preparedStatement.setInt(3, unit);
-            preparedStatement.setInt(4, medicine_info_id);
-            preparedStatement.executeUpdate();
+            if (piece_zero_flag == 1)
+            {
+                preparedStatement = dbConnection.prepareStatement("INSERT INTO quantity VALUES (?,-1,-1,-1,-1,?,DEFAULT )");
+                preparedStatement.setInt(1, medicine_info_id);
+                preparedStatement.setInt(2, piece);
+                preparedStatement.executeUpdate();
+            }
+            else
+            {
+                preparedStatement = dbConnection.prepareStatement("UPDATE quantity SET piece=?, items=?, unit=? WHERE medicine_info_id=?");
+                preparedStatement.setInt(1, piece);
+                preparedStatement.setInt(2, items);
+                preparedStatement.setInt(3, unit);
+                preparedStatement.setInt(4, medicine_info_id);
+                preparedStatement.executeUpdate();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -592,12 +611,22 @@ public class AddSaleController {
                         medicine_info_id = resultSet.getInt("medicine_info_id");
                     }
 
-                    preparedStatement = dbConnection.prepareStatement("UPDATE quantity SET piece=?, items=?, unit=? WHERE medicine_info_id=?");
-                    preparedStatement.setInt(1, piece);
-                    preparedStatement.setInt(2, items);
-                    preparedStatement.setInt(3, unit);
-                    preparedStatement.setInt(4, medicine_info_id);
-                    preparedStatement.executeUpdate();
+                    if (piece > 0)
+                    {
+                        preparedStatement = dbConnection.prepareStatement("UPDATE quantity SET piece=?, items=?, unit=? WHERE medicine_info_id=?");
+                        preparedStatement.setInt(1, piece);
+                        preparedStatement.setInt(2, items);
+                        preparedStatement.setInt(3, unit);
+                        preparedStatement.setInt(4, medicine_info_id);
+                        preparedStatement.executeUpdate();
+                    }
+                    else
+                    {
+                        preparedStatement = dbConnection.prepareStatement("DELETE FROM quantity WHERE medicine_info_id=?");
+                        preparedStatement.setInt(1, medicine_info_id);
+                        preparedStatement.executeUpdate();
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
