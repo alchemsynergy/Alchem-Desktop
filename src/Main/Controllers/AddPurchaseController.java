@@ -116,6 +116,8 @@ public class AddPurchaseController {
         medicineKeyReleaseEvent();
         initializePurchaseProperty();
         searchKeyReleaseEvent();
+        tableKeyPressEvent();
+        ppitemKeyPressEvent();
     }
 
     public void setSearchBillDataList() {
@@ -158,6 +160,15 @@ public class AddPurchaseController {
         search_amount.setCellValueFactory(new PropertyValueFactory<Purchase_history, Float>("searchAmount"));
     }
 
+    public void tableKeyPressEvent() {
+        purchase_table.setOnKeyPressed((KeyEvent keyEvent) -> {
+            if (purchase_table.getSelectionModel().getSelectedItem() != null) {
+                if (keyEvent.getCode() == KeyCode.DELETE)
+                    onDelete(null);
+            }
+        });
+    }
+
     public void medicineKeyReleaseEvent()
     {
         medicine_name.setOnKeyReleased((KeyEvent keyEvent) -> {
@@ -170,6 +181,18 @@ public class AddPurchaseController {
                 medicine_type.getSelectionModel().selectFirst();
             }
 
+        });
+    }
+
+    public void ppitemKeyPressEvent()
+    {
+        ppitem.setOnKeyPressed((KeyEvent keyEvent) -> {
+            Node source = (Node) keyEvent.getSource();
+            Stage currentStage = (Stage) source.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+
+            if (keyEvent.getCode() == KeyCode.ENTER)
+                onAddEntry(currentStage, fxmlLoader);
         });
     }
 
@@ -215,6 +238,12 @@ public class AddPurchaseController {
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+
+        onAddEntry(currentStage, fxmlLoader);
+    }
+
+    public void onAddEntry(Stage currentStage, FXMLLoader fxmlLoader)
+    {
 
         String regexDecimal = "[0-9]*\\.?[0-9]+";
         String regexQuantity = "^[0-9]*$";
