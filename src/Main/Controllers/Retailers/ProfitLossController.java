@@ -488,7 +488,7 @@ public class ProfitLossController {
 
         profitTableView.setItems(profitParticularDayList);
         if(profit<0) {
-            dateSelectedLabel.setText("Total Loss on " + date + " " + tense + " Rs." + profit);
+            dateSelectedLabel.setText("Total Loss on " + date + " " + tense + " Rs." + (profit*-1));
             dateSelectedLabel.setTextFill(Color.RED);
         }
         else if(profit==0)

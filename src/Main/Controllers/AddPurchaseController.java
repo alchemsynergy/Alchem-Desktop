@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
+import javax.swing.text.View;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -617,6 +618,42 @@ public class AddPurchaseController {
             if(flag == 0)
             {
                 search_bill_table_list.add(new Purchase_history(wholesaler_name.getText(), BillNoLong, Date, totalAmount));
+                ViewPurchaseController.purchaseList.add(new Purchase(Date,BillNoLong,wholesaler_name.getText(), Mode,Float.parseFloat(Amount)));
+                for (int i = 0; i < 7; i++) {
+                    int chk = viewPurchaseEvent(i,Date,Float.parseFloat(Amount));
+                    if (chk == 1)
+                        break;
+                }
+
+                String date="";
+                try {
+                    Connection conn=JDBC.databaseConnect();
+                    Statement sqlStatement=conn.createStatement();
+                    ResultSet purchaseProfitResultSet=sqlStatement.executeQuery("SELECT date from retailer_purchase_bill where bill_no='"+BillNoLong+"' AND user_access_id='"+UserInfo.accessId+"' AND wholesaler_name='"+wholesaler_name.getText()+"'");
+                    while(purchaseProfitResultSet.next())
+                    {
+                        date=purchaseProfitResultSet.getString(1);
+                    }
+                }catch (Exception e)
+                {e.printStackTrace();}
+
+                Iterator<ProfitLoss> plIterator = ProfitLossController.profitList.iterator();
+                while (plIterator.hasNext()) {
+                    ProfitLoss profitLoss=plIterator.next();
+                    if(date.equals(profitLoss.getDate()))
+                    {
+                        profitLoss.setTotalPurchase(Float.parseFloat(Amount)+profitLoss.getTotalPurchase());
+                        profitLoss.setProfit(profitLoss.getProfit()-Float.parseFloat(Amount));
+                        for (int i = 0; i < 7; i++) {
+                            int chk = viewPurchaseProfitEvent(i, date,Float.parseFloat(Amount));
+                            if (chk == 1)
+                                break;
+                        }
+                    }
+                }
+                ObservableList<ProfitLoss> temporary_profit_data = FXCollections.observableArrayList(ProfitLossController.profitList);
+                ProfitLossController.profitList.clear();
+                ProfitLossController.profitList.addAll(temporary_profit_data);
             }
             else
             {
@@ -630,45 +667,56 @@ public class AddPurchaseController {
                 ObservableList<Purchase_history> temporary_add_sale_data = FXCollections.observableArrayList(search_bill_table_list);
                 search_bill_table_list.clear();
                 search_bill_table_list.addAll(temporary_add_sale_data);
-            }
-
-            ViewPurchaseController.purchaseList.add(new Purchase(Date,BillNoLong,wholesaler_name.getText(), Mode,Float.parseFloat(Amount)));
-            for (int i = 0; i < 7; i++) {
-                int chk = viewPurchaseEvent(i,Date,Float.parseFloat(Amount));
-                if (chk == 1)
-                    break;
-            }
-
-            String date="";
-            try {
-                Connection conn=JDBC.databaseConnect();
-                Statement sqlStatement=conn.createStatement();
-                ResultSet purchaseProfitResultSet=sqlStatement.executeQuery("SELECT date from retailer_purchase_bill where bill_no='"+BillNoLong+"' AND user_access_id='"+UserInfo.accessId+"' AND wholesaler_name='"+wholesaler_name.getText()+"'");
-                while(purchaseProfitResultSet.next())
+                float prevAmount=0;
+                Iterator<Purchase> purchaseIterator= ViewPurchaseController.purchaseList.iterator();
+                while(purchaseIterator.hasNext())
                 {
-                    date=purchaseProfitResultSet.getString(1);
-                }
-            }catch (Exception e)
-            {e.printStackTrace();}
-
-            Iterator<ProfitLoss> plIterator = ProfitLossController.profitList.iterator();
-            while (plIterator.hasNext()) {
-                ProfitLoss profitLoss=plIterator.next();
-                if(date.equals(profitLoss.getDate()))
-                {
-                    profitLoss.setTotalPurchase(Float.parseFloat(Amount)+profitLoss.getTotalPurchase());
-                    profitLoss.setProfit(profitLoss.getProfit()-Float.parseFloat(Amount));
-                    for (int i = 0; i < 7; i++) {
-                        int chk = viewPurchaseProfitEvent(i, date,Float.parseFloat(Amount));
-                        if (chk == 1)
-                            break;
+                    Purchase purchase=purchaseIterator.next();
+                    if(purchase.getWholesalerName().equals(wholesaler_name.getText()) && purchase.getBillNumber()==BillNoLong && purchase.getDate().equals(Date))
+                    {
+                        prevAmount=purchase.getAmount();
+                        purchase.setAmount(Float.parseFloat(Amount));
+                        break;
                     }
                 }
-            }
-            ObservableList<ProfitLoss> temporary_profit_data = FXCollections.observableArrayList(ProfitLossController.profitList);
-            ProfitLossController.profitList.clear();
-            ProfitLossController.profitList.addAll(temporary_profit_data);
+                ObservableList<Purchase> temp=FXCollections.observableArrayList(ViewPurchaseController.purchaseList);
+                ViewPurchaseController.purchaseList.clear();
+                ViewPurchaseController.purchaseList.addAll(temp);
+                for (int i = 0; i < 7; i++) {
+                    int chk = viewPurchaseEvent(i,Date,Float.parseFloat(Amount)-prevAmount);
+                    if (chk == 1)
+                        break;
+                }
+                String date="";
+                try {
+                    Connection conn=JDBC.databaseConnect();
+                    Statement sqlStatement=conn.createStatement();
+                    ResultSet purchaseProfitResultSet=sqlStatement.executeQuery("SELECT date from retailer_purchase_bill where bill_no='"+BillNoLong+"' AND user_access_id='"+UserInfo.accessId+"' AND wholesaler_name='"+wholesaler_name.getText()+"'");
+                    while(purchaseProfitResultSet.next())
+                    {
+                        date=purchaseProfitResultSet.getString(1);
+                    }
+                }catch (Exception e)
+                {e.printStackTrace();}
 
+                Iterator<ProfitLoss> plIterator = ProfitLossController.profitList.iterator();
+                while (plIterator.hasNext()) {
+                    ProfitLoss profitLoss=plIterator.next();
+                    if(date.equals(profitLoss.getDate()))
+                    {
+                        profitLoss.setTotalPurchase(Float.parseFloat(Amount)-prevAmount+profitLoss.getTotalPurchase());
+                        profitLoss.setProfit(profitLoss.getProfit()-(Float.parseFloat(Amount)-prevAmount));
+                        for (int i = 0; i < 7; i++) {
+                            int chk = viewPurchaseProfitEvent(i, date,Float.parseFloat(Amount)-prevAmount);
+                            if (chk == 1)
+                                break;
+                        }
+                    }
+                }
+                ObservableList<ProfitLoss> temporary_profit_data = FXCollections.observableArrayList(ProfitLossController.profitList);
+                ProfitLossController.profitList.clear();
+                ProfitLossController.profitList.addAll(temporary_profit_data);
+            }
 
         }
     }
