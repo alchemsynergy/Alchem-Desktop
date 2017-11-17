@@ -44,9 +44,7 @@
     -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
     -fx-padding: 0.166667em;
 
-    -fx-background-color: #000040;
     -fx-cell-size: 2.0em;
-    -fx-text-fill: #ffffff;
 }
 
 .table-view .column-header{
