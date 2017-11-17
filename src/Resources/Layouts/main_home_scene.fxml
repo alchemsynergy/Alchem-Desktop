@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="686.0" prefWidth="906.0"
+<AnchorPane fx:id="home_anchor" xmlns:fx="http://javafx.com/fxml/1" prefHeight="686.0" prefWidth="906.0"
             style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.111"
             fx:controller="Main.Controllers.MainHomeSceneController">
     <children>
