@@ -91,6 +91,7 @@ public class AddSaleController {
         initializeBillingHistoryProperty();
 
         bill_date.setEditable(false);
+        bill_date.setValue(LocalDate.now());
         batch.setDisable(true);
         delete.setDisable(true);
         discount.setDisable(true);

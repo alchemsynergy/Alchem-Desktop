@@ -100,6 +100,10 @@ public class AddPurchaseController {
         purchase_table.setItems(table_data);
         mode.setItems(Mode);
         mode.getSelectionModel().selectFirst();
+        mfd.setEditable(false);
+        expiry_date.setEditable(false);
+        date.setEditable(false);
+        date.setValue(LocalDate.now());
         medicine_type.setItems(Type);
         medicine_type.getSelectionModel().selectFirst();
 
@@ -234,7 +238,7 @@ public class AddPurchaseController {
                 expiry_date.getValue() == null || mfd.getValue() == null || Sgst.equals("") || Cgst.equals("") || Igst.equals("") || Ipunit.equals("") || Ppitem.equals(""))
         {
             if (Hsn.equals(""))
-                medicine_name.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+                hsn_code.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
             if (Item.equals(""))
                 medicine_name.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
             if (Batch.equals(""))
@@ -294,6 +298,22 @@ public class AddPurchaseController {
             mrp.setText("");
             salt.setText("");
             company.setText("");
+
+            hsn_code.setStyle(null);
+            medicine_name.setStyle(null);
+            batch_number.setStyle(null);
+            quantity.setStyle(null);
+            cost_price.setStyle(null);
+            mrp.setStyle(null);
+            salt.setStyle(null);
+            company.setStyle(null);
+            expiry_date.setStyle(null);
+            mfd.setStyle(null);
+            ipunit.setStyle(null);
+            ppitem.setStyle(null);
+            sgst.setStyle(null);
+            cgst.setStyle(null);
+            igst.setStyle(null);
         }
     }
 
@@ -622,6 +642,14 @@ public class AddPurchaseController {
 
 
         }
+    }
+
+    public void onNewBill(ActionEvent actionEvent) {
+        purchase_table.getItems().clear();
+        wholesaler_name.setText(null);
+        bill_no.setText(null);
+        wholesaler_name.setStyle(null);
+        bill_no.setStyle(null);
     }
 
     public void searchKeyReleaseEvent() {

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="800.0" prefWidth="1270.0" stylesheets="@../../Styling/add_purchase.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddPurchaseController">
+<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="800.0" prefWidth="1270.0" stylesheets="@../../Styling/add_purchase.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.AddPurchaseController">
     <content>
         <AnchorPane style="-fx-background-color: black" stylesheets="@../../Styling/add_purchase.css">
             <children>
@@ -152,7 +152,7 @@
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Button>
-                        <Button layoutX="444.0" layoutY="730.0" mnemonicParsing="false" text="New Purchase">
+                        <Button layoutX="444.0" layoutY="730.0" mnemonicParsing="false" onAction="#onNewBill" text="New Purchase">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
