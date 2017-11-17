@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -109,8 +111,9 @@ public class MainHomeSceneController implements Initializable {
 
     public void viewTabs(int index){
 
-        sceneWidth = 1316;
-        sceneHeight = 728;
+        Toolkit tk=Toolkit.getDefaultToolkit();
+        sceneWidth=(int)tk.getScreenSize().getWidth()-25;
+        sceneHeight=(int)tk.getScreenSize().getHeight()-50;
         try {
             allFeaturesPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_features_tab_scene.fxml"));
         } catch (IOException e) {
