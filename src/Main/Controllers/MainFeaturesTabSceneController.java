@@ -24,6 +24,8 @@ public class MainFeaturesTabSceneController {
     @FXML
     ViewPurchaseController viewPurchaseController;
 
+
+
     public void initialize() {
         viewSaleController.init(this);
         addSaleController.init(this);

@@ -109,7 +109,7 @@ public class MainStageController implements Initializable {
         switcher_pane.getChildren().addAll(dashboardPane);
     }
 
-    public void viewAllFeaturesScene() {
+        public void viewAllFeaturesScene() {
         switcher_pane.getChildren().clear();
         allFeaturesPane.setPrefWidth(drawableStageWidth);
         InventoryController.setDrawableWidth(drawableStageWidth);
