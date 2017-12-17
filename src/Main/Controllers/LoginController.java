@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -68,31 +69,32 @@ public class LoginController {
         } else {
             try {
                 Connection dbConnection = JDBC.databaseConnect();
-                Statement sqlStatement = dbConnection.createStatement();
-                ResultSet userAccessResultSet = sqlStatement.executeQuery("SELECT * FROM user_access");
-                while (userAccessResultSet.next()) {
-                    if (loginUsername.equals(userAccessResultSet.getString("username")) &&
-                            loginPassword.equals(userAccessResultSet.getString("password"))) {
-                        userTypeCheck = userAccessResultSet.getInt("user_type_id");
-                        userAccessId = userAccessResultSet.getInt("user_access_id");
-                        UserDrawerController.setUserAccessID(userAccessId);
+                PreparedStatement pstmt=dbConnection.prepareStatement("SELECT * FROM user_access WHERE username= ? and password=? ");
+                pstmt.setString(1,loginUsername);
+                pstmt.setString(2,loginPassword);
 
-                        ResultSet userTypeResultSet = sqlStatement.executeQuery("select * from user_type");
-                        while (userTypeResultSet.next()) {
-                            if (user_type.getSelectedToggle().getUserData().toString().equals(
-                                    userTypeResultSet.getString("type"))) {
-                                userType = userTypeResultSet.getInt("user_type_id");
-                                break;
-                            }
-                        }
-                        userTypeResultSet.close();
-                        if (userTypeCheck == userType) {
-                            flag = 1;
-                        }
-                        break;
+
+                ResultSet userAccessResultSet = pstmt.executeQuery();
+                if(userAccessResultSet.next()) {
+                    userTypeCheck = userAccessResultSet.getInt("user_type_id");
+                    userAccessId = userAccessResultSet.getInt("user_access_id");
+                    UserDrawerController.setUserAccessID(userAccessId);
+
+                    PreparedStatement pstmt2 = dbConnection.prepareStatement("select * from user_type where type=?");
+                    String s =user_type.getSelectedToggle().getUserData().toString();
+                    pstmt2.setString(1,s);
+
+                    ResultSet userTypeResultSet = pstmt2.executeQuery();
+                    if(userTypeResultSet.next()){
+                        userType = userTypeResultSet.getInt("user_type_id");
+                    }
+                    userTypeResultSet.close();
+                    if(userTypeCheck == userType){
+                        flag=1;
                     }
                 }
                 userAccessResultSet.close();
+              
                 if (flag == 1) {
                     if (user_type.getSelectedToggle().getUserData().toString().equals("Wholesaler"))
                         UserInfo.typeId = 1;
