@@ -27,7 +27,9 @@ public class MainStageController implements Initializable {
     AnchorPane settingsDrawerPane = null;
     TranslateTransition openNavigation = null;
     TranslateTransition closeNavigation = null;
-
+    
+    boolean open_user_drawer=false,open_setting_drawer=false;
+    
     @FXML
     private Button pane_button1, pane_button2, pane_button21, pane_button3, pane_button4;
     @FXML
@@ -126,9 +128,15 @@ public class MainStageController implements Initializable {
         drawer_parent.getChildren().addAll(userDrawerPane);
 
         /*Play transition set by Initialise()*/
-        if (drawer_parent.getTranslateX() != 0) {
+        if(open_setting_drawer){
+            open_setting_drawer=false;
+            open_user_drawer=true;
+            openNavigation.play();
+        } else if (drawer_parent.getTranslateX() != 0) {
+            open_user_drawer=true;
             openNavigation.play();
         } else {
+            open_user_drawer=false;
             closeNavigation.setToX(-(drawer_parent.getWidth()));
             closeNavigation.play();
         }
@@ -136,15 +144,21 @@ public class MainStageController implements Initializable {
     }
 
     public void viewSettingsDrawer() {
-         /*Draw settings.fxml into Parent Drawer Pane (StackPane) in main_stage.fxml */
+        /*Draw settings.fxml into Parent Drawer Pane (StackPane) in main_stage.fxml */
         drawer_parent.getChildren().clear();
         drawer_parent.setPrefHeight(drawableStageHeight);
         drawer_parent.getChildren().addAll(settingsDrawerPane);
 
         /*Play transition set by Initialise()*/
-        if (drawer_parent.getTranslateX() != 0) {
+        if(open_user_drawer){
+            open_user_drawer=false;
+            open_setting_drawer=true;
+            openNavigation.play();
+        } else if (drawer_parent.getTranslateX() != 0) {
+            open_setting_drawer=true;
             openNavigation.play();
         } else {
+            open_setting_drawer=false;
             closeNavigation.setToX(-(drawer_parent.getWidth()));
             closeNavigation.play();
         }
