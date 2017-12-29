@@ -138,7 +138,7 @@ public class InventoryController {
 
     public void searchTable() {
         filteredData = new FilteredList<>(medicines, e -> true);
-        searchField.setOnKeyReleased(e -> {
+        searchField.setOnKeyPressed(e -> {
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate((Predicate<? super Medicine>) medicine -> {
                     if (newValue == null || newValue.isEmpty()) {
