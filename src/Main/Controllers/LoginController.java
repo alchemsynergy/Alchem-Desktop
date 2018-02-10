@@ -5,6 +5,7 @@ import Main.Controllers.NavigationDrawer.UserDrawerController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,16 +14,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class LoginController {
+public class LoginController{
     public static int userAccessId = 0;
     @FXML
     private TextField login_username;
@@ -36,6 +42,12 @@ public class LoginController {
     private ToggleGroup user_type;
     @FXML
     private RadioButton wholesaler_toggle, retailer_toggle;
+    @FXML
+    private AnchorPane main_pane;
+    @FXML
+    private Label wait_label;
+    @FXML
+    SplashScreenController splashScreenController;
 
     public void initialize() {
         wholesaler_toggle.setUserData("Wholesaler");
@@ -101,12 +113,7 @@ public class LoginController {
                     else
                         UserInfo.typeId = 2;
                     UserInfo.accessId = userAccessId;
-                    FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/main_stage.fxml"));
-                    Parent root1 = (Parent) fxmlMainStage.load();
-                    Stage mainStage = new Stage();
-                    mainStage.setScene(new Scene(root1));
-                    mainStage.show();
-                    ((Stage) submit_button.getScene().getWindow()).close();
+                    loadSplashScreen();
                 } else {
                     login_username.setText("");
                     login_password.setText("");
@@ -115,6 +122,47 @@ public class LoginController {
             } catch (Exception e) {
             }
         }
+    }
+
+    public void loadSplashScreen()
+    {
+        try{
+            StackPane stackPane=FXMLLoader.load(getClass().getResource("../../Resources/Layouts/splash_screen.fxml"));
+            main_pane.getChildren().setAll(stackPane);
+            //splashScreenController.init(this);
+            FadeTransition fadeIn=new FadeTransition(Duration.seconds(2),stackPane);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.setCycleCount(1);
+
+            FadeTransition fadeOut=new FadeTransition(Duration.seconds(2),stackPane);
+            fadeOut.setFromValue(1);
+            fadeOut.setToValue(0);
+            fadeOut.setCycleCount(1);
+
+            fadeIn.play();
+
+
+
+            fadeIn.setOnFinished((e)->{
+                try{
+                /*Thread.sleep(1000);
+                splashScreenController.wait_label.setText("WELCOME");
+                Thread.sleep(1000);*/
+                fadeOut.play();}catch (Exception ex){ex.printStackTrace();}
+            });
+            fadeOut.setOnFinished((e)->
+            {
+                try {
+                    FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/main_stage.fxml"));
+                    Parent root1 = (Parent) fxmlMainStage.load();
+                    Stage mainStage = new Stage();
+                    mainStage.setScene(new Scene(root1));
+                    mainStage.show();
+                    ((Stage) main_pane.getScene().getWindow()).close();
+                }catch (Exception ex){ex.printStackTrace();}
+            });
+        }catch (Exception e){e.printStackTrace();}
     }
 
     public void closeAction(ActionEvent e) {
