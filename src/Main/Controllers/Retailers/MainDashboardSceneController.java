@@ -1,4 +1,4 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
 /**
  * Created by techfreakworm on 10/11/2017.

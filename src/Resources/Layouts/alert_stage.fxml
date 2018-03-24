@@ -8,7 +8,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #1d1d1d;"
-            xmlns="http://javafx.com/javafx/8" fx:controller="Main.Controllers.AlertScreenController">
+            xmlns="http://javafx.com/javafx/8" fx:controller="Main.Controllers.Retailers.AlertScreenController">
     <children>
         <Button fx:id="ok_button" blendMode="SOFT_LIGHT" cancelButton="true" layoutX="188.0" layoutY="120.0"
                 mnemonicParsing="false" onAction="#alertAction" text="OK"/>

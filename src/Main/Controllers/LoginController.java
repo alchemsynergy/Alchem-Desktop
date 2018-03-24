@@ -15,9 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,7 +24,6 @@ import javafx.util.Duration;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class LoginController{
     public static int userAccessId = 0;
@@ -129,7 +126,6 @@ public class LoginController{
         try{
             StackPane stackPane=FXMLLoader.load(getClass().getResource("../../Resources/Layouts/splash_screen.fxml"));
             main_pane.getChildren().setAll(stackPane);
-            //splashScreenController.init(this);
             FadeTransition fadeIn=new FadeTransition(Duration.seconds(2),stackPane);
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
@@ -146,20 +142,19 @@ public class LoginController{
 
             fadeIn.setOnFinished((e)->{
                 try{
-                /*Thread.sleep(1000);
-                splashScreenController.wait_label.setText("WELCOME");
-                Thread.sleep(1000);*/
                 fadeOut.play();}catch (Exception ex){ex.printStackTrace();}
             });
             fadeOut.setOnFinished((e)->
             {
                 try {
-                    FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/main_stage.fxml"));
-                    Parent root1 = (Parent) fxmlMainStage.load();
-                    Stage mainStage = new Stage();
-                    mainStage.setScene(new Scene(root1));
-                    mainStage.show();
-                    ((Stage) main_pane.getScene().getWindow()).close();
+                    if(UserInfo.typeId==2) {
+                        FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/Retailers/main_stage.fxml"));
+                        Parent root1 = (Parent) fxmlMainStage.load();
+                        Stage mainStage = new Stage();
+                        mainStage.setScene(new Scene(root1));
+                        mainStage.show();
+                        ((Stage) main_pane.getScene().getWindow()).close();
+                    }
                 }catch (Exception ex){ex.printStackTrace();}
             });
         }catch (Exception e){e.printStackTrace();}
@@ -172,7 +167,7 @@ public class LoginController{
 
     public void joinNow(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("../../Resources/Layouts/register_stage.fxml"));
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("../../Resources/Layouts/Retailers/register_stage.fxml"));
             Parent root2 = (Parent) fxmlLoader2.load();
             Stage stage2 = new Stage();
             stage2.setScene(new Scene(root2));

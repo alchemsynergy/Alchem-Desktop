@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Medicine {
 
 
-    SimpleIntegerProperty code, quantity, sgst, cgst, igst;
+    SimpleIntegerProperty code, quantity, sgst, cgst, igst,serialNumber;
     SimpleStringProperty name, salt, company, type, batch, hsn, expiry;
     SimpleFloatProperty mrp, cost;
 
@@ -30,12 +30,17 @@ public class Medicine {
         this.igst = new SimpleIntegerProperty(igst);
     }
 
-    //Getters
+    public Medicine(int serialNumber,String name,Integer quantity)
+    {
+        this.serialNumber=new SimpleIntegerProperty(serialNumber);
+        this.name=new SimpleStringProperty(name);
+        this.quantity=new SimpleIntegerProperty(quantity);
+    }
+
     public int getCode() {
         return code.get();
     }
 
-    //Setters
     public void setCode(SimpleIntegerProperty code) {
         this.code = code;
     }
@@ -142,6 +147,14 @@ public class Medicine {
 
     public void setType(SimpleStringProperty type) {
         this.type = type;
+    }
+
+    public int getSerialNumber() {
+        return serialNumber.get();
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber.set(serialNumber);
     }
 }
 

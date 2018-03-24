@@ -1,9 +1,5 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
-import static javafx.application.ConditionalFeature.FXML;
-
-import Main.Controllers.Retailers.ViewSaleController;
-import impl.org.controlsfx.spreadsheet.SelectedCellsMapTemp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -115,7 +111,7 @@ public class MainHomeSceneController implements Initializable {
         sceneWidth=(int)tk.getScreenSize().getWidth()-25;
         sceneHeight=(int)tk.getScreenSize().getHeight()-50;
         try {
-            allFeaturesPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_features_tab_scene.fxml"));
+            allFeaturesPane = FXMLLoader.load(getClass().getResource("../../../Resources/Layouts/Retailers/main_features_tab_scene.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

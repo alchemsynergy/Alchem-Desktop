@@ -1,7 +1,6 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
-import Main.Controllers.Retailers.ProfitLossController;
-import Main.Controllers.Retailers.ViewSaleController;
+import Main.Controllers.LoginController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Billing;
 import Main.Helpers.Billing_history;
@@ -227,7 +226,7 @@ public class AddSaleController {
         quantity.setOnKeyPressed((KeyEvent keyEvent) -> {
             Node source = (Node) keyEvent.getSource();
             Stage currentStage = (Stage) source.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
             if (keyEvent.getCode() == KeyCode.ENTER)
                 addEntry(currentStage, fxmlLoader);
@@ -238,7 +237,7 @@ public class AddSaleController {
         free.setOnKeyPressed((KeyEvent keyEvent) -> {
             Node source = (Node) keyEvent.getSource();
             Stage currentStage = (Stage) source.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
             if (keyEvent.getCode() == KeyCode.ENTER)
                 addEntry(currentStage, fxmlLoader);
@@ -248,7 +247,7 @@ public class AddSaleController {
     public void onAddBill(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
         addEntry(currentStage, fxmlLoader);
     }
@@ -340,7 +339,7 @@ public class AddSaleController {
 
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
         Iterator<Billing> it = bill_data.iterator();
         if (it.hasNext()) {
@@ -898,7 +897,15 @@ public class AddSaleController {
         long date = ViewSaleController.day[i];
         long month = ViewSaleController.month[i];
         long year = ViewSaleController.year[i];
-        String datechk = year + "-" + month + "-" + date;
+        String datechk;
+        if(month<10 && date<10)
+            datechk=year+"-0"+month+"-0"+date;
+        else if(month<10)
+            datechk=year+"-0"+month+"-"+date;
+        else if(date<10)
+            datechk=year+"-"+month+"-0"+date;
+        else
+            datechk=year+"-"+month+"-"+date;
         if (datechk.equals(billDate)) {
             ViewSaleController.sum[i] = ViewSaleController.sum[i] + Amount;
             try {
@@ -915,7 +922,15 @@ public class AddSaleController {
         long date = ProfitLossController.day[i];
         long month = ProfitLossController.month[i];
         long year = ProfitLossController.year[i];
-        String datechk = year + "-" + month + "-" + date;
+        String datechk;
+        if(month<10 && date<10)
+            datechk=year+"-0"+month+"-0"+date;
+        else if(month<10)
+            datechk=year+"-0"+month+"-"+date;
+        else if(date<10)
+            datechk=year+"-"+month+"-0"+date;
+        else
+            datechk=year+"-"+month+"-"+date;
         if (datechk.equals(billDate)) {
             ProfitLossController.sum[i] = ProfitLossController.sum[i] + Amount;
             ProfitLossController.totalSale[i]=ProfitLossController.totalSale[i]+Amount;

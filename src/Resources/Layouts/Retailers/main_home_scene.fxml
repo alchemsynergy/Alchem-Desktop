@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane fx:id="home_anchor" xmlns:fx="http://javafx.com/fxml/1" prefHeight="686.0" prefWidth="906.0"
             style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.111"
-            fx:controller="Main.Controllers.MainHomeSceneController">
+            fx:controller="Main.Controllers.Retailers.MainHomeSceneController">
     <children>
         <AnchorPane prefHeight="425.0" prefWidth="689.0" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="100.0"
                     AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="100.0">
@@ -32,7 +32,7 @@
                                         <ImageView fitHeight="129.0" fitWidth="135.0" pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../Assets/sale.png"/>
+                                                <Image url="@../../Assets/sale.png"/>
                                             </image>
                                         </ImageView>
                                     </children>
@@ -61,7 +61,7 @@
                                         <ImageView fitHeight="130.0" fitWidth="136.0" pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../Assets/view_sale.png"/>
+                                                <Image url="@../../Assets/view_sale.png"/>
                                             </image>
                                         </ImageView>
                                     </children>
@@ -91,7 +91,7 @@
                                         <ImageView fitHeight="129.0" fitWidth="136.0" pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../Assets/purchase.png"/>
+                                                <Image url="@../../Assets/purchase.png"/>
                                             </image>
                                         </ImageView>
                                     </children>
@@ -120,7 +120,7 @@
                                         <ImageView fitHeight="129.0" fitWidth="136.0" pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../Assets/view_purchase.png"/>
+                                                <Image url="@../../Assets/view_purchase.png"/>
                                             </image>
                                         </ImageView>
                                     </children>
@@ -149,7 +149,7 @@
                                         <ImageView fitHeight="129.0" fitWidth="140.0" layoutX="7.0" layoutY="-1.0"
                                                    pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../Assets/inventory.png"/>
+                                                <Image url="@../../Assets/inventory.png"/>
                                             </image>
                                         </ImageView>
                                     </children>
@@ -178,7 +178,7 @@
                                         <ImageView fitHeight="121.0" fitWidth="119.0" layoutX="10.0" layoutY="9.0"
                                                    pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../Assets/about.png"/>
+                                                <Image url="@../../Assets/about.png"/>
                                             </image>
                                         </ImageView>
                                     </children>

@@ -1,6 +1,5 @@
 package Main.Controllers.Retailers;
 
-import Main.Controllers.MainFeaturesTabSceneController;
 import Main.Helpers.Retailers.ProfitLoss;
 import Main.Helpers.UserInfo;
 import javafx.collections.FXCollections;
@@ -167,7 +166,14 @@ public class ProfitLossController {
             Statement sqlStatement=dbConnection.createStatement();
             for(int i=0;i<30;i++)
             {
-                todayDate=year+"-"+month+"-"+day;
+                if(month<10 && day<10)
+                    todayDate=year+"-0"+month+"-0"+day;
+                else if(month<10)
+                    todayDate=year+"-0"+month+"-"+day;
+                else if(day<10)
+                    todayDate=year+"-"+month+"-0"+day;
+                else
+                    todayDate=year+"-"+month+"-"+day;
                 totalSale=0f;
                 totalPurchase=0f;
                 profit=0f;
@@ -234,7 +240,14 @@ public class ProfitLossController {
             Connection dbConnection = JDBC.databaseConnect();
             Statement sqlStatement = dbConnection.createStatement();
             for (int i = 0; i < 7; i++) {
-                date = year[i] + "-" + month[i] + "-" + day[i];
+                if(month[i]<10 && day[i]<10)
+                    date=year[i]+"-0"+month[i]+"-0"+day[i];
+                else if(month[i]<10)
+                    date=year[i]+"-0"+month[i]+"-"+day[i];
+                else if(day[i]<10)
+                    date=year[i]+"-"+month[i]+"-0"+day[i];
+                else
+                    date=year[i]+"-"+month[i]+"-"+day[i];
                 ResultSet totalSaleResultSet=sqlStatement.executeQuery("SELECT SUM(total_amount) from retailer_sale_bill where date='"+date+"' AND user_access_id='" + user_id + "'");
                 while (totalSaleResultSet.next())
                 {

@@ -1,6 +1,5 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
-import Main.Controllers.Retailers.ViewSaleController;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,11 +40,11 @@ public class MainStageController implements Initializable {
     private StackPane drawer_parent;
 
     public MainStageController() throws IOException {
-        homePane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_home_scene.fxml"));
-        allFeaturesPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_features_tab_scene.fxml"));
-        dashboardPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/main_dashboard_scene.fxml"));
-        userDrawerPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/NavigationDrawer/user.fxml"));
-        settingsDrawerPane = FXMLLoader.load(getClass().getResource("../../Resources/Layouts/NavigationDrawer/settings.fxml"));
+        homePane = FXMLLoader.load(getClass().getResource("../../../Resources/Layouts/Retailers/main_home_scene.fxml"));
+        allFeaturesPane = FXMLLoader.load(getClass().getResource("../../../Resources/Layouts/Retailers/main_features_tab_scene.fxml"));
+        dashboardPane = FXMLLoader.load(getClass().getResource("../../../Resources/Layouts/Retailers/main_dashboard_scene.fxml"));
+        userDrawerPane = FXMLLoader.load(getClass().getResource("../../../Resources/Layouts/NavigationDrawer/user.fxml"));
+        settingsDrawerPane = FXMLLoader.load(getClass().getResource("../../../Resources/Layouts/NavigationDrawer/settings.fxml"));
     }
 
 

@@ -1,7 +1,6 @@
 package Main.Controllers.Retailers;
 
 
-import Main.Controllers.MainFeaturesTabSceneController;
 import Main.Helpers.Retailers.Sale;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
@@ -146,7 +145,14 @@ public class ViewSaleController {
             Connection dbConnection = JDBC.databaseConnect();
             Statement sqlStatement = dbConnection.createStatement();
             for (int i = 0; i < 7; i++) {
-                date = year[i] + "-" + month[i] + "-" + day[i];
+                if(month[i]<10 && day[i]<10)
+                    date=year[i]+"-0"+month[i]+"-0"+day[i];
+                else if(month[i]<10)
+                    date=year[i]+"-0"+month[i]+"-"+day[i];
+                else if(day[i]<10)
+                    date=year[i]+"-"+month[i]+"-0"+day[i];
+                else
+                    date=year[i]+"-"+month[i]+"-"+day[i];
                 String sqlQuery = "SELECT sum(total_amount) from retailer_sale_bill where user_access_id='" + user_id + "' and date='" + date + "'";
                 ResultSet saleResultSet = sqlStatement.executeQuery(sqlQuery);
                 while (saleResultSet.next()) {
@@ -263,7 +269,14 @@ public class ViewSaleController {
         year = dateToday.get(Calendar.YEAR);
         month = dateToday.get(Calendar.MONTH) + 1;
         day = dateToday.get(Calendar.DAY_OF_MONTH);
-        dateChk = year + "-" + month + "-" + day;
+        if(month<10 && day<10)
+            dateChk=year+"-0"+month+"-0"+day;
+        else if(month<10)
+            dateChk=year+"-0"+month+"-"+day;
+        else if(day<10)
+            dateChk=year+"-"+month+"-0"+day;
+        else
+            dateChk=year+"-"+month+"-"+day;
         if (dateChk.equals(date))
             tense = "is";
         else

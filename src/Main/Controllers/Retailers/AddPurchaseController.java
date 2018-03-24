@@ -1,18 +1,14 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
-import Main.Controllers.Retailers.ProfitLossController;
-import Main.Controllers.Retailers.ViewPurchaseController;
-import Main.Controllers.Retailers.ViewSaleController;
+import Main.Controllers.LoginController;
 import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Add_purchase;
 import Main.Helpers.Medicine;
 import Main.Helpers.Purchase_history;
 import Main.Helpers.Retailers.ProfitLoss;
 import Main.Helpers.Retailers.Purchase;
-import Main.Helpers.Retailers.Sale;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +23,6 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
-import javax.swing.text.View;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -190,7 +185,7 @@ public class AddPurchaseController {
         ppitem.setOnKeyPressed((KeyEvent keyEvent) -> {
             Node source = (Node) keyEvent.getSource();
             Stage currentStage = (Stage) source.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
             if (keyEvent.getCode() == KeyCode.ENTER)
                 onAddEntry(currentStage, fxmlLoader);
@@ -238,7 +233,7 @@ public class AddPurchaseController {
     {
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
         onAddEntry(currentStage, fxmlLoader);
     }
@@ -358,7 +353,7 @@ public class AddPurchaseController {
     {
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
 
         String WholesalerName = wholesaler_name.getText();
         String Mode = mode.getSelectionModel().getSelectedItem().toString();
@@ -874,7 +869,15 @@ public class AddPurchaseController {
         long date = ViewPurchaseController.day[i];
         long month = ViewPurchaseController.month[i];
         long year = ViewPurchaseController.year[i];
-        String datechk = year + "-" + month + "-" + date;
+        String datechk;
+        if(month<10 && date<10)
+            datechk=year+"-0"+month+"-0"+date;
+        else if(month<10)
+            datechk=year+"-0"+month+"-"+date;
+        else if(date<10)
+            datechk=year+"-"+month+"-0"+date;
+        else
+            datechk=year+"-"+month+"-"+date;
         if (datechk.equals(billDate)) {
             ViewPurchaseController.sum[i] = ViewPurchaseController.sum[i] + Amount;
             try {
@@ -891,7 +894,15 @@ public class AddPurchaseController {
         long date = ProfitLossController.day[i];
         long month = ProfitLossController.month[i];
         long year = ProfitLossController.year[i];
-        String datechk = year + "-" + month + "-" + date;
+        String datechk;
+        if(month<10 && date<10)
+            datechk=year+"-0"+month+"-0"+date;
+        else if(month<10)
+            datechk=year+"-0"+month+"-"+date;
+        else if(date<10)
+            datechk=year+"-"+month+"-0"+date;
+        else
+            datechk=year+"-"+month+"-"+date;
         if (datechk.equals(billDate)) {
             ProfitLossController.sum[i] = ProfitLossController.sum[i] - Amount;
             ProfitLossController.totalPurchase[i]=ProfitLossController.totalPurchase[i]+Amount;

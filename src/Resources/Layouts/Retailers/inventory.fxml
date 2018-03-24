@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="inventory_parent_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.InventoryController">
+<AnchorPane fx:id="inventory_parent_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.InventoryController">
     <children>
         <HBox prefWidth="250.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0">
             <children>
@@ -46,7 +46,7 @@
         </HBox>
         <HBox layoutX="-105.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1098.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
             <children>
-                <TableView fx:id="medicineTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="660.0" prefWidth="1176.0" stylesheets="@../Styling/inventory.css">
+                <TableView fx:id="medicineTableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="660.0" prefWidth="1176.0" stylesheets="@../../Styling/Retailers/inventory.css">
                     <columns>
                         <TableColumn fx:id="codeColumn" prefWidth="62.0" text="Code" />
                         <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />

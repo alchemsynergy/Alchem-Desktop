@@ -16,7 +16,7 @@
     <children>
         <Label prefHeight="42.0" prefWidth="119.0" text="LOGIN" textFill="#ffffff70" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="131.0" AnchorPane.topAnchor="0.0">
             <font>
-                <Font name="Microsoft Sans Serif" size="36.0" />
+                <Font name="Britannic Bold" size="36.0" />
             </font>
         </Label>
       <AnchorPane fx:id="login_details_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="400.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

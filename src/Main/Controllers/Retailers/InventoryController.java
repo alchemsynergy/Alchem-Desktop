@@ -1,4 +1,4 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
 import Main.Helpers.Medicine;
 import Main.JdbcConnection.JDBC;

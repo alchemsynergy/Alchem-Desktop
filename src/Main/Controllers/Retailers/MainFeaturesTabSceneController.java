@@ -1,10 +1,6 @@
-package Main.Controllers;
+package Main.Controllers.Retailers;
 
 
-import Main.Controllers.Retailers.ProfitLossController;
-import Main.Controllers.Retailers.ViewPurchaseController;
-import Main.Controllers.Retailers.ViewSaleController;
-import Main.Helpers.Retailers.ProfitLoss;
 import javafx.fxml.FXML;
 
 public class MainFeaturesTabSceneController {
