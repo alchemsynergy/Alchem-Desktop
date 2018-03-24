@@ -53,19 +53,6 @@
                         </Button>
                     </children>
                 </Pane>
-            <Pane fx:id="pane11" layoutY="563.0" prefHeight="45.0" prefWidth="41.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0">
-               <children>
-                  <Button fx:id="notificationButton" layoutY="-4.0" mnemonicParsing="false" onAction="#viewNotification" prefHeight="40.0" prefWidth="41.0" style="-fx-background-color: #200020;">
-                     <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="26.0">
-                           <image>
-                              <Image url="@../../Assets/message.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </Pane>
                 <Pane fx:id="pane3" prefHeight="45.0" prefWidth="41.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0">
                     <children>
                         <Button fx:id="pane_button3" mnemonicParsing="false" onAction="#viewUserDrawer" prefHeight="40.0" prefWidth="31.0" style="-fx-background-color: #200020;">
