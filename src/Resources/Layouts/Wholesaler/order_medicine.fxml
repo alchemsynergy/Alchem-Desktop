@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1600.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/order_medicine.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.OrderMedicineController">
+   <children>
+      <Label fx:id="dateLabel" layoutX="81.0" layoutY="55.0" prefHeight="61.0" prefWidth="278.0" text="DATE" textFill="WHITE" AnchorPane.leftAnchor="81.0" AnchorPane.topAnchor="55.0">
+         <font>
+            <Font name="Bodoni MT Black Italic" size="20.0" />
+         </font>
+      </Label>
+      <VBox fx:id="orderToVBox" layoutX="810.0" layoutY="55.0" prefHeight="61.0" prefWidth="513.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <Label fx:id="orderingToLabel" prefHeight="61.0" prefWidth="521.0" text="ORDERING TO " textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Bodoni MT Black" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox fx:id="selectWholesalerVBox" layoutX="236.0" layoutY="55.0" prefHeight="61.0" prefWidth="524.0" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <HBox prefHeight="61.0" prefWidth="387.0">
+               <children>
+                  <Label prefHeight="61.0" prefWidth="135.0" text="Wholesaler :" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Bodoni MT Black" size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox prefHeight="61.0" prefWidth="343.0">
+                     <children>
+                        <Region prefHeight="18.0" prefWidth="173.0" />
+                        <ComboBox fx:id="selectWholesalerComboBox" onAction="#wholesalerSelected" prefHeight="31.0" prefWidth="268.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="addMedicineVBox" layoutX="176.0" layoutY="201.0" prefHeight="700.0" prefWidth="840.0" style="-: #000020;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <AnchorPane prefHeight="715.0" prefWidth="838.0">
+               <children>
+                  <TextField fx:id="medicineName" layoutX="162.0" layoutY="24.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="35.0" />
+                  <Label layoutX="48.0" layoutY="29.0" prefHeight="21.0" prefWidth="124.0" text="Medicine Name" textFill="WHITE" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="40.0" />
+                  <Label layoutX="440.0" layoutY="29.0" text="Quantity" textFill="WHITE" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="40.0" />
+                  <TextField fx:id="quantity" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="35.0" />
+                  <Button layoutX="731.0" layoutY="27.0" mnemonicParsing="false" onAction="#onMedicineAdd" prefHeight="44.0" prefWidth="46.0" text="+" AnchorPane.leftAnchor="731.0" AnchorPane.topAnchor="27.0">
+                     <font>
+                        <Font name="Gill Sans Ultra Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="orderTableView" layoutX="312.0" layoutY="153.0" prefHeight="414.0" prefWidth="705.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="100.0">
+                    <columns>
+                        <TableColumn fx:id="serialNumberColumn" prefWidth="115.0" text="Serial Number" />
+                      <TableColumn fx:id="medicineNameColumn" prefWidth="438.0" text="Medicine Name" />
+                      <TableColumn fx:id="quantityColumn" prefWidth="170.0" text="Quantity" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="orderMedicineButton" layoutX="433.0" layoutY="583.0" mnemonicParsing="false" onAction="#onOrderMedicine" prefHeight="31.0" prefWidth="220.0" text="ORDER MEDICINE" AnchorPane.bottomAnchor="84.0" AnchorPane.topAnchor="583.0">
+                     <font>
+                        <Font name="Bodoni MT Black" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="cancelButton" layoutX="190.0" layoutY="583.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="31.0" prefWidth="151.0" text="CANCEL" AnchorPane.bottomAnchor="84.0" AnchorPane.topAnchor="583.0">
+                     <font>
+                        <Font name="Bodoni MT Black" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <Label fx:id="orderNumberLabel" layoutX="430.0" layoutY="70.0" prefHeight="68.0" prefWidth="447.0" text="ORDER NUMBER" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font name="Bodoni MT Black" size="20.0" />
+         </font>
+      </Label>
+      <VBox fx:id="errorLogVBox" layoutX="1226.0" layoutY="352.0" prefHeight="95.0" prefWidth="356.0">
+         <children>
+            <Label prefHeight="33.0" prefWidth="354.0" text="      ERROR LOG" textFill="#eb1919">
+               <font>
+                  <Font name="Bodoni MT Black Italic" size="16.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" />
+                  <Label fx:id="errorLabel" prefHeight="60.0" prefWidth="352.0" textFill="#c90e0e">
+                     <font>
+                        <Font name="Bodoni MT Black Italic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

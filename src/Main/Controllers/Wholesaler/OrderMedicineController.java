@@ -1,27 +1,21 @@
-package Main.Controllers.Retailers;
+package Main.Controllers.Wholesaler;
 
 
-import Main.ErrorAndInfo.AlertBox;
 import Main.Helpers.Medicine;
-import Main.Helpers.Retailers.ViewOrder;
 import Main.Helpers.UserInfo;
 import Main.JdbcConnection.JDBC;
-import com.sun.org.apache.regexp.internal.RE;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -241,8 +235,6 @@ public class OrderMedicineController {
         disableVBox();
         selectWholesalerVBox.setVisible(true);
         orderTableView.getItems().clear();
-        medicineList.clear();
-        serialNumber=1;
         errorLabel.setText("");
         medicineName.setText("");
         quantity.setText("");
@@ -292,16 +284,6 @@ public class OrderMedicineController {
                  id=medicine.getInt("retailer_order_wholesaler_id");
                  break;
                 }
-                String wname="";
-                Statement stmt=dbConnect.createStatement();
-                ResultSet rs=stmt.executeQuery("SELECT  name from store_info where user_access_id='"+wholesalerId+"'");
-                while (rs.next())
-                {
-                    wname=rs.getString("name");
-                    break;
-                }
-
-                ViewOrderController.viewOrders.add(new ViewOrder(date,orderNumber,wname,"Order Sent by You",id));
 
                 Iterator<Medicine> iterate=medicineList.iterator();
                 while(iterate.hasNext())

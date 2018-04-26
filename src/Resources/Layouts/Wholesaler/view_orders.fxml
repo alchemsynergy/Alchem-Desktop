@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="951.0" prefWidth="1863.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Wholesaler/view_order.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.ViewOrderController">
+   <children>
+      <Label layoutX="232.0" layoutY="58.0" prefHeight="20.0" prefWidth="248.0" text="Orders From Retailers" textAlignment="CENTER" textFill="#c9c9c9" underline="true" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="60.0">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="orderTableView" layoutX="70.0" layoutY="107.0" prefHeight="704.0" prefWidth="741.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="120.0">
+        <columns>
+            <TableColumn fx:id="snumber" prefWidth="110.0" text="Serial Number" />
+          <TableColumn fx:id="date" prefWidth="152.0" text="Date" />
+          <TableColumn fx:id="rname" prefWidth="182.0" text="Retailer Name" />
+            <TableColumn fx:id="status" prefWidth="296.0" text="Status" />
+        </columns>
+      </TableView>
+      <Pane layoutX="674.0" layoutY="121.0" prefHeight="704.0" prefWidth="748.0" style="-fx-border-color: #ffffff;" AnchorPane.bottomAnchor="46.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <Label layoutX="35.0" layoutY="14.0" prefHeight="21.0" prefWidth="222.0" text="Detailed Order Summary" textFill="#e4d7d7">
+               <font>
+                  <Font name="Bookman Old Style" size="15.0" />
+               </font>
+            </Label>
+            <Pane fx:id="orderSummaryPane" layoutY="39.0" prefHeight="744.0" prefWidth="730.0">
+               <children>
+                  <Label fx:id="dateLabel" layoutX="71.0" layoutY="46.0" prefHeight="21.0" prefWidth="241.0" textFill="WHITE">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font></Label>
+                  <Label fx:id="rnameLabel" layoutX="71.0" layoutY="81.0" prefHeight="21.0" prefWidth="241.0" textFill="WHITE">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font></Label>
+                  <TableView fx:id="dOrderTableView" layoutX="71.0" layoutY="148.0" prefHeight="389.0" prefWidth="543.0">
+                    <columns>
+                      <TableColumn fx:id="serialno" prefWidth="143.0" text="Serial Number" />
+                      <TableColumn fx:id="mname" prefWidth="271.0" text="Medicine Name" />
+                        <TableColumn fx:id="quantity" prefWidth="136.0" text="Quantity" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="66.0" layoutY="561.0" prefHeight="21.0" prefWidth="114.0" text="Order Status :" textFill="#e4e2e2" />
+                  <ComboBox fx:id="statusComboBox" layoutX="169.0" layoutY="556.0" onAction="#onComboBoxItemSelected" prefHeight="31.0" prefWidth="202.0" />
+                  <Button layoutX="423.0" layoutY="558.0" mnemonicParsing="false" onAction="#onSave" prefHeight="28.0" prefWidth="69.0" text="SAVE">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="509.0" layoutY="558.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="21.0" prefWidth="84.0" text="CANCEL">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="15.0" />
+                     </font>
+                  </Button>
+                  <HBox fx:id="reasonHBox" layoutX="82.0" layoutY="609.0" prefHeight="28.0" prefWidth="510.0">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="86.0" text="*Reason :" textFill="#e4e4e4" />
+                        <TextField fx:id="reasonField" prefHeight="31.0" prefWidth="432.0" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="errorLabel" layoutX="288.0" layoutY="670.0" prefHeight="31.0" prefWidth="180.0" text="Reason Required" textFill="#f80e0e">
+                     <font>
+                        <Font name="Bookman Old Style Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

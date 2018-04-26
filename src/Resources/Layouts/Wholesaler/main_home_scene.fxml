@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="home_anchor" xmlns:fx="http://javafx.com/fxml/1" prefHeight="686.0" prefWidth="906.0"
+            style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/8.0.111"
+            fx:controller="Main.Controllers.Wholesaler.MainHomeSceneController">
+    <children>
+        <AnchorPane prefHeight="425.0" prefWidth="689.0" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="100.0"
+                    AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="100.0">
+            <children>
+                <GridPane hgap="20.0" prefHeight="331.0" prefWidth="368.0" vgap="20.0" AnchorPane.bottomAnchor="0.0"
+                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;">
+                            <children>
+                                <Pane prefHeight="145.0" prefWidth="136.0" style="-fx-background-color: #004d00;"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fitHeight="129.0" fitWidth="135.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../Assets/sale.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Label layoutX="152.0" layoutY="3.0" prefHeight="129.0" prefWidth="199.0"
+                                       text="Make a sale bill and view all the bills in database to edit/delete in realtime."
+                                       textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                       AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="30.0"
+                                       AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Pane fx:id="add_sale_pane" opacity="0.4" prefHeight="200.0" prefWidth="200.0"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;"
+                                    GridPane.columnIndex="1">
+                            <children>
+                                <Pane prefHeight="145.0" prefWidth="136.0" style="-fx-background-color: #0a290a;"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fitHeight="130.0" fitWidth="136.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../Assets/view_sale.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Label prefHeight="129.0" prefWidth="199.0"
+                                       text="Check the sale bills, edit or delete them according to requirement."
+                                       textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                       AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="30.0"
+                                       AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Pane fx:id="view_sale_pane" layoutX="10.0" layoutY="10.0" opacity="0.4"
+                                      prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;"
+                                    GridPane.rowIndex="1">
+                            <children>
+                                <Pane prefHeight="145.0" prefWidth="136.0" style="-fx-background-color: #004d4d;"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fitHeight="129.0" fitWidth="136.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../Assets/purchase.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Label prefHeight="129.0" prefWidth="199.0"
+                                       text="Add the details related to goods bought by wholesalers/distributers"
+                                       textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                       AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="30.0"
+                                       AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Pane fx:id="add_purchase_pane" opacity="0.4" prefHeight="200.0" prefWidth="200.0"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;"
+                                    GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <Pane prefHeight="145.0" prefWidth="136.0" style="-fx-background-color: #003333;"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fitHeight="129.0" fitWidth="136.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../Assets/view_purchase.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Label prefHeight="129.0" prefWidth="199.0"
+                                       text="Check the purchase bills, edit or delete them according to requirement."
+                                       textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                       AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="30.0"
+                                       AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Pane fx:id="view_purchase_pane" opacity="0.4" prefHeight="200.0" prefWidth="200.0"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;"
+                                    GridPane.rowIndex="2">
+                            <children>
+                                <Pane prefHeight="145.0" prefWidth="136.0" style="-fx-background-color: #4d0033;"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fitHeight="129.0" fitWidth="140.0" layoutX="7.0" layoutY="-1.0"
+                                                   pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../Assets/inventory.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Label prefHeight="129.0" prefWidth="199.0"
+                                       text="Check and search the detailed information about every item stored."
+                                       textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                       AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="30.0"
+                                       AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Pane fx:id="inventory_pane" opacity="0.4" prefHeight="200.0" prefWidth="200.0"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;"
+                                    GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <children>
+                                <Pane prefHeight="145.0" prefWidth="136.0" style="-fx-background-color: #330022;"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ImageView fitHeight="121.0" fitWidth="119.0" layoutX="10.0" layoutY="9.0"
+                                                   pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../Assets/about.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </Pane>
+                                <Label prefHeight="129.0" prefWidth="199.0" text="Want to know more about us?"
+                                       textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                       AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="30.0"
+                                       AnchorPane.topAnchor="0.0">
+                                    <font>
+                                        <Font size="13.0"/>
+                                    </font>
+                                </Label>
+                                <Pane fx:id="about_pane" opacity="0.4" prefHeight="200.0" prefWidth="200.0"
+                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </GridPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1559.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/view_orders.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.ViewOrderController">
+   <children>
+      <Label alignment="CENTER" layoutX="287.0" layoutY="78.0" prefHeight="21.0" prefWidth="441.0" text="Orders to Wholesalers" textAlignment="CENTER" textFill="#dadada" underline="true" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="orderTableView" layoutX="560.0" layoutY="195.0" prefHeight="608.0" prefWidth="745.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="195.0">
+        <columns>
+            <TableColumn fx:id="dateColumn" prefWidth="86.0" text="Date" />
+          <TableColumn fx:id="orderNumberColumn" prefWidth="127.0" text="Order Number" />
+          <TableColumn fx:id="wholesalerNameColumn" minWidth="0.0" prefWidth="259.0" text="Wholesaler Name" />
+            <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="272.0" text="Status" />
+        </columns>
+      </TableView>
+      <AnchorPane prefHeight="608.0" prefWidth="681.0" style="-fx-border-color: #ffffff;" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="195.0">
+         <children>
+            <Label prefHeight="21.0" prefWidth="181.0" text="Detailed Summary" textFill="WHITE" underline="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Bookman Old Style Italic" size="18.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="detailedAnchorPane" layoutX="6.0" layoutY="13.0" prefHeight="589.0" prefWidth="674.0" style="-: #ffffff;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="12.0">
+               <children>
+                  <Label fx:id="statusLabel" layoutX="359.0" layoutY="175.0" prefHeight="21.0" prefWidth="346.0" text="Status:" textFill="WHITE" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="140.0">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderNoLabel" layoutX="35.0" layoutY="158.0" prefHeight="34.0" prefWidth="190.0" text="Order Number" textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="140.0">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="wnameLabel" layoutX="347.0" layoutY="75.0" prefHeight="21.0" prefWidth="354.0" text="Wholesaler Name:" textFill="WHITE" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="80.0">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dateLabel" layoutX="42.0" layoutY="75.0" prefHeight="28.0" prefWidth="190.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="74.0">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="medicineTableView" layoutX="81.0" layoutY="234.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                    <columns>
+                      <TableColumn fx:id="snumber" prefWidth="116.0" text="Serial Number" />
+                      <TableColumn fx:id="mname" prefWidth="235.0" text="Medicine Name" />
+                        <TableColumn fx:id="quantity" prefWidth="140.0" text="Quantity" />
+                    </columns>
+                  </TableView>
+                  <Label fx:id="rLabel" layoutX="28.0" layoutY="477.0" prefHeight="42.0" prefWidth="248.0" text="Want to cancel,state reason:" textFill="WHITE" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="477.0">
+                     <font>
+                        <Font name="Bookman Old Style Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="rTextField" layoutX="297.0" layoutY="481.0" prefHeight="31.0" prefWidth="346.0" AnchorPane.topAnchor="481.0" />
+                  <Button fx:id="cancelButton" layoutX="459.0" layoutY="538.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel Order" />
+                  <Button layoutX="579.0" layoutY="538.0" mnemonicParsing="false" onAction="#onClear" text="Clear" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

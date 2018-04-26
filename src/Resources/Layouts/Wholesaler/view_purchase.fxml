@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/view_purchase.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.ViewPurchaseController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/view_purchase.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.ViewPurchaseController">
    <children>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="680.0" prefWidth="542.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="40.0">
          <children>
@@ -24,7 +24,7 @@
                <columns>
                   <TableColumn fx:id="dateColumn" prefWidth="101.0" text="Date" />
                   <TableColumn fx:id="billNumberColumn" prefWidth="104.0" text="Bill Number" />
-                  <TableColumn fx:id="wholesalerNameColumn" prefWidth="137.0" text="Wholesaler Name" />
+                  <TableColumn fx:id="wholesalerNameColumn" prefWidth="137.0" text="Distributor Name" />
                   <TableColumn fx:id="modeColumn" minWidth="0.0" prefWidth="90.0" text="Mode" />
                   <TableColumn fx:id="amountColumn" minWidth="0.0" prefWidth="110.0" text="Amount" />
                </columns>

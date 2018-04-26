@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1325.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/dashboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.MainDashboardSceneController">
+   <children>
+      <AreaChart layoutX="5.0" layoutY="176.0" prefHeight="298.0" prefWidth="443.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </AreaChart>
+      <AreaChart layoutX="862.0" layoutY="174.0" prefHeight="298.0" prefWidth="443.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </AreaChart>
+      <AreaChart layoutX="439.0" layoutY="173.0" prefHeight="298.0" prefWidth="443.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </AreaChart>
+      <Label layoutX="428.0" layoutY="-19.0" prefHeight="83.0" prefWidth="256.0" text="&lt;GREETINGS&gt;">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="680.0" layoutY="-18.0" prefHeight="83.0" prefWidth="256.0" text="&lt;USERNAME&gt;">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="368.0" layoutY="38.0" prefHeight="83.0" prefWidth="632.0" text="Let's review our money making scores.">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="181.0" layoutY="156.0" text="This Year">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="627.0" layoutY="155.0" text="This month">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="1048.0" layoutY="151.0" text="This week">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="52.0" layoutY="466.0" text="Sale:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="505.0" text="Purchase:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="52.0" layoutY="545.0" text="Profit/Loss:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="585.0" text="Tax Payed:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="624.0" text="Most sold product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="662.0" text="Least sold product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="703.0" text="Most expired product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="465.0" text="Sale:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="483.0" layoutY="504.0" text="Purchase:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="484.0" layoutY="544.0" text="Profit/Loss:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="485.0" layoutY="584.0" text="Tax Payed:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="488.0" layoutY="623.0" text="Most sold product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="488.0" layoutY="661.0" text="Least sold product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="489.0" layoutY="702.0" text="Most expired product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="909.0" layoutY="466.0" text="Sale:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="908.0" layoutY="505.0" text="Purchase:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="909.0" layoutY="545.0" text="Profit/Loss:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="910.0" layoutY="585.0" text="Tax Payed:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="913.0" layoutY="624.0" text="Most sold product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="913.0" layoutY="662.0" text="Least sold product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="914.0" layoutY="703.0" text="Most expired product:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="118.0" layoutY="465.0" text="&lt;SALE&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="164.0" layoutY="505.0" text="&lt;PURCHASE&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="184.0" layoutY="546.0" text="&lt;PROFIT/LOSS&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="176.0" layoutY="585.0" text="&lt;TAX PAYED&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="273.0" layoutY="623.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="272.0" layoutY="662.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="311.0" layoutY="703.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="546.0" layoutY="466.0" text="&lt;SALE&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="592.0" layoutY="506.0" text="&lt;PURCHASE&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="612.0" layoutY="547.0" text="&lt;PROFIT/LOSS&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="604.0" layoutY="586.0" text="&lt;TAX PAYED&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="701.0" layoutY="624.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="700.0" layoutY="663.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="739.0" layoutY="704.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="972.0" layoutY="466.0" text="&lt;SALE&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1018.0" layoutY="506.0" text="&lt;PURCHASE&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1038.0" layoutY="547.0" text="&lt;PROFIT/LOSS&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1030.0" layoutY="586.0" text="&lt;TAX PAYED&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1127.0" layoutY="624.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1126.0" layoutY="663.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="1165.0" layoutY="704.0" text="&lt;PRODUCT&gt;">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

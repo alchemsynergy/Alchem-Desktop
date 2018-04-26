@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="735.0" prefWidth="1162.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/profit_loss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.ProfitLossController">
+<AnchorPane prefHeight="735.0" prefWidth="1162.0" style="-fx-background-color: #000000;" stylesheets="@../../Styling/Retailers/profit_loss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.ProfitLossController">
    <children>
       <HBox layoutX="20.0" layoutY="20.0" prefHeight="655.0" prefWidth="420.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="40.0">
          <children>

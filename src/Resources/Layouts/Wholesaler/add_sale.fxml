@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="850.0" prefWidth="1250.0" stylesheets="@../../Styling/Retailers/add_sale.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Retailers.AddSaleController">
+<ScrollPane fx:id="add_sale_parent_pane" fitToWidth="true" prefHeight="850.0" prefWidth="1250.0" stylesheets="@../../Styling/Retailers/add_sale.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.AddSaleController">
     <content>
         <AnchorPane stylesheets="@../../Styling/Retailers/add_sale.css">
             <children>
@@ -37,7 +37,7 @@
                         </TableView>
                     </children>
                 </Pane>
-                <AnchorPane layoutX="351.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="750.0" styleClass="bill_container" stylesheets="@../../Styling/Retailers/add_sale.css" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="100.0">
+                <AnchorPane layoutX="351.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="750.0" style="-fx-background-color: #454545;" styleClass="bill_container" stylesheets="@../../Styling/Retailers/add_sale.css" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="100.0">
                     <children>
                         <HBox alignment="CENTER" layoutX="224.0" layoutY="14.0" prefHeight="27.0" prefWidth="193.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="180.0">
                             <children>
@@ -64,12 +64,12 @@
                                         <Pane prefHeight="49.0" prefWidth="591.0">
                                             <children>
                                                 <TextField fx:id="patient_name" layoutX="125.0" layoutY="16.0" prefHeight="25.0" prefWidth="196.0" />
-                                                <Label layoutX="22.0" layoutY="18.0" text="Patient Name">
+                                                <Label layoutX="22.0" layoutY="18.0" text="Patient Name" textFill="WHITE">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Label layoutX="417.0" layoutY="18.0" text="Date">
+                                                <Label layoutX="417.0" layoutY="18.0" text="Date" textFill="WHITE">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
@@ -79,25 +79,25 @@
                                         </Pane>
                                         <Pane prefHeight="46.0" prefWidth="591.0">
                                             <children>
-                                                <Label layoutX="32.0" layoutY="13.0" text="Bill No.">
+                                                <Label layoutX="32.0" layoutY="13.0" text="Bill No." textFill="WHITE">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Label layoutX="416.0" layoutY="14.0" text="Mode">
+                                                <Label layoutX="416.0" layoutY="14.0" text="Mode" textFill="WHITE">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
                                                 </Label>
                                                 <ComboBox fx:id="mode" layoutX="506.0" layoutY="11.0" prefHeight="30.0" prefWidth="154.0" />
-                                                <Label fx:id="bill_no" layoutX="125.0" layoutY="14.0" textFill="#290457">
+                                                <Label fx:id="bill_no" layoutX="125.0" layoutY="14.0" textFill="#2de0a1">
                                                     <font>
                                                         <Font name="System Bold" size="14.0" />
                                                     </font>
                                                 </Label>
                                             </children>
                                         </Pane>
-                                        <Pane prefHeight="47.0" prefWidth="591.0">
+                                        <Pane fx:id="hidePane" prefHeight="47.0" prefWidth="591.0">
                                             <children>
                                                 <Label layoutX="24.0" layoutY="14.0" text="Company">
                                                     <font>
@@ -161,18 +161,18 @@
                             <children>
                                 <Pane prefHeight="96.0" prefWidth="754.0">
                                     <children>
-                                        <Label layoutX="335.0" layoutY="4.0" prefHeight="24.0" prefWidth="57.0" text="Discount :">
+                                        <Label layoutX="335.0" layoutY="4.0" prefHeight="24.0" prefWidth="57.0" text="Discount :" textFill="WHITE">
                                             <font>
                                                 <Font name="System Bold" size="12.0" />
                                             </font>
                                         </Label>
                                         <TextField fx:id="discount" layoutX="453.0" layoutY="4.0" prefHeight="25.0" prefWidth="47.0" />
-                                        <Label layoutX="511.0" layoutY="6.0" text="\%">
+                                        <Label layoutX="511.0" layoutY="6.0" text="\%" textFill="WHITE">
                                             <font>
                                                 <Font name="System Bold" size="12.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="335.0" layoutY="52.0" text="Total Amount :">
+                                        <Label layoutX="335.0" layoutY="52.0" text="Total Amount :" textFill="WHITE">
                                             <font>
                                                 <Font name="System Bold" size="12.0" />
                                             </font>
@@ -182,7 +182,7 @@
                                                 <Font name="System Bold" size="13.0" />
                                             </font>
                                         </Button>
-                                        <Label fx:id="display_amount" layoutX="453.0" layoutY="51.0" textFill="#025e36">
+                                        <Label fx:id="display_amount" layoutX="453.0" layoutY="51.0" textFill="#33cd88">
                                             <font>
                                                 <Font name="System Bold" size="14.0" />
                                             </font>

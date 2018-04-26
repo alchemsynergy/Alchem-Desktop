@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.Wholesaler.MainFeaturesTabSceneController">
+    <children>
+        <TabPane fx:id="tab_view" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../Styling/Retailers/tab_pane.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab fx:id="inventoryTab" text="Inventory">
+               <content>
+                  <fx:include fx:id="inventory" source="inventory.fxml" />
+               </content>
+                </Tab>
+                <Tab fx:id="addSaleTab" text="Add Sale">
+               <content>
+                  <fx:include fx:id="addSale" source="add_sale.fxml" />
+               </content>
+                </Tab>
+                <Tab fx:id="viewSaleTab" text="View Sale">
+               <content>
+                  <fx:include fx:id="viewSale" source="view_sale.fxml" />
+               </content>
+                </Tab>
+                <Tab fx:id="addPurchaseTab" text="Add Purchase">
+               <content>
+                  <fx:include fx:id="addPurchase" source="add_purchase.fxml" />
+               </content>
+                </Tab>
+                <Tab text="View Purchase">
+               <content>
+                  <fx:include fx:id="viewPurchase" source="view_purchase.fxml" />
+               </content>
+                </Tab>
+                <Tab text="Sale/Purchase Analysis">
+               <content>
+                  <fx:include fx:id="profitLoss" source="profit_loss.fxml" />
+               </content>
+                </Tab>
+            <Tab text="View Orders">
+               <content>
+                  <fx:include source="view_orders.fxml" />
+               </content>
+            </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

@@ -43,6 +43,11 @@
                   <fx:include source="order_medicine.fxml" />
                </content>
             </Tab>
+            <Tab text="View Order">
+               <content>
+                  <fx:include source="view_orders.fxml" />
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>

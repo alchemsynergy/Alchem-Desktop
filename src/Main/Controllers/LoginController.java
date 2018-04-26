@@ -147,14 +147,16 @@ public class LoginController{
             fadeOut.setOnFinished((e)->
             {
                 try {
-                    if(UserInfo.typeId==2) {
-                        FXMLLoader fxmlMainStage = new FXMLLoader(getClass().getResource("../../Resources/Layouts/Retailers/main_stage.fxml"));
-                        Parent root1 = (Parent) fxmlMainStage.load();
-                        Stage mainStage = new Stage();
-                        mainStage.setScene(new Scene(root1));
-                        mainStage.show();
-                        ((Stage) main_pane.getScene().getWindow()).close();
-                    }
+                    FXMLLoader fxmlMainStage=null;
+                    if(UserInfo.typeId==1)
+                        fxmlMainStage= new FXMLLoader(getClass().getResource("../../Resources/Layouts/Wholesaler/main_stage.fxml"));
+                    if(UserInfo.typeId==2)
+                        fxmlMainStage= new FXMLLoader(getClass().getResource("../../Resources/Layouts/Retailers/main_stage.fxml"));
+                    Parent root1 = (Parent) fxmlMainStage.load();
+                    Stage mainStage = new Stage();
+                    mainStage.setScene(new Scene(root1));
+                    mainStage.show();
+                    ((Stage) main_pane.getScene().getWindow()).close();
                 }catch (Exception ex){ex.printStackTrace();}
             });
         }catch (Exception e){e.printStackTrace();}
@@ -167,7 +169,7 @@ public class LoginController{
 
     public void joinNow(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("../../Resources/Layouts/Retailers/register_stage.fxml"));
+            FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("../../Resources/Layouts/register_stage.fxml"));
             Parent root2 = (Parent) fxmlLoader2.load();
             Stage stage2 = new Stage();
             stage2.setScene(new Scene(root2));
