@@ -64,7 +64,7 @@
                                         <Pane prefHeight="49.0" prefWidth="591.0">
                                             <children>
                                                 <TextField fx:id="patient_name" layoutX="125.0" layoutY="16.0" prefHeight="25.0" prefWidth="196.0" />
-                                                <Label layoutX="22.0" layoutY="18.0" text="Patient Name" textFill="WHITE">
+                                                <Label layoutX="22.0" layoutY="18.0" text="Retailer Name" textFill="WHITE">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>

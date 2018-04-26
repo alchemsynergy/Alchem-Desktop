@@ -48,7 +48,7 @@ public class UserDrawerController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        alchem_validity.setText("1st Jan, 2018");
+        alchem_validity.setText("1st Jan, 2019");
     }
 
     public void setUserData() throws SQLException {
@@ -60,7 +60,10 @@ public class UserDrawerController implements Initializable {
             while (ownerResult.next()) {
                 owner_name.setText(ownerResult.getString("name"));
                 owner_address.setText(ownerResult.getString("address"));
-                owner_email.setText(ownerResult.getString("email"));
+                if(ownerResult.getString("email")==null)
+                    owner_email.setText("Not Provided");
+                else
+                    owner_email.setText(ownerResult.getString("email"));
                 owner_phone.setText(ownerResult.getString("mobile_number"));
                 license_number.setText(ownerResult.getString("license_number"));
                 license_valid_till.setText(ownerResult.getString("license_valid"));

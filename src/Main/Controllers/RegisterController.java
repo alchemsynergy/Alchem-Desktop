@@ -1,4 +1,4 @@
-package Main.Controllers.Wholesaler;
+package Main.Controllers;
 
 import Main.ErrorAndInfo.AlertBox;
 import Main.JdbcConnection.JDBC;
@@ -59,7 +59,7 @@ public class RegisterController {
 
         Node source = (Node) actionEvent.getSource();
         Stage currentStage = (Stage) source.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../Resources/Layouts/alert_stage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Resources/Layouts/alert_stage.fxml"));
 
         String sqlQuery = null;
         int increment = 0;

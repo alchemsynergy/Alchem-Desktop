@@ -7,7 +7,7 @@
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="650.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8"
-            fx:controller="Main.Controllers.Retailers.RegisterController">
+            fx:controller="Main.Controllers.RegisterController">
     <content>
         <BorderPane prefHeight="648.0" prefWidth="600.0" styleClass="container" stylesheets="@../Styling/menu.css">
             <top>

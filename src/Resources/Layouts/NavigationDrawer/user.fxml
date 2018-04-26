@@ -1,91 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="settings_drawer" prefHeight="800.0" prefWidth="350.0"
-            style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.111"
-            fx:controller="Main.Controllers.NavigationDrawer.UserDrawerController">
+
+<AnchorPane fx:id="settings_drawer" prefHeight="800.0" prefWidth="350.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.Controllers.NavigationDrawer.UserDrawerController">
     <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="0.0"
-                    AnchorPane.topAnchor="0.0">
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fx:id="user_image" fitHeight="151.0" fitWidth="169.0" layoutX="100.0" layoutY="14.0"
-                           onMouseClicked="#addOrChangePhoto" pickOnBounds="true" preserveRatio="true"
-                           AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="99.0" AnchorPane.topAnchor="14.0">
+                <ImageView fx:id="user_image" fitHeight="151.0" fitWidth="169.0" layoutX="100.0" layoutY="14.0" onMouseClicked="#addOrChangePhoto" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="99.0" AnchorPane.topAnchor="14.0">
                     <image>
-                        <Image url="@../../Assets/user_dummy.png"/>
+                        <Image url="@../../Assets/user_dummy.png" />
                     </image>
                 </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="41.0" layoutY="200.0" prefHeight="157.0" prefWidth="350.0" AnchorPane.leftAnchor="41.0"
-                    AnchorPane.rightAnchor="0.0">
+        <AnchorPane layoutX="41.0" layoutY="200.0" prefHeight="157.0" prefWidth="350.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label layoutX="15.0" layoutY="31.0" prefHeight="57.0" prefWidth="105.0" text="Name:"/>
-                <Label layoutX="14.0" layoutY="71.0" prefHeight="57.0" prefWidth="107.0" text="Phone:"/>
-                <Label layoutX="14.0" layoutY="110.0" prefHeight="57.0" prefWidth="107.0" text="Address: "/>
-                <Label layoutX="184.0" layoutY="71.0" prefHeight="57.0" prefWidth="107.0" text="E-Mail:"/>
-                <Label layoutX="145.0" layoutY="1.0" text="Owner">
+                <Label layoutX="15.0" layoutY="31.0" prefHeight="57.0" prefWidth="105.0" text="Name:" textFill="#4899ab" />
+                <Label layoutX="14.0" layoutY="71.0" prefHeight="57.0" prefWidth="107.0" text="Phone:" textFill="#4899ab" />
+                <Label layoutX="14.0" layoutY="110.0" prefHeight="57.0" prefWidth="107.0" text="Address: " textFill="#4899ab" />
+                <Label layoutX="184.0" layoutY="71.0" prefHeight="57.0" prefWidth="107.0" text="E-Mail:" textFill="#4899ab" />
+                <Label layoutX="145.0" layoutY="1.0" text="Owner" textFill="#4baa55">
                     <font>
-                        <Font name="Arial Black" size="17.0"/>
+                        <Font name="Arial Black" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="owner_name" layoutX="58.0" layoutY="51.0" prefHeight="17.0" prefWidth="263.0"
-                       text="&lt;NAME&gt;"/>
-                <Label fx:id="owner_phone" layoutX="55.0" layoutY="90.0" prefHeight="17.0" prefWidth="113.0"
-                       text="&lt;PHONE_NUM&gt;"/>
-                <Label fx:id="owner_email" layoutX="221.0" layoutY="91.0" prefHeight="17.0" prefWidth="113.0"
-                       text="&lt;EMAIL&gt;"/>
-                <Label fx:id="owner_address" layoutX="62.0" layoutY="130.0" prefHeight="17.0" prefWidth="290.0"
-                       text="&lt;ADDRESS&gt;"/>
+                <Label fx:id="owner_name" layoutX="77.0" layoutY="51.0" prefHeight="21.0" prefWidth="244.0" text="&lt;NAME&gt;" textFill="#bc9232" />
+                <Label fx:id="owner_phone" layoutX="65.0" layoutY="91.0" prefHeight="17.0" prefWidth="113.0" text="&lt;PHONE_NUM&gt;" textFill="#bc9232" />
+                <Label fx:id="owner_email" layoutX="235.0" layoutY="91.0" prefHeight="17.0" prefWidth="113.0" text="&lt;EMAIL&gt;" textFill="#bc9232" />
+                <Label fx:id="owner_address" layoutX="77.0" layoutY="128.0" prefHeight="21.0" prefWidth="269.0" text="&lt;ADDRESS&gt;" textFill="#bc9232" />
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="41.0" layoutY="352.0" prefHeight="157.0" prefWidth="350.0" AnchorPane.leftAnchor="41.0"
-                    AnchorPane.rightAnchor="0.0">
+        <AnchorPane layoutX="41.0" layoutY="352.0" prefHeight="157.0" prefWidth="350.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label layoutX="15.0" layoutY="31.0" prefHeight="57.0" prefWidth="105.0" text="Name:"/>
-                <Label layoutX="14.0" layoutY="71.0" prefHeight="57.0" prefWidth="107.0" text="Phone:"/>
-                <Label layoutX="14.0" layoutY="110.0" prefHeight="57.0" prefWidth="107.0" text="Address: "/>
-                <Label layoutX="145.0" layoutY="1.0" text="Store">
+                <Label layoutX="15.0" layoutY="31.0" prefHeight="57.0" prefWidth="105.0" text="Name:" textFill="#4899ab" />
+                <Label layoutX="14.0" layoutY="71.0" prefHeight="57.0" prefWidth="107.0" text="Phone:" textFill="#4899ab" />
+                <Label layoutX="14.0" layoutY="110.0" prefHeight="57.0" prefWidth="107.0" text="Address: " textFill="#4899ab" />
+                <Label layoutX="145.0" layoutY="1.0" text="Store" textFill="#4baa55">
                     <font>
-                        <Font name="Arial Black" size="17.0"/>
+                        <Font name="Arial Black" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="store_name" layoutX="54.0" layoutY="51.0" prefHeight="17.0" prefWidth="298.0"
-                       text="&lt;NAME&gt;"/>
-                <Label fx:id="store_phone" layoutX="53.0" layoutY="91.0" prefHeight="17.0" prefWidth="125.0"
-                       text="&lt;PHONE_NUM&gt;"/>
-                <Label fx:id="store_address" layoutX="63.0" layoutY="130.0" prefHeight="17.0" prefWidth="290.0"
-                       text="&lt;ADDRESS&gt;"/>
+                <Label fx:id="store_name" layoutX="71.0" layoutY="51.0" prefHeight="21.0" prefWidth="281.0" text="&lt;NAME&gt;" textFill="#bc9232" />
+                <Label fx:id="store_phone" layoutX="68.0" layoutY="89.0" prefHeight="21.0" prefWidth="137.0" text="&lt;PHONE_NUM&gt;" textFill="#bc9232" />
+                <Label fx:id="store_address" layoutX="78.0" layoutY="130.0" prefHeight="21.0" prefWidth="275.0" text="&lt;ADDRESS&gt;" textFill="#bc9232" />
             </children>
         </AnchorPane>
         <AnchorPane layoutX="46.0" layoutY="506.0" prefHeight="78.0" prefWidth="350.0">
             <children>
-                <Label layoutX="15.0" layoutY="31.0" prefHeight="57.0" prefWidth="105.0" text="Number:"/>
-                <Label layoutX="182.0" layoutY="31.0" prefHeight="57.0" prefWidth="107.0" text="Validity:"/>
-                <Label layoutX="145.0" layoutY="1.0" text="License">
+                <Label layoutX="122.0" layoutY="14.0" text="License" textFill="#4baa55">
                     <font>
-                        <Font name="Arial Black" size="17.0"/>
+                        <Font name="Arial Black" size="17.0" />
                     </font>
                 </Label>
-                <Label fx:id="license_number" layoutX="63.0" layoutY="51.0" prefHeight="17.0" prefWidth="118.0"
-                       text="&lt;LIC_NUM&gt;"/>
-                <Label fx:id="license_valid_till" layoutX="224.0" layoutY="51.0" prefHeight="17.0" prefWidth="124.0"
-                       text="&lt;LIC_VALIDITY&gt;"/>
+                <Label layoutX="14.0" layoutY="38.0" prefHeight="57.0" prefWidth="105.0" text="Number:" textFill="#4899ab" />
+                <Label fx:id="license_number" layoutX="92.0" layoutY="56.0" prefHeight="17.0" prefWidth="118.0" text="&lt;LIC_NUM&gt;" textFill="#bc9232" />
             </children>
         </AnchorPane>
-        <Label layoutX="110.0" layoutY="617.0" text="Alchem license valid till:" AnchorPane.leftAnchor="110.0">
+        <Label layoutX="94.0" layoutY="647.0" text="Alchem license valid till:" textFill="#f82727" AnchorPane.leftAnchor="94.0">
             <font>
-                <Font size="20.0"/>
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Label>
-        <Label fx:id="alchem_validity" layoutX="169.0" layoutY="672.0" text="&lt;DATE&gt;" textFill="#4abf42">
+        <Label fx:id="alchem_validity" layoutX="157.0" layoutY="695.0" text="&lt;DATE&gt;" textFill="#f82727">
             <font>
-                <Font name="System Bold" size="26.0"/>
+                <Font name="System Bold" size="26.0" />
             </font>
         </Label>
+          <Label layoutX="61.0" layoutY="590.0" prefHeight="57.0" prefWidth="107.0" text="Validity:" textFill="#4899ab" />
+          <Label fx:id="license_valid_till" layoutX="142.0" layoutY="608.0" prefHeight="17.0" prefWidth="124.0" text="&lt;LIC_VALIDITY&gt;" textFill="#bc9232" />
     </children>
 </AnchorPane>
