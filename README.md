@@ -1,4 +1,4 @@
-# Alchem Desktop
+# Alchem Desktop (no longer maintained)
 
 ##### An all-in-one inventory and accounts solution for Chemist shops (both wholesale and retail) as per new Indian taxation standards.
 
@@ -22,5 +22,3 @@ Project is typically made in Jetbrains Intellij IDEA, but can be migrated to any
  
 NOTE: Though project can be built and modified using other IDE, but same project structure has to be maintained while committed changes or raising pull requests.
 
-### Want to join?
-[Join our slack channel](https://join.slack.com/t/alchemsynergy/shared_invite/enQtMjU0NjUwMzAyNTgzLTM0OTNlMTg3ZDk1MmQ4ODdkYzM2YTA3MTE2MGM4ZTQ1ODU5ZTc3YTA4ODY5MWI2ZTAzZDM5MjEzOGM3N2FhYjY)
