@@ -22,7 +22,7 @@ Project is typically made in Jetbrains Intellij IDEA, but can be migrated to any
  
 NOTE: Though project can be built and modified using other IDE, but same project structure has to be maintained while committed changes or raising pull requests.
 
-Regarding any issues, contact: 
-vipul.gyl12@gmail.com
-rajadelhi94@gmail.com
-techfreakworm@gmail.com
+Regarding any issues, contact: </br>
+vipul.gyl12@gmail.com </br>
+rajadelhi94@gmail.com </br>
+techfreakworm@gmail.com </br>
