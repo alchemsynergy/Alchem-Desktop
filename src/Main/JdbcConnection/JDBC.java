@@ -8,6 +8,7 @@ public class JDBC {
     public static Connection databaseConnect() {
         Connection dbConnection = null;
         try {
+            System.out.println("");
             Class.forName("org.postgresql.Driver");
             dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AlchemDB",
                     "postgres", "123456");
