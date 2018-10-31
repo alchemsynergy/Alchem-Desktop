@@ -164,6 +164,7 @@ public class AddSaleController {
 
     public void initializeItemsList() {
         try {
+            System.out.println("");
             Connection dbConnection = JDBC.databaseConnect();
             Statement stmt = dbConnection.createStatement();
             ResultSet resultSet = stmt.executeQuery("SELECT name FROM medicine");
