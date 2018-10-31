@@ -24,6 +24,7 @@ public class Billing {
 
     public Billing(String billItem,String billBatch,int billQuantity,Boolean check)
     {
+        System.out.println("");
         this.billItem = new SimpleStringProperty(billItem);
         this.billBatch = new SimpleStringProperty(billBatch);
         this.billQuantity = new SimpleIntegerProperty(billQuantity);
